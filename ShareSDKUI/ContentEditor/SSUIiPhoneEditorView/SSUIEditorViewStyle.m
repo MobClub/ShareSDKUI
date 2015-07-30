@@ -9,6 +9,8 @@
 #import "SSUIEditorViewStyle.h"
 #import "SSUIEditorViewStyle_Private.h"
 #import <MOBFoundation/MOBFColor.h>
+
+static SSUIEditorViewStyle *style = nil;
 @implementation SSUIEditorViewStyle
 
 + (void)setTitle:(NSString *)title
@@ -63,14 +65,19 @@
 }
 + (instancetype)sharedInstance
 {
-    static SSUIEditorViewStyle *style = nil;
     static dispatch_once_t sharedInstancePredicate;
-    
     dispatch_once(&sharedInstancePredicate, ^{
-        style = [[SSUIEditorViewStyle alloc] init];
+        if (style == nil)
+        {
+            style = [[SSUIEditorViewStyle alloc] init];
+        }
     });
-    
     return style;
+}
+
++(void)setSupportedInterfaceOrientation:(UIInterfaceOrientationMask)toInterfaceOrientation
+{
+    [SSUIEditorViewStyle sharedInstance].supportedInterfaceOrientation = toInterfaceOrientation;
 }
 
 @end

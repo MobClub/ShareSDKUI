@@ -2,7 +2,7 @@
 //  SSUIShareActionSheetStyle.h
 //  ShareSDKUI
 //
-//  Created by 刘靖煌 on 15/7/15.
+//  Created by 刘 靖煌 on 15/7/15.
 //  Copyright (c) 2015年 mob. All rights reserved.
 //
 
@@ -56,6 +56,11 @@
  *  设置UIPageControl当前页的Indicator的颜色
  */
 + (void)setCurrentPageIndicatorTintColor:(UIColor *)color;
+
+/**
+ *  设置支持的页面方向（单独控制分享菜单栏）
+ */
++ (void)setSupportedInterfaceOrientation:(UIInterfaceOrientationMask)toInterfaceOrientation;
 
 
 @end

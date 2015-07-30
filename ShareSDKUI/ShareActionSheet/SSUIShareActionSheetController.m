@@ -15,6 +15,7 @@
 #import "SSUIiPadShareActionSheet.h"
 #import <ShareSDK/ShareSDK+Base.h>
 #import <MOBFoundation/MOBFoundation.h>
+#import <ShareSDKExtension/ShareSDK+Extension.h>
 
 @interface SSUIShareActionSheetController ()
 
@@ -43,6 +44,28 @@
     {
         [activePlatforms removeObject:@(SSDKPlatformTypeUnknown)];
     }
+    
+    //过滤掉未安装客户端且依赖客户端分享的平台
+    NSMutableArray *temPlatform = [NSMutableArray arrayWithArray:activePlatforms];
+    [temPlatform enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+     {
+         if ([obj isKindOfClass:[NSNumber class]])
+         {
+             if ([obj isEqual: @(SSDKPlatformTypeWechat)] ||
+                 [obj isEqual: @(SSDKPlatformSubTypeWechatSession)]||
+                 [obj isEqual: @(SSDKPlatformSubTypeWechatTimeline)]||
+                 [obj isEqual: @(SSDKPlatformSubTypeWechatFav)] ||
+                 [obj isEqual: @(SSDKPlatformTypeQQ)] ||
+                 [obj isEqual: @(SSDKPlatformSubTypeQZone)] ||
+                 [obj isEqual: @(SSDKPlatformSubTypeQQFriend)])
+             {
+                 if (![ShareSDK isClientInstalled:[obj integerValue]])
+                 {
+                     [activePlatforms removeObject:obj];
+                 }
+             }
+         }
+     }];
     
     //对微信和QQ等包含多个平台的平台处理
     if ([activePlatforms containsObject:@(SSDKPlatformTypeWechat)])
@@ -75,7 +98,7 @@
         
         [activePlatforms removeObject:@(SSDKPlatformTypeQQ)];
     }
-    
+
     if (!items)
     {
         items = activePlatforms;

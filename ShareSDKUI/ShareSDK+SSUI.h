@@ -59,4 +59,9 @@ typedef void (^SSUIShareStateChangedHandler) (SSDKResponseState state,
                                               shareParams:(NSMutableDictionary *)shareParams
                                       onShareStateChanged:(SSUIShareStateChangedHandler)shareStateChangedHandler;
 
+/**
+ *  设置支持的页面方向
+ */
++ (void)setSupportedInterfaceOrientation:(UIInterfaceOrientationMask)toInterfaceOrientation;
+
 @end

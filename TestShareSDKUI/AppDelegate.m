@@ -24,6 +24,9 @@
     NSArray *activePlatforms = @[@(SSDKPlatformTypeSinaWeibo),
                                  @(SSDKPlatformTypeWechat),
                                  @(SSDKPlatformTypeTwitter),
+                                 @(SSDKPlatformTypeMail),
+                                 @(SSDKPlatformTypeSMS),
+                                 @(SSDKPlatformTypeCopy),
                                  @(SSDKPlatformTypeQQ),
                                  @(SSDKPlatformTypeFacebook),
                                  @(SSDKPlatformTypeTencentWeibo),
@@ -78,7 +81,8 @@
                       
                       break;
                   case SSDKPlatformTypeTencentWeibo:
-                      [appInfo SSDKSetupTencentWeiboByAppKey:@"801565430" appSecret:@"f297c4bd9499f9e1bb0b1d34719d0c2f" redirectUri:@"http://mob.com"];
+                      [appInfo SSDKSetupTencentWeiboByAppKey:@"801565430"
+                                                   appSecret:@"f297c4bd9499f9e1bb0b1d34719d0c2f" redirectUri:@"http://mob.com"];
                       
                       break;
                   case SSDKPlatformTypeWechat:
@@ -111,10 +115,11 @@
                   default:
                       break;
               }
-              
           }];
-    
+
     return YES;
 }
+
+
 
 @end

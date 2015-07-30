@@ -2,7 +2,7 @@
 //  SSUIShareActionSheetStyle_Private.h
 //  ShareSDKUI
 //
-//  Created by 刘靖煌 on 15/7/15.
+//  Created by 刘 靖煌 on 15/7/15.
 //  Copyright (c) 2015年 mob. All rights reserved.
 //
 
@@ -51,9 +51,14 @@
 @property (nonatomic, strong) UIColor *currentPageIndicatorTintColor;
 
 /**
+ *  支持的方向
+ */
+@property (nonatomic, assign) UIInterfaceOrientationMask supportedInterfaceOrientation;
+
+/**
  *  获取授权视图风格共享实例
  *
- *  @return 风格实例
+ *  @return 风格类实例
  */
 + (instancetype)sharedInstance;
 

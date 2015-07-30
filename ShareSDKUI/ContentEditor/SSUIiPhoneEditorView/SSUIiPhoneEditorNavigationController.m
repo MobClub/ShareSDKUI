@@ -8,15 +8,17 @@
 
 #import "SSUIiPhoneEditorNavigationController.h"
 #import "SSUIiPhoneEditorViewController.h"
+#import "SSUIEditorViewStyle_Private.h"
 
 @implementation SSUIiPhoneEditorNavigationController
 
--(id)initShareViewController{
+-(id)initShareViewController
+{
     SSUIiPhoneEditorViewController* iPhoneEditViewController = [[SSUIiPhoneEditorViewController alloc]init];
     self = [self initWithRootViewController:iPhoneEditViewController];
-    if (self) {
+    if (self)
+    {
         _iPhoneEditViewController = iPhoneEditViewController;
-
     }
     return  self;
 }
@@ -25,9 +27,54 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];
-
-  
 }
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    if ([SSUIEditorViewStyle sharedInstance].supportedInterfaceOrientation)
+    {
+        
+        switch ([SSUIEditorViewStyle sharedInstance].supportedInterfaceOrientation)
+        {
+            case UIInterfaceOrientationMaskPortrait:
+                return toInterfaceOrientation == UIInterfaceOrientationPortrait;
+            case UIInterfaceOrientationMaskLandscapeLeft:
+                return toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft;
+            case UIInterfaceOrientationMaskLandscapeRight:
+                return toInterfaceOrientation == UIInterfaceOrientationLandscapeRight;
+            case UIInterfaceOrientationMaskPortraitUpsideDown:
+                return toInterfaceOrientation == UIDeviceOrientationPortraitUpsideDown;
+            case UIInterfaceOrientationMaskLandscape:
+                return (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
+                        toInterfaceOrientation == UIInterfaceOrientationLandscapeRight);
+            case UIInterfaceOrientationMaskAll:
+                return YES;
+            case UIInterfaceOrientationMaskAllButUpsideDown:
+                return (toInterfaceOrientation != UIDeviceOrientationPortraitUpsideDown);
+            default:
+                break;
+        }
+    }
+    
+    return [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
+}
+
+//iOS 6
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if ([SSUIEditorViewStyle sharedInstance].supportedInterfaceOrientation)
+    {
+        return [SSUIEditorViewStyle sharedInstance].supportedInterfaceOrientation;
+    }
+    
+    return UIInterfaceOrientationMaskAll;
+}
+
 
 -(void)updateWithContent:(NSString *)content image:(SSDKImage *)image platformTypes:(NSArray *)platformTypes{
     

@@ -139,6 +139,52 @@ static const CGFloat platformItemH = 78.0;
     [self updateLayout];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    if ([SSUIShareActionSheetStyle sharedInstance].supportedInterfaceOrientation)
+    {
+        
+        switch ([SSUIShareActionSheetStyle sharedInstance].supportedInterfaceOrientation)
+        {
+            case UIInterfaceOrientationMaskPortrait:
+                return toInterfaceOrientation == UIInterfaceOrientationPortrait;
+            case UIInterfaceOrientationMaskLandscapeLeft:
+                return toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft;
+            case UIInterfaceOrientationMaskLandscapeRight:
+                return toInterfaceOrientation == UIInterfaceOrientationLandscapeRight;
+            case UIInterfaceOrientationMaskPortraitUpsideDown:
+                return toInterfaceOrientation == UIDeviceOrientationPortraitUpsideDown;
+            case UIInterfaceOrientationMaskLandscape:
+                return (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
+                        toInterfaceOrientation == UIInterfaceOrientationLandscapeRight);
+            case UIInterfaceOrientationMaskAll:
+                return YES;
+            case UIInterfaceOrientationMaskAllButUpsideDown:
+                return (toInterfaceOrientation != UIDeviceOrientationPortraitUpsideDown);
+            default:
+                break;
+        }
+    }
+    
+    return [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
+}
+
+//iOS 6
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if ([SSUIShareActionSheetStyle sharedInstance].supportedInterfaceOrientation)
+    {
+        return [SSUIShareActionSheetStyle sharedInstance].supportedInterfaceOrientation;
+    }
+    
+    return UIInterfaceOrientationMaskAll;
+}
+
 - (void)updateLayout
 {
     if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))

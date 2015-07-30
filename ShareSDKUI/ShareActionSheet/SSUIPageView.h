@@ -36,7 +36,6 @@
  */
 @property (nonatomic, strong) NSMutableArray *platformArr;
 
-
 @property (nonatomic, copy) SSUIShareActionSheetItemClickHandler clickHandle;
 @property (nonatomic, copy) SSUIShareActionSheetCancelHandler cancelHandle;
 

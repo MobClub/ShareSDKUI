@@ -151,23 +151,6 @@
     [_contentView updateWithContent:_content image:_image platformTypes:_platformTypes interfaceOrientation:self.interfaceOrientation];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    return YES;
-}
-
--(BOOL)shouldAutorotate
-{
-    //iOS6下旋屏方法
-    return YES;
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    //iOS6下旋屏方法
-    return UIInterfaceOrientationMaskAllButUpsideDown;
-}
-
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     
@@ -194,7 +177,6 @@
      _contentView.frame = CGRectMake(SPACING, SPACING, SSUI_WIDTH(self.view) - 2 * SPACING, viewH);
     
     [_contentView rotationToInterfaceOrientation:toInterfaceOrientation];
-    
 }
 
 
@@ -222,16 +204,20 @@
     {
         NSString* contentText = _contentView.contentView.text;
         NSMutableArray* selectedPlatform =[[_contentView.toolbar selectedPlatforms] mutableCopy];
-        if (![contentText isEqualToString:@""]) {
+        if (![contentText isEqualToString:@""])
+        {
             BOOL needAuthorize = YES;
             NSArray* unNeedAuthorizedPlatforms = @[@(SSDKPlatformTypeWechat),
-                                                       @(SSDKPlatformTypeQQ),
-                                                       @(SSDKPlatformSubTypeQQFriend),
-                                                       @(SSDKPlatformSubTypeQZone),
-                                                       @(SSDKPlatformSubTypeWechatSession),
-                                                       @(SSDKPlatformSubTypeWechatTimeline),
-                                                       @(SSDKPlatformSubTypeWechatFav)];
-
+                                                   @(SSDKPlatformTypeQQ),
+                                                   @(SSDKPlatformSubTypeQQFriend),
+                                                   @(SSDKPlatformSubTypeWechatSession),
+                                                   @(SSDKPlatformSubTypeWechatTimeline),
+                                                   @(SSDKPlatformSubTypeWechatFav),
+                                                   @(SSDKPlatformTypeSMS),
+                                                   @(SSDKPlatformTypeMail),
+                                                   @(SSDKPlatformTypeCopy)
+                                                   ];
+            
             if ([unNeedAuthorizedPlatforms containsObject:[_platformTypes objectAtIndex:0]])
             {
                 needAuthorize = NO;
@@ -254,21 +240,21 @@
                            settings:nil
                      onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
                  {
-                     if (state == SSDKResponseStateSuccess) {
-                         
+                     if (state == SSDKResponseStateSuccess)
+                     {
                          theController.submitHandler(selectedPlatform,contentText, theController.image);
                      }
                      
-                     if (state ==  SSDKResponseStateFail)
+                     if (state == SSDKResponseStateFail)
                      {
                          UIAlertView* alert = [[UIAlertView alloc]initWithTitle: NSLocalizedStringWithDefaultValue(@"Alert", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Alert", nil)
-                                                                        message:[NSString stringWithFormat:@"%@ : %@",NSLocalizedStringWithDefaultValue(@"AuthorizeFailed", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"AuthorizeFailed", nil),error]
-                                                                               delegate:self
+                                                                        message:[NSString stringWithFormat:@"%@ - errorCode:%ld , errorMsg:%@",NSLocalizedStringWithDefaultValue(@"AuthorizeFailed", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"AuthorizeFailed", nil),(long)[error code],[[error userInfo] objectForKey:@"error_message"]]
+                                                                       delegate:self
                                                               cancelButtonTitle:NSLocalizedStringWithDefaultValue(@"OK", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"OK", nil)
                                                               otherButtonTitles:nil];
                          [alert show];
                      }
-
+                     
                  }];
             }
         }
@@ -285,7 +271,8 @@
     }
 }
 
--(void)setNavigationItemStyle{
+-(void)setNavigationItemStyle
+{
     
     if ([SSUIEditorViewStyle sharedInstance].cancelButtonLabel) {
         self.navigationItem.leftBarButtonItem.title = [SSUIEditorViewStyle sharedInstance].cancelButtonLabel;

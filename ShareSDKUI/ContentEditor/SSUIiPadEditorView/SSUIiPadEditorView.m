@@ -170,10 +170,13 @@
             NSArray* unNeedAuthorizedPlatforms = @[@(SSDKPlatformTypeWechat),
                                                    @(SSDKPlatformTypeQQ),
                                                    @(SSDKPlatformSubTypeQQFriend),
-                                                   @(SSDKPlatformSubTypeQZone),
                                                    @(SSDKPlatformSubTypeWechatSession),
                                                    @(SSDKPlatformSubTypeWechatTimeline),
-                                                   @(SSDKPlatformSubTypeWechatFav)];
+                                                   @(SSDKPlatformSubTypeWechatFav),
+                                                   @(SSDKPlatformTypeSMS),
+                                                   @(SSDKPlatformTypeMail),
+                                                   @(SSDKPlatformTypeCopy)
+                                                   ];
             
             if ([unNeedAuthorizedPlatforms containsObject:[_platformTypes objectAtIndex:0]])
             {
@@ -197,20 +200,21 @@
                            settings:nil
                      onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error)
                  {
-                     if (state == SSDKResponseStateSuccess) {
+                     if (state == SSDKResponseStateSuccess)
+                     {
                          
                          theView.submitHandler(selectedPlatform,contentText, _image);
                      }
+                     
                      if (state ==  SSDKResponseStateFail)
                      {
                          UIAlertView* alert = [[UIAlertView alloc]initWithTitle: NSLocalizedStringWithDefaultValue(@"Alert", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Alert", nil)
-                                                                        message:[NSString stringWithFormat:@"%@ : %@",NSLocalizedStringWithDefaultValue(@"AuthorizeFailed", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"AuthorizeFailed", nil),error]
+                                                                        message:[NSString stringWithFormat:@"%@ - errorCode:%ld , errorMsg:%@",NSLocalizedStringWithDefaultValue(@"AuthorizeFailed", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"AuthorizeFailed", nil),(long)[error code],[[error userInfo] objectForKey:@"error_message"]]
                                                                        delegate:self
                                                               cancelButtonTitle:NSLocalizedStringWithDefaultValue(@"OK", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"OK", nil)
                                                               otherButtonTitles:nil];
                          [alert show];
                      }
-                     
                  }];
             }
         }else

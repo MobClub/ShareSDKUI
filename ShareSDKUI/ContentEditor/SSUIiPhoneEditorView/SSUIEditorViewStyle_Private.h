@@ -69,6 +69,11 @@
 @property (nonatomic, strong) UIImage *shareButtonImage;
 
 /**
+ *  支持的屏幕方向
+ */
+@property (nonatomic, assign) UIInterfaceOrientationMask supportedInterfaceOrientation;
+
+/**
  *  获取授权视图风格共享实例
  *
  *  @return 风格实例

@@ -11,6 +11,8 @@
 #import "SSUIShareActionSheetPlatformItem.h"
 #import "SSUIShareActionSheetCustomItem.h"
 #import <ShareSDK/ShareSDK+Base.h>
+#import "SSUIShareActionSheetStyle.h"
+#import "SSUIEditorViewStyle.h"
 
 @implementation ShareSDK (SSUI)
 
@@ -147,9 +149,12 @@
                                                @(SSDKPlatformSubTypeQZone),
                                                @(SSDKPlatformSubTypeWechatSession),
                                                @(SSDKPlatformSubTypeWechatTimeline),
-                                               @(SSDKPlatformSubTypeWechatFav)];
-    
-    
+                                               @(SSDKPlatformSubTypeWechatFav),
+                                               @(SSDKPlatformTypeMail),
+                                               @(SSDKPlatformTypeSMS),
+                                               @(SSDKPlatformTypeCopy)
+                                               ];
+
     if ([unSupportOneKeySharePlatforms containsObject:@(platformType)])
     {
         unSupportOneKeyShare = YES;
@@ -262,10 +267,16 @@
                  }
              }];
         }];
-        
     }];
-    
     return vc;
 }
+
++ (void)setSupportedInterfaceOrientation:(UIInterfaceOrientationMask)toInterfaceOrientation
+{
+    [SSUIShareActionSheetStyle setSupportedInterfaceOrientation:toInterfaceOrientation];
+    [SSUIEditorViewStyle setSupportedInterfaceOrientation:toInterfaceOrientation];
+}
+
+
 
 @end

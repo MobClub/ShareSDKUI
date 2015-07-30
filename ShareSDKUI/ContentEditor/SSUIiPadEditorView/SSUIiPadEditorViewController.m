@@ -8,7 +8,7 @@
 
 #import "SSUIiPadEditorViewController.h"
 #import "SSUIShareContentEditorDef.h"
-
+#import "SSUIEditorViewStyle_Private.h"
 
 #define CONTENT_VIEW_WIDTH 480
 #define CONTENT_VIEW_HEIGHT 300
@@ -17,7 +17,6 @@
 @implementation SSUIiPadEditorViewController
 
 - (void)viewDidLoad
-
 {
     [super viewDidLoad];
     
@@ -30,6 +29,52 @@
     _contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
     [self.view addSubview:_contentView];
 
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    if ([SSUIEditorViewStyle sharedInstance].supportedInterfaceOrientation)
+    {
+        
+        switch ([SSUIEditorViewStyle sharedInstance].supportedInterfaceOrientation)
+        {
+            case UIInterfaceOrientationMaskPortrait:
+                return toInterfaceOrientation == UIInterfaceOrientationPortrait;
+            case UIInterfaceOrientationMaskLandscapeLeft:
+                return toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft;
+            case UIInterfaceOrientationMaskLandscapeRight:
+                return toInterfaceOrientation == UIInterfaceOrientationLandscapeRight;
+            case UIInterfaceOrientationMaskPortraitUpsideDown:
+                return toInterfaceOrientation == UIDeviceOrientationPortraitUpsideDown;
+            case UIInterfaceOrientationMaskLandscape:
+                return (toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft ||
+                        toInterfaceOrientation == UIInterfaceOrientationLandscapeRight);
+            case UIInterfaceOrientationMaskAll:
+                return YES;
+            case UIInterfaceOrientationMaskAllButUpsideDown:
+                return (toInterfaceOrientation != UIDeviceOrientationPortraitUpsideDown);
+            default:
+                break;
+        }
+    }
+    
+    return [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
+}
+
+//iOS 6
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    if ([SSUIEditorViewStyle sharedInstance].supportedInterfaceOrientation)
+    {
+        return [SSUIEditorViewStyle sharedInstance].supportedInterfaceOrientation;
+    }
+    
+    return UIInterfaceOrientationMaskAll;
 }
 
 -(void)updateWithContent:(NSString *)content image:(SSDKImage *)image platformTypes:(NSArray *)platformTypes{

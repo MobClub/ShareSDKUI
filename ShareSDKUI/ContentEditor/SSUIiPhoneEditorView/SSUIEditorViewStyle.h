@@ -95,4 +95,9 @@
  */
 + (void)setShareButtonImage:(UIImage *)image;
 
+/**
+ *  设置支持的页面方向（单独分享编辑页面）
+ */
++ (void)setSupportedInterfaceOrientation:(UIInterfaceOrientationMask)toInterfaceOrientation;
+
 @end
