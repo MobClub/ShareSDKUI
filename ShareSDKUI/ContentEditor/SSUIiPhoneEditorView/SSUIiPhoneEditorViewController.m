@@ -163,9 +163,8 @@
         viewH = screenHeight * 0.32;
         if ([MOBFDevice versionCompare:@"8.0"] < 0)
         {
-            viewH = screenHeight * 0.20;
+            viewH = screenHeight * 0.19;
         }
-     
     }
     else
     {
@@ -209,6 +208,7 @@
             BOOL needAuthorize = YES;
             NSArray* unNeedAuthorizedPlatforms = @[@(SSDKPlatformTypeWechat),
                                                    @(SSDKPlatformTypeQQ),
+                                                   @(SSDKPlatformSubTypeQZone),
                                                    @(SSDKPlatformSubTypeQQFriend),
                                                    @(SSDKPlatformSubTypeWechatSession),
                                                    @(SSDKPlatformSubTypeWechatTimeline),

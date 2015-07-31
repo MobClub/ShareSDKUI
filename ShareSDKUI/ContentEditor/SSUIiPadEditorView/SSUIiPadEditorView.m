@@ -169,6 +169,7 @@
             BOOL needAuthorize = YES;
             NSArray* unNeedAuthorizedPlatforms = @[@(SSDKPlatformTypeWechat),
                                                    @(SSDKPlatformTypeQQ),
+                                                   @(SSDKPlatformSubTypeQZone),
                                                    @(SSDKPlatformSubTypeQQFriend),
                                                    @(SSDKPlatformSubTypeWechatSession),
                                                    @(SSDKPlatformSubTypeWechatTimeline),
@@ -177,7 +178,7 @@
                                                    @(SSDKPlatformTypeMail),
                                                    @(SSDKPlatformTypeCopy)
                                                    ];
-            
+
             if ([unNeedAuthorizedPlatforms containsObject:[_platformTypes objectAtIndex:0]])
             {
                 needAuthorize = NO;

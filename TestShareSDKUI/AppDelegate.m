@@ -21,7 +21,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //需要集成的平台
-    NSArray *activePlatforms = @[@(SSDKPlatformTypeSinaWeibo),
+    NSArray *activePlatforms = @[
+                                 @(SSDKPlatformTypeSinaWeibo),
                                  @(SSDKPlatformTypeWechat),
                                  @(SSDKPlatformTypeTwitter),
                                  @(SSDKPlatformTypeMail),

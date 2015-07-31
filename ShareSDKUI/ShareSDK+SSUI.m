@@ -13,6 +13,17 @@
 #import <ShareSDK/ShareSDK+Base.h>
 #import "SSUIShareActionSheetStyle.h"
 #import "SSUIEditorViewStyle.h"
+#import <ShareSDKExtension/ShareSDK+Extension.h>
+
+/**
+ *  错误域
+ */
+extern NSString *const SSDKErrorDomain;
+
+/**
+ *  无任何平台
+ */
+extern const NSInteger SSDKErrorCodePlatformNotFound;
 
 @implementation ShareSDK (SSUI)
 
@@ -23,13 +34,43 @@
 {
     SSUIShareActionSheetController *actionSheet = [ShareSDKUI shareActionSheetWithItems:items];
     
+    NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
+    
+    //过滤掉未安装客户端且依赖客户端分享的平台
+    NSMutableArray *temPlatform = [NSMutableArray arrayWithArray:activePlatforms];
+    [temPlatform enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+     {
+         if ([obj isKindOfClass:[NSNumber class]])
+         {
+             if ([obj isEqual: @(SSDKPlatformTypeWechat)] ||
+                 [obj isEqual: @(SSDKPlatformSubTypeWechatSession)]||
+                 [obj isEqual: @(SSDKPlatformSubTypeWechatTimeline)]||
+                 [obj isEqual: @(SSDKPlatformSubTypeWechatFav)] ||
+                 [obj isEqual: @(SSDKPlatformTypeQQ)] ||
+                 [obj isEqual: @(SSDKPlatformSubTypeQZone)] ||
+                 [obj isEqual: @(SSDKPlatformSubTypeQQFriend)])
+             {
+                 if (![ShareSDK isClientInstalled:[obj integerValue]])
+                 {
+                     [activePlatforms removeObject:obj];
+                 }
+             }
+         }
+     }];
+    
+    if ([activePlatforms count] < 1)
+    {
+        NSError *error = [NSError errorWithDomain:SSDKErrorDomain
+                                             code:SSDKErrorCodePlatformNotFound
+                                         userInfo:@{@"error description ":@" There is no valid platform to show . the reason may be that the active platform need app client to share and the ios device do not have one."}];
+        shareStateChangedHandler (SSDKResponseStateFail, SSDKPlatformTypeUnknown, nil, nil, error, YES);
+    }
+    
     [actionSheet onCancel:^{
-        
         if (shareStateChangedHandler)
         {
             shareStateChangedHandler (SSDKResponseStateCancel, SSDKPlatformTypeUnknown, nil, nil, nil, YES);
         }
-        
     }];
     
     [actionSheet onItemClick:^(NSInteger index, SSUIShareActionSheetItem *item) {
@@ -55,7 +96,6 @@
                             [otherPlatformTypes addObject:obj];
                         }
                     }
-                    
                 }];
             }
             
@@ -68,6 +108,28 @@
                 [otherPlatformTypes removeObject:@(SSDKPlatformTypeAny)];
             }
             
+            //过滤掉未安装客户端且依赖客户端分享的平台
+            NSMutableArray *temPlatform = [NSMutableArray arrayWithArray:activePlatforms];
+            [temPlatform enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+             {
+                 if ([obj isKindOfClass:[NSNumber class]])
+                 {
+                     if ([obj isEqual: @(SSDKPlatformTypeWechat)] ||
+                         [obj isEqual: @(SSDKPlatformSubTypeWechatSession)]||
+                         [obj isEqual: @(SSDKPlatformSubTypeWechatTimeline)]||
+                         [obj isEqual: @(SSDKPlatformSubTypeWechatFav)] ||
+                         [obj isEqual: @(SSDKPlatformTypeQQ)] ||
+                         [obj isEqual: @(SSDKPlatformSubTypeQZone)] ||
+                         [obj isEqual: @(SSDKPlatformSubTypeQQFriend)])
+                     {
+                         if (![ShareSDK isClientInstalled:[obj integerValue]])
+                         {
+                             [otherPlatformTypes removeObject:obj];
+                         }
+                     }
+                 }
+             }];
+
             //对微信和QQ等包含多个平台的平台处理
             if ([otherPlatformTypes containsObject:@(SSDKPlatformTypeWechat)])
             {
@@ -188,7 +250,6 @@
                 default:
                     break;
             }
-            
         }];
     }
 

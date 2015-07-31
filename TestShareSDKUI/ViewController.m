@@ -53,13 +53,13 @@
 
     //1.2、自定义分享平台（非必要）
     NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
-    SSUIShareActionSheetCustomItem *item = [SSUIShareActionSheetCustomItem itemWithIcon:[UIImage imageNamed:@"Icon.png"]
-                                                                                  label:@"自定义"
-                                                                                onClick:^{
-                                                                                    
-                                                                                    NSLog(@"=== 自定义item点击 ===");
-                                                                                }];
-    [activePlatforms addObject:item];
+//    SSUIShareActionSheetCustomItem *item = [SSUIShareActionSheetCustomItem itemWithIcon:[UIImage imageNamed:@"Icon.png"]
+//                                                                                  label:@"自定义"
+//                                                                                onClick:^{
+//                                                                                    
+//                                                                                    NSLog(@"=== 自定义item点击 ===");
+//                                                                                }];
+//    [activePlatforms addObject:item];
     
     //1.3、自定义分享编辑页面（非必要）
 //    [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:249/255.0 green:0/255.0 blue:12/255.0 alpha:0.5]];
@@ -183,7 +183,6 @@
         {
             NSLog(@"平台:%lu 取消分享",(unsigned long)platformType);
         }
-
     }];
 }
 

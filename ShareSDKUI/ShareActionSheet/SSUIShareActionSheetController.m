@@ -17,6 +17,16 @@
 #import <MOBFoundation/MOBFoundation.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 
+///**
+// *  错误域
+// */
+//extern NSString *const SSDKErrorDomain;
+//
+///**
+// *  无任何平台
+// */
+//extern const NSInteger SSDKErrorCodePlatformNotFound;
+
 @interface SSUIShareActionSheetController ()
 
 /**
