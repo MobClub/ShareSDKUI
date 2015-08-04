@@ -61,9 +61,8 @@
 		DE64BADB1B55F9BB00201E90 /* SSUIiPadShareActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE64BAD91B55F9BB00201E90 /* SSUIiPadShareActionSheetViewController.m */; };
 		DE64BADE1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DE64BADC1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.h */; };
 		DE64BADF1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE64BADD1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.m */; };
-		DE66E94E1B54F6E900DF140F /* ShareSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE66E94C1B54F6E900DF140F /* ShareSDKUI.bundle */; };
-		DE66E94F1B54F6E900DF140F /* ShareSDKUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE66E94D1B54F6E900DF140F /* ShareSDKUI.framework */; };
 		DE748C8E1B68DCB200CC1B4B /* ShareSDKUI.h in Headers */ = {isa = PBXBuildFile; fileRef = D0DD5A7A1B329AA7001D6161 /* ShareSDKUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE75D3861B70536D00A1F1CD /* ShareSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE75D3851B70536D00A1F1CD /* ShareSDKUI.bundle */; };
 		DE93B04F1B4E49FE00459A2A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE93B04E1B4E49FE00459A2A /* Foundation.framework */; };
 		DE93B0511B4E49FE00459A2A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE93B0501B4E49FE00459A2A /* CoreGraphics.framework */; };
 		DE93B0531B4E49FE00459A2A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE93B0521B4E49FE00459A2A /* UIKit.framework */; };
@@ -119,6 +118,7 @@
 		DE97DF391B56881800D21F5D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DE97DF381B56881800D21F5D /* Icon.png */; };
 		DE97DF3D1B568D7000D21F5D /* SSUIShareActionSheetStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = DE97DF3B1B568D7000D21F5D /* SSUIShareActionSheetStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE97DF3E1B568D7000D21F5D /* SSUIShareActionSheetStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = DE97DF3C1B568D7000D21F5D /* SSUIShareActionSheetStyle.m */; };
+		DEA264241B6F770A00840353 /* ShareSDKUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA264231B6F770A00840353 /* ShareSDKUI.framework */; };
 		DECF63AC1B54B53100B6197E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DECF63AB1B54B53100B6197E /* LaunchScreen.xib */; };
 		E2FF0FF01B56922F008EA663 /* SSUIEditorViewStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = E2FF0FEE1B56922F008EA663 /* SSUIEditorViewStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2FF0FF11B56922F008EA663 /* SSUIEditorViewStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FF0FEF1B56922F008EA663 /* SSUIEditorViewStyle.m */; };
@@ -187,8 +187,7 @@
 		DE64BAD91B55F9BB00201E90 /* SSUIiPadShareActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIiPadShareActionSheetViewController.m; sourceTree = "<group>"; };
 		DE64BADC1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIiPhoneShareActionSheetViewController.h; sourceTree = "<group>"; };
 		DE64BADD1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIiPhoneShareActionSheetViewController.m; sourceTree = "<group>"; };
-		DE66E94C1B54F6E900DF140F /* ShareSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ShareSDKUI.bundle; path = ../../bin/ShareSDKUI.bundle; sourceTree = "<group>"; };
-		DE66E94D1B54F6E900DF140F /* ShareSDKUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShareSDKUI.framework; path = ../../bin/ShareSDKUI.framework; sourceTree = "<group>"; };
+		DE75D3851B70536D00A1F1CD /* ShareSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ShareSDKUI.bundle; path = ../../bin/ShareSDKUI.bundle; sourceTree = "<group>"; };
 		DE93B04C1B4E49FE00459A2A /* TestShareSDKUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestShareSDKUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE93B04E1B4E49FE00459A2A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DE93B0501B4E49FE00459A2A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -260,6 +259,7 @@
 		DE97DF3B1B568D7000D21F5D /* SSUIShareActionSheetStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIShareActionSheetStyle.h; sourceTree = "<group>"; };
 		DE97DF3C1B568D7000D21F5D /* SSUIShareActionSheetStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIShareActionSheetStyle.m; sourceTree = "<group>"; };
 		DE97DF3F1B5691C700D21F5D /* SSUIShareActionSheetStyle_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSUIShareActionSheetStyle_Private.h; sourceTree = "<group>"; };
+		DEA264231B6F770A00840353 /* ShareSDKUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShareSDKUI.framework; path = ../../bin/ShareSDKUI.framework; sourceTree = "<group>"; };
 		DECF63AB1B54B53100B6197E /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		E2FF0FEE1B56922F008EA663 /* SSUIEditorViewStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSUIEditorViewStyle.h; path = SSUIiPhoneEditorView/SSUIEditorViewStyle.h; sourceTree = "<group>"; };
 		E2FF0FEF1B56922F008EA663 /* SSUIEditorViewStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSUIEditorViewStyle.m; path = SSUIiPhoneEditorView/SSUIEditorViewStyle.m; sourceTree = "<group>"; };
@@ -293,7 +293,7 @@
 				DE93B0B21B4E4CBD00459A2A /* libWeChatSDK.a in Frameworks */,
 				DE93B0AF1B4E4CBD00459A2A /* libWeiboSDK.a in Frameworks */,
 				DE93B0BE1B4E4E1300459A2A /* ShareSDKUI.framework in Frameworks */,
-				DE66E94F1B54F6E900DF140F /* ShareSDKUI.framework in Frameworks */,
+				DEA264241B6F770A00840353 /* ShareSDKUI.framework in Frameworks */,
 				DE93B0531B4E49FE00459A2A /* UIKit.framework in Frameworks */,
 				DE93B0941B4E4C6900459A2A /* ShareSDKExtension.framework in Frameworks */,
 				DE93B04F1B4E49FE00459A2A /* Foundation.framework in Frameworks */,
@@ -435,9 +435,9 @@
 		DE93B0541B4E49FE00459A2A /* TestShareSDKUI */ = {
 			isa = PBXGroup;
 			children = (
+				DE75D3851B70536D00A1F1CD /* ShareSDKUI.bundle */,
+				DEA264231B6F770A00840353 /* ShareSDKUI.framework */,
 				DE97DF381B56881800D21F5D /* Icon.png */,
-				DE66E94C1B54F6E900DF140F /* ShareSDKUI.bundle */,
-				DE66E94D1B54F6E900DF140F /* ShareSDKUI.framework */,
 				DECF63AB1B54B53100B6197E /* LaunchScreen.xib */,
 				DE93B05D1B4E49FE00459A2A /* AppDelegate.h */,
 				DE93B05E1B4E49FE00459A2A /* AppDelegate.m */,
@@ -715,6 +715,7 @@
 			files = (
 				DE93B0AE1B4E4CBD00459A2A /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				DECF63AC1B54B53100B6197E /* LaunchScreen.xib in Resources */,
+				DE75D3861B70536D00A1F1CD /* ShareSDKUI.bundle in Resources */,
 				DE97DF391B56881800D21F5D /* Icon.png in Resources */,
 				DE93B0651B4E49FE00459A2A /* Main_iPad.storyboard in Resources */,
 				DE93B0911B4E4C6900459A2A /* ShareSDK.bundle in Resources */,
@@ -722,7 +723,6 @@
 				DE93B0B01B4E4CBD00459A2A /* WeiboSDK.bundle in Resources */,
 				DE93B0621B4E49FE00459A2A /* Main_iPhone.storyboard in Resources */,
 				DE93B0591B4E49FE00459A2A /* InfoPlist.strings in Resources */,
-				DE66E94E1B54F6E900DF140F /* ShareSDKUI.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -970,6 +970,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../bin",
 					"$(SRCROOT)/../extends/QQSDK",
+					/Users/liujinghuang/Desktop/ShareSDKv3.0.0/bin,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestShareSDKUI/TestShareSDKUI-Prefix.pch";
@@ -1006,6 +1007,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../bin",
 					"$(SRCROOT)/../extends/QQSDK",
+					/Users/liujinghuang/Desktop/ShareSDKv3.0.0/bin,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestShareSDKUI/TestShareSDKUI-Prefix.pch";

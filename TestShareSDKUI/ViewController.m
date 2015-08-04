@@ -76,6 +76,7 @@
     [ShareSDK setSupportedInterfaceOrientation:UIInterfaceOrientationMaskAllButUpsideDown];
     
     //2、弹出分享菜单栏
+//    SSUIShareActionSheetController *actionSheet = [ShareSDK showShareActionSheet:sender
     [ShareSDK showShareActionSheet:sender
                              items:activePlatforms
                        shareParams:params
@@ -123,6 +124,8 @@
                        }
                    }
                }];
+    
+//    [actionSheet.directSharePlatforms removeObject:@(SSDKPlatformTypeWechat)];
 }
 
 -(void)ShowShareContentEditorView:(id*)sender

@@ -16,6 +16,11 @@
 @interface SSUIShareActionSheetController : NSObject
 
 /**
+ *  支持点击分享菜单栏平台后直接分享的平台(不显示分享编辑页面)，默认支持微信和QQ平台。
+ */
+@property (nonatomic, strong) NSMutableSet *directSharePlatforms;
+
+/**
  *  初始化分享菜单
  *
  *  @param items 菜单项集合

@@ -37,7 +37,8 @@
                                  @(SSDKPlatformSubTypeWechatTimeline),
                                  @(SSDKPlatformSubTypeQQFriend),
                                  @(SSDKPlatformSubTypeWechatFav),
-                                 @(SSDKPlatformTypeAny)
+                                 @(SSDKPlatformTypeAny),
+                                 @(SSDKPlatformTypeDouBan)
                                  ];
     
     //ShareSDK和平台初始化
@@ -112,6 +113,11 @@
                                                appSecret:@"38053202e1a5fe26c80c753071f0b573"
                                                 authType:SSDKAuthTypeWeb];
                       
+                      break;
+                  case SSDKPlatformTypeDouBan:
+                      [appInfo SSDKSetupDouBanByApiKey:@"02e2cbe5ca06de5908a863b15e149b0b"
+                                                secret:@"9f1e7b4f71304f2f"
+                                           redirectUri:@"http://www.sharesdk.cn"];
                       break;
                   default:
                       break;

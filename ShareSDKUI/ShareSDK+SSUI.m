@@ -33,6 +33,7 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                                      onShareStateChanged:(SSUIShareStateChangedHandler)shareStateChangedHandler
 {
     SSUIShareActionSheetController *actionSheet = [ShareSDKUI shareActionSheetWithItems:items];
+    __block NSMutableSet *directSharePlt = actionSheet.directSharePlatforms;
     
     NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
     
@@ -98,70 +99,7 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                     }
                 }];
             }
-            
-            if ([otherPlatformTypes containsObject:@(SSDKPlatformTypeUnknown)])
-            {
-                [otherPlatformTypes removeObject:@(SSDKPlatformTypeUnknown)];
-            }
-            if ([otherPlatformTypes containsObject:@(SSDKPlatformTypeAny)])
-            {
-                [otherPlatformTypes removeObject:@(SSDKPlatformTypeAny)];
-            }
-            
-            //过滤掉未安装客户端且依赖客户端分享的平台
-            NSMutableArray *temPlatform = [NSMutableArray arrayWithArray:activePlatforms];
-            [temPlatform enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-             {
-                 if ([obj isKindOfClass:[NSNumber class]])
-                 {
-                     if ([obj isEqual: @(SSDKPlatformTypeWechat)] ||
-                         [obj isEqual: @(SSDKPlatformSubTypeWechatSession)]||
-                         [obj isEqual: @(SSDKPlatformSubTypeWechatTimeline)]||
-                         [obj isEqual: @(SSDKPlatformSubTypeWechatFav)] ||
-                         [obj isEqual: @(SSDKPlatformTypeQQ)] ||
-                         [obj isEqual: @(SSDKPlatformSubTypeQZone)] ||
-                         [obj isEqual: @(SSDKPlatformSubTypeQQFriend)])
-                     {
-                         if (![ShareSDK isClientInstalled:[obj integerValue]])
-                         {
-                             [otherPlatformTypes removeObject:obj];
-                         }
-                     }
-                 }
-             }];
 
-            //对微信和QQ等包含多个平台的平台处理
-            if ([otherPlatformTypes containsObject:@(SSDKPlatformTypeWechat)])
-            {
-                if (![otherPlatformTypes containsObject:@(SSDKPlatformSubTypeWechatSession)])
-                {
-                    [otherPlatformTypes addObject:@(SSDKPlatformSubTypeWechatSession)];
-                }
-                
-                if (![otherPlatformTypes containsObject:@(SSDKPlatformSubTypeWechatTimeline)]) {
-                    [otherPlatformTypes addObject:@(SSDKPlatformSubTypeWechatTimeline)];
-                }
-                
-                if (![otherPlatformTypes containsObject:@(SSDKPlatformSubTypeWechatFav)]) {
-                    [otherPlatformTypes addObject:@(SSDKPlatformSubTypeWechatFav)];
-                }
-                
-                [otherPlatformTypes removeObject:@(SSDKPlatformTypeWechat)];
-            }
-            
-            if ([otherPlatformTypes containsObject:@(SSDKPlatformTypeQQ)])
-            {
-                if (![otherPlatformTypes containsObject:@(SSDKPlatformSubTypeQZone)]) {
-                    [otherPlatformTypes addObject:@(SSDKPlatformSubTypeQZone)];
-                }
-                
-                if (![otherPlatformTypes containsObject:@(SSDKPlatformSubTypeQQFriend)]) {
-                    [otherPlatformTypes addObject:@(SSDKPlatformSubTypeQQFriend)];
-                }
-                
-                [otherPlatformTypes removeObject:@(SSDKPlatformTypeQQ)];
-            }
-            
             SSUIShareActionSheetPlatformItem *platItem = (SSUIShareActionSheetPlatformItem *)item;
             //构造其他平台列表
             if ([otherPlatformTypes containsObject:@(platItem.platformType)])
@@ -169,19 +107,63 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                 [otherPlatformTypes removeObject:@(platItem.platformType)];
             }
             
-            //显示内容编辑视图
-            [self showShareEditor:platItem.platformType
-               otherPlatformTypes:otherPlatformTypes
-                      shareParams:shareParams
-              onShareStateChanged:shareStateChangedHandler];
+            //对微信和QQ等包含多个平台的平台处理
+            if ([directSharePlt containsObject:@(SSDKPlatformTypeWechat)])
+            {
+                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeWechatSession)])
+                {
+                    [directSharePlt addObject:@(SSDKPlatformSubTypeWechatSession)];
+                }
+                
+                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeWechatTimeline)]) {
+                    [directSharePlt addObject:@(SSDKPlatformSubTypeWechatTimeline)];
+                }
+                
+                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeWechatFav)]) {
+                    [directSharePlt addObject:@(SSDKPlatformSubTypeWechatFav)];
+                }
+                
+                [directSharePlt removeObject:@(SSDKPlatformTypeWechat)];
+            }
             
+            if ([directSharePlt containsObject:@(SSDKPlatformTypeQQ)])
+            {
+                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeQZone)]) {
+                    [directSharePlt addObject:@(SSDKPlatformSubTypeQZone)];
+                }
+                
+                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeQQFriend)]) {
+                    [directSharePlt addObject:@(SSDKPlatformSubTypeQQFriend)];
+                }
+                
+                [directSharePlt removeObject:@(SSDKPlatformTypeQQ)];
+            }
+            
+            if ([directSharePlt containsObject:@(platItem.platformType)])
+            {
+                [ShareSDK share:platItem.platformType
+                     parameters:shareParams
+                 onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+                     if (shareStateChangedHandler)
+                     {
+                         shareStateChangedHandler (state, platItem.platformType, userData, contentEntity, error, YES);
+                     }
+                 }];
+            }
+            else
+            {
+                //显示内容编辑视图
+                [self showShareEditor:platItem.platformType
+                   otherPlatformTypes:otherPlatformTypes
+                          shareParams:shareParams
+                  onShareStateChanged:shareStateChangedHandler];
+            }
         }
         else if ([item isKindOfClass:[SSUIShareActionSheetCustomItem class]])
         {
             //触发自定义点击事件
             [(SSUIShareActionSheetCustomItem *)item triggerClick];
         }
-        
     }];
     
     [actionSheet showInView:view];

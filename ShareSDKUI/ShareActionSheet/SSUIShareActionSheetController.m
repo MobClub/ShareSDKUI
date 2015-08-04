@@ -17,23 +17,9 @@
 #import <MOBFoundation/MOBFoundation.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 
-///**
-// *  错误域
-// */
-//extern NSString *const SSDKErrorDomain;
-//
-///**
-// *  无任何平台
-// */
-//extern const NSInteger SSDKErrorCodePlatformNotFound;
-
 @interface SSUIShareActionSheetController ()
 
-/**
- *  分享菜单对象
- */
 @property (nonatomic, strong) SSUIBaseShareActionSheet *shareActionSheet;
-
 @property (nonatomic, strong) SSUIShareActionSheetController *selfRef;
 
 @end
@@ -42,6 +28,8 @@
 
 - (instancetype)initWithItems:(NSArray *)items
 {
+    self.directSharePlatforms = [NSMutableSet setWithObjects:@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ),nil];
+    
     NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
     
     //过滤掉未知和任意2个平台
