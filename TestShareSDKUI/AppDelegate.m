@@ -15,6 +15,8 @@
 #import "WeiboSDK.h"
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
+#import <RennSDK/RennSDK.h>
+#import <GooglePlus/GooglePlus.h>
 
 @implementation AppDelegate
 
@@ -38,7 +40,11 @@
                                  @(SSDKPlatformSubTypeQQFriend),
                                  @(SSDKPlatformSubTypeWechatFav),
                                  @(SSDKPlatformTypeAny),
-                                 @(SSDKPlatformTypeDouBan)
+                                 @(SSDKPlatformTypeRenren),
+                                 @(SSDKPlatformTypeDouBan),
+                                 @(SSDKPlatformTypeKaixin),
+                                 @(SSDKPlatformTypeGooglePlus),
+                                 @(SSDKPlatformTypePocket)
                                  ];
     
     //ShareSDK和平台初始化
@@ -63,6 +69,13 @@
                              [ShareSDKConnector connectQQ:[QQApiInterface class]
                                         tencentOAuthClass:[TencentOAuth class]];
                              
+                             break;
+                         case SSDKPlatformTypeRenren:
+                             [ShareSDKConnector connectRenren:[RennClient class]];
+                             break;
+                         case SSDKPlatformTypeGooglePlus:
+                             [ShareSDKConnector connectGooglePlus:[GPPSignIn class]
+                                                       shareClass:[GPPShare class]];
                              break;
                          default:
                              break;
@@ -118,6 +131,28 @@
                       [appInfo SSDKSetupDouBanByApiKey:@"02e2cbe5ca06de5908a863b15e149b0b"
                                                 secret:@"9f1e7b4f71304f2f"
                                            redirectUri:@"http://www.sharesdk.cn"];
+                      break;
+                  case SSDKPlatformTypeRenren:
+                      [appInfo SSDKSetupRenRenByAppId:@"226427"
+                                               appKey:@"fc5b8aed373c4c27a05b712acba0f8c3"
+                                            secretKey:@"f29df781abdd4f49beca5a2194676ca4"
+                                             authType:SSDKAuthTypeBoth];
+                      break;
+                  case SSDKPlatformTypeKaixin:
+                      [appInfo SSDKSetupKaiXinByApiKey:@"358443394194887cee81ff5890870c7c"
+                                             secretKey:@"da32179d859c016169f66d90b6db2a23"
+                                           redirectUri:@"http://www.sharesdk.cn/"];
+                      break;
+                  case SSDKPlatformTypeGooglePlus:
+                      [appInfo SSDKSetupGooglePlusByClientID:@"232554794995.apps.googleusercontent.com"
+                                                clientSecret:@"PEdFgtrMw97aCvf0joQj7EMk"
+                                                 redirectUri:@"http://localhost"
+                                                    authType:SSDKAuthTypeBoth];
+                      break;
+                  case SSDKPlatformTypePocket:
+                      [appInfo SSDKSetupPocketByConsumerKey:@"11496-de7c8c5eb25b2c9fcdc2b627"
+                                                redirectUri:@"pocketapp1234"
+                                                   authType:SSDKAuthTypeBoth];
                       break;
                   default:
                       break;

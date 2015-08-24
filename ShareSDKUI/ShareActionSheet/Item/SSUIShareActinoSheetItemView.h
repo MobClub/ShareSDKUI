@@ -15,9 +15,10 @@
 @property (nonatomic) NSInteger index;
 @property (nonatomic, strong) UILabel *nameLabel;
 @property (nonatomic, strong) UIButton *platformIcon;
+@property (nonatomic, strong) SSUIShareActionSheetItem *item;
 @property (nonatomic, copy) SSUIShareActionSheetItemClickHandler clickHandle;
 @property (nonatomic, copy) SSUIShareActionSheetCancelHandler cancelHandle;
 
--(instancetype)initWithItem:(SSUIShareActionSheetItem *)item index:(NSInteger)index;
+-(instancetype)initWithIndex:(NSInteger)index;
 
 @end

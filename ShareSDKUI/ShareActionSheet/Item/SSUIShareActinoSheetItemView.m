@@ -18,19 +18,17 @@ static const CGFloat nameH = 18;
 
 @interface SSUIShareActinoSheetItemView ()
 
-@property (nonatomic, strong) SSUIShareActionSheetItem *item;
 @property (nonatomic ,strong) SSUIShareActionSheetItem *baseItem;
 
 @end
 
 @implementation SSUIShareActinoSheetItemView
 
--(instancetype)initWithItem:(SSUIShareActionSheetItem *)item index:(NSInteger)index
+-(instancetype)initWithIndex:(NSInteger)index
 {
     if (self = [super init])
     {
         self.index = index;
-        self.item = item;
         
         UILabel *name = [[UILabel alloc] init];
         name.textAlignment = NSTextAlignmentCenter;
@@ -55,11 +53,15 @@ static const CGFloat nameH = 18;
         [icon addTarget:self action:@selector(itemClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:icon];
         self.platformIcon = icon;
-        
-        [self.platformIcon setBackgroundImage:item.icon forState:UIControlStateNormal];
-        self.nameLabel.text = item.label;
     }
     return self;
+}
+
+-(void)setItem:(SSUIShareActionSheetItem *)item
+{
+    _item = item;
+    [self.platformIcon setBackgroundImage:item.icon forState:UIControlStateNormal];
+    self.nameLabel.text = item.label;
 }
 
 - (void)itemClicked:(id)sender

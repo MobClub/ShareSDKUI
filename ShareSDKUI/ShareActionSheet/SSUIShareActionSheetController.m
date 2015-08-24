@@ -30,7 +30,15 @@
 {
     self.directSharePlatforms = [NSMutableSet setWithObjects:@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ),nil];
     
-    NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
+    NSMutableArray *activePlatforms = nil;
+    if (!items)
+    {
+        activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
+    }
+    else
+    {
+        activePlatforms = [NSMutableArray arrayWithArray:items];
+    }
     
     //过滤掉未知和任意2个平台
     if ([activePlatforms containsObject:@(SSDKPlatformTypeAny)])
@@ -55,7 +63,8 @@
                  [obj isEqual: @(SSDKPlatformSubTypeWechatFav)] ||
                  [obj isEqual: @(SSDKPlatformTypeQQ)] ||
                  [obj isEqual: @(SSDKPlatformSubTypeQZone)] ||
-                 [obj isEqual: @(SSDKPlatformSubTypeQQFriend)])
+                 [obj isEqual: @(SSDKPlatformSubTypeQQFriend)] ||
+                 [obj isEqual: @(SSDKPlatformTypeInstagram)])
              {
                  if (![ShareSDK isClientInstalled:[obj integerValue]])
                  {
@@ -96,17 +105,12 @@
         
         [activePlatforms removeObject:@(SSDKPlatformTypeQQ)];
     }
-
-    if (!items)
-    {
-        items = activePlatforms;
-    }
     
     //过滤菜单列表，如没有集成平台
     NSMutableArray *showActivePlatforms = [NSMutableArray array];
     NSMutableArray *actionSheetItems = [NSMutableArray array];
     
-    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [activePlatforms enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         if ([obj isKindOfClass:[NSNumber class]])
         {

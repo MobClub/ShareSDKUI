@@ -24,6 +24,20 @@
 /* Begin PBXBuildFile section */
 		D0DD5A7C1B329AA7001D6161 /* ShareSDKUI.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DD5A7B1B329AA7001D6161 /* ShareSDKUI.m */; };
 		D0DD5A7F1B329AE5001D6161 /* ShareSDK+SSUI.m in Sources */ = {isa = PBXBuildFile; fileRef = D0DD5A7E1B329AE5001D6161 /* ShareSDK+SSUI.m */; };
+		DE0F12F51B84685B00B6E543 /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0F12EF1B84685B00B6E543 /* GoogleOpenSource.framework */; };
+		DE0F12F61B84685B00B6E543 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE0F12F01B84685B00B6E543 /* GooglePlus.bundle */; };
+		DE0F12F71B84685B00B6E543 /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0F12F11B84685B00B6E543 /* GooglePlus.framework */; };
+		DE0F12F81B84685B00B6E543 /* RennSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE0F12F31B84685B00B6E543 /* RennSDK.bundle */; };
+		DE0F12F91B84685B00B6E543 /* RennSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0F12F41B84685B00B6E543 /* RennSDK.framework */; };
+		DE0F12FB1B8468FD00B6E543 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0F12FA1B8468FD00B6E543 /* CoreMotion.framework */; };
+		DE0F12FD1B84690300B6E543 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0F12FC1B84690300B6E543 /* CoreLocation.framework */; };
+		DE0F12FF1B84690A00B6E543 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0F12FE1B84690A00B6E543 /* MediaPlayer.framework */; };
+		DE0F13011B84691100B6E543 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0F13001B84691100B6E543 /* AssetsLibrary.framework */; };
+		DE0F13031B84691800B6E543 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE0F13021B84691800B6E543 /* AddressBook.framework */; };
+		DE0F13081B84697C00B6E543 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DE0F13041B84697C00B6E543 /* Icon-72.png */; };
+		DE0F13091B84697C00B6E543 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE0F13051B84697C00B6E543 /* Icon-72@2x.png */; };
+		DE0F130A1B84697C00B6E543 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DE0F13061B84697C00B6E543 /* Icon.png */; };
+		DE0F130B1B84697C00B6E543 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DE0F13071B84697C00B6E543 /* Icon@2x.png */; };
 		DE1EA3451B4F62DE00DE95E2 /* SSUIBaseShareContentEditor.h in Headers */ = {isa = PBXBuildFile; fileRef = DE1EA3211B4F62DE00DE95E2 /* SSUIBaseShareContentEditor.h */; };
 		DE1EA3461B4F62DE00DE95E2 /* SSUIBaseShareContentEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1EA3221B4F62DE00DE95E2 /* SSUIBaseShareContentEditor.m */; };
 		DE1EA3471B4F62DE00DE95E2 /* SSUIBaseShareContentEditor_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = DE1EA3231B4F62DE00DE95E2 /* SSUIBaseShareContentEditor_Private.h */; };
@@ -96,7 +110,7 @@
 		DE93B0DA1B4E4ED300459A2A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DE93B0D91B4E4ED300459A2A /* libsqlite3.dylib */; };
 		DE93B12B1B4F6C4300459A2A /* SSUIShareActionSheetCustomItem.h in Headers */ = {isa = PBXBuildFile; fileRef = DE93B1171B4F6C4300459A2A /* SSUIShareActionSheetCustomItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE93B12C1B4F6C4300459A2A /* SSUIShareActionSheetCustomItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DE93B1181B4F6C4300459A2A /* SSUIShareActionSheetCustomItem.m */; };
-		DE93B12D1B4F6C4300459A2A /* SSUIShareActionSheetItem.h in Headers */ = {isa = PBXBuildFile; fileRef = DE93B1191B4F6C4300459A2A /* SSUIShareActionSheetItem.h */; };
+		DE93B12D1B4F6C4300459A2A /* SSUIShareActionSheetItem.h in Headers */ = {isa = PBXBuildFile; fileRef = DE93B1191B4F6C4300459A2A /* SSUIShareActionSheetItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE93B12E1B4F6C4300459A2A /* SSUIShareActionSheetItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DE93B11A1B4F6C4300459A2A /* SSUIShareActionSheetItem.m */; };
 		DE93B12F1B4F6C4300459A2A /* SSUIShareActionSheetPlatformItem.h in Headers */ = {isa = PBXBuildFile; fileRef = DE93B11B1B4F6C4300459A2A /* SSUIShareActionSheetPlatformItem.h */; };
 		DE93B1301B4F6C4300459A2A /* SSUIShareActionSheetPlatformItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DE93B11C1B4F6C4300459A2A /* SSUIShareActionSheetPlatformItem.m */; };
@@ -115,7 +129,6 @@
 		DE93B13D1B4F6C4300459A2A /* SSUIShareActionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE93B12A1B4F6C4300459A2A /* SSUIShareActionSheetController.m */; };
 		DE97DF361B56665E00D21F5D /* SSUIShareActinoSheetItemView.h in Headers */ = {isa = PBXBuildFile; fileRef = DE97DF341B56665E00D21F5D /* SSUIShareActinoSheetItemView.h */; };
 		DE97DF371B56665E00D21F5D /* SSUIShareActinoSheetItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE97DF351B56665E00D21F5D /* SSUIShareActinoSheetItemView.m */; };
-		DE97DF391B56881800D21F5D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DE97DF381B56881800D21F5D /* Icon.png */; };
 		DE97DF3D1B568D7000D21F5D /* SSUIShareActionSheetStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = DE97DF3B1B568D7000D21F5D /* SSUIShareActionSheetStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE97DF3E1B568D7000D21F5D /* SSUIShareActionSheetStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = DE97DF3C1B568D7000D21F5D /* SSUIShareActionSheetStyle.m */; };
 		DEA264241B6F770A00840353 /* ShareSDKUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA264231B6F770A00840353 /* ShareSDKUI.framework */; };
@@ -150,6 +163,20 @@
 		D0DD5A7B1B329AA7001D6161 /* ShareSDKUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareSDKUI.m; sourceTree = "<group>"; };
 		D0DD5A7D1B329AE5001D6161 /* ShareSDK+SSUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShareSDK+SSUI.h"; sourceTree = "<group>"; };
 		D0DD5A7E1B329AE5001D6161 /* ShareSDK+SSUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShareSDK+SSUI.m"; sourceTree = "<group>"; };
+		DE0F12EF1B84685B00B6E543 /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
+		DE0F12F01B84685B00B6E543 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
+		DE0F12F11B84685B00B6E543 /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
+		DE0F12F31B84685B00B6E543 /* RennSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RennSDK.bundle; sourceTree = "<group>"; };
+		DE0F12F41B84685B00B6E543 /* RennSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RennSDK.framework; sourceTree = "<group>"; };
+		DE0F12FA1B8468FD00B6E543 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		DE0F12FC1B84690300B6E543 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
+		DE0F12FE1B84690A00B6E543 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
+		DE0F13001B84691100B6E543 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AssetsLibrary.framework; sourceTree = DEVELOPER_DIR; };
+		DE0F13021B84691800B6E543 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/AddressBook.framework; sourceTree = DEVELOPER_DIR; };
+		DE0F13041B84697C00B6E543 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		DE0F13051B84697C00B6E543 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		DE0F13061B84697C00B6E543 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		DE0F13071B84697C00B6E543 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		DE1EA3211B4F62DE00DE95E2 /* SSUIBaseShareContentEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIBaseShareContentEditor.h; sourceTree = "<group>"; };
 		DE1EA3221B4F62DE00DE95E2 /* SSUIBaseShareContentEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIBaseShareContentEditor.m; sourceTree = "<group>"; };
 		DE1EA3231B4F62DE00DE95E2 /* SSUIBaseShareContentEditor_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIBaseShareContentEditor_Private.h; sourceTree = "<group>"; };
@@ -255,7 +282,6 @@
 		DE93B12A1B4F6C4300459A2A /* SSUIShareActionSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIShareActionSheetController.m; sourceTree = "<group>"; };
 		DE97DF341B56665E00D21F5D /* SSUIShareActinoSheetItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIShareActinoSheetItemView.h; sourceTree = "<group>"; };
 		DE97DF351B56665E00D21F5D /* SSUIShareActinoSheetItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIShareActinoSheetItemView.m; sourceTree = "<group>"; };
-		DE97DF381B56881800D21F5D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		DE97DF3B1B568D7000D21F5D /* SSUIShareActionSheetStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIShareActionSheetStyle.h; sourceTree = "<group>"; };
 		DE97DF3C1B568D7000D21F5D /* SSUIShareActionSheetStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIShareActionSheetStyle.m; sourceTree = "<group>"; };
 		DE97DF3F1B5691C700D21F5D /* SSUIShareActionSheetStyle_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSUIShareActionSheetStyle_Private.h; sourceTree = "<group>"; };
@@ -278,8 +304,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE0F13031B84691800B6E543 /* AddressBook.framework in Frameworks */,
+				DE0F13011B84691100B6E543 /* AssetsLibrary.framework in Frameworks */,
+				DE0F12FF1B84690A00B6E543 /* MediaPlayer.framework in Frameworks */,
+				DE0F12FD1B84690300B6E543 /* CoreLocation.framework in Frameworks */,
+				DE0F12FB1B8468FD00B6E543 /* CoreMotion.framework in Frameworks */,
 				DE93B0DA1B4E4ED300459A2A /* libsqlite3.dylib in Frameworks */,
+				DE0F12F51B84685B00B6E543 /* GoogleOpenSource.framework in Frameworks */,
 				DE93B0D81B4E4EBB00459A2A /* Accounts.framework in Frameworks */,
+				DE0F12F91B84685B00B6E543 /* RennSDK.framework in Frameworks */,
 				DE93B0D61B4E4EB600459A2A /* Social.framework in Frameworks */,
 				DE93B0D41B4E4EAC00459A2A /* ImageIO.framework in Frameworks */,
 				DE93B0D21B4E4EA700459A2A /* JavaScriptCore.framework in Frameworks */,
@@ -298,6 +331,7 @@
 				DE93B0941B4E4C6900459A2A /* ShareSDKExtension.framework in Frameworks */,
 				DE93B04F1B4E49FE00459A2A /* Foundation.framework in Frameworks */,
 				DE93B0921B4E4C6900459A2A /* ShareSDK.framework in Frameworks */,
+				DE0F12F71B84685B00B6E543 /* GooglePlus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +378,25 @@
 				D0DD5A741B329802001D6161 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DE0F12EE1B84685B00B6E543 /* GooglePlusSDK */ = {
+			isa = PBXGroup;
+			children = (
+				DE0F12EF1B84685B00B6E543 /* GoogleOpenSource.framework */,
+				DE0F12F01B84685B00B6E543 /* GooglePlus.bundle */,
+				DE0F12F11B84685B00B6E543 /* GooglePlus.framework */,
+			);
+			path = GooglePlusSDK;
+			sourceTree = "<group>";
+		};
+		DE0F12F21B84685B00B6E543 /* RenRenSDK */ = {
+			isa = PBXGroup;
+			children = (
+				DE0F12F31B84685B00B6E543 /* RennSDK.bundle */,
+				DE0F12F41B84685B00B6E543 /* RennSDK.framework */,
+			);
+			path = RenRenSDK;
 			sourceTree = "<group>";
 		};
 		DE1EA3201B4F62DE00DE95E2 /* ContentEditor */ = {
@@ -416,6 +469,11 @@
 		DE93B04D1B4E49FE00459A2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE0F13021B84691800B6E543 /* AddressBook.framework */,
+				DE0F13001B84691100B6E543 /* AssetsLibrary.framework */,
+				DE0F12FE1B84690A00B6E543 /* MediaPlayer.framework */,
+				DE0F12FC1B84690300B6E543 /* CoreLocation.framework */,
+				DE0F12FA1B8468FD00B6E543 /* CoreMotion.framework */,
 				DE93B0D91B4E4ED300459A2A /* libsqlite3.dylib */,
 				DE93B0D71B4E4EBB00459A2A /* Accounts.framework */,
 				DE93B0D51B4E4EB600459A2A /* Social.framework */,
@@ -437,7 +495,6 @@
 			children = (
 				DE75D3851B70536D00A1F1CD /* ShareSDKUI.bundle */,
 				DEA264231B6F770A00840353 /* ShareSDKUI.framework */,
-				DE97DF381B56881800D21F5D /* Icon.png */,
 				DECF63AB1B54B53100B6197E /* LaunchScreen.xib */,
 				DE93B05D1B4E49FE00459A2A /* AppDelegate.h */,
 				DE93B05E1B4E49FE00459A2A /* AppDelegate.m */,
@@ -451,6 +508,10 @@
 		DE93B0551B4E49FE00459A2A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DE0F13041B84697C00B6E543 /* Icon-72.png */,
+				DE0F13051B84697C00B6E543 /* Icon-72@2x.png */,
+				DE0F13061B84697C00B6E543 /* Icon.png */,
+				DE0F13071B84697C00B6E543 /* Icon@2x.png */,
 				DE93B0951B4E4CBD00459A2A /* extends */,
 				DE93B08A1B4E4C6900459A2A /* bin */,
 				DE93B0601B4E49FE00459A2A /* Main_iPhone.storyboard */,
@@ -481,6 +542,8 @@
 		DE93B0951B4E4CBD00459A2A /* extends */ = {
 			isa = PBXGroup;
 			children = (
+				DE0F12EE1B84685B00B6E543 /* GooglePlusSDK */,
+				DE0F12F21B84685B00B6E543 /* RenRenSDK */,
 				DE93B0961B4E4CBD00459A2A /* QQSDK */,
 				DE93B0991B4E4CBD00459A2A /* SinaWeiboSDK */,
 				DE93B0A91B4E4CBD00459A2A /* WeChatSDK */,
@@ -592,6 +655,7 @@
 				DE93B0CA1B4E4E5800459A2A /* SSUITypeDef.h in Headers */,
 				E2FF0FF01B56922F008EA663 /* SSUIEditorViewStyle.h in Headers */,
 				DE748C8E1B68DCB200CC1B4B /* ShareSDKUI.h in Headers */,
+				DE93B12D1B4F6C4300459A2A /* SSUIShareActionSheetItem.h in Headers */,
 				DE93B12F1B4F6C4300459A2A /* SSUIShareActionSheetPlatformItem.h in Headers */,
 				DE93B12B1B4F6C4300459A2A /* SSUIShareActionSheetCustomItem.h in Headers */,
 				DE1EA34A1B4F62DE00DE95E2 /* SSUIiPadEditorViewController.h in Headers */,
@@ -614,7 +678,6 @@
 				DE93B1311B4F6C4300459A2A /* SSUIBaseShareActionSheet.h in Headers */,
 				DE1EA3631B4F62DE00DE95E2 /* SSUIShareContentEditorDef.h in Headers */,
 				E2FF0FF61B569789008EA663 /* SSUIEditorViewStyle_Private.h in Headers */,
-				DE93B12D1B4F6C4300459A2A /* SSUIShareActionSheetItem.h in Headers */,
 				DE1EA34E1B4F62DE00DE95E2 /* SSUIiPadShareContentEditor.h in Headers */,
 				DE93B13A1B4F6C4300459A2A /* SSUIPlatformsView.h in Headers */,
 				DE1EA35D1B4F62DE00DE95E2 /* SSUIiPhoneEditorViewController.h in Headers */,
@@ -716,13 +779,18 @@
 				DE93B0AE1B4E4CBD00459A2A /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				DECF63AC1B54B53100B6197E /* LaunchScreen.xib in Resources */,
 				DE75D3861B70536D00A1F1CD /* ShareSDKUI.bundle in Resources */,
-				DE97DF391B56881800D21F5D /* Icon.png in Resources */,
 				DE93B0651B4E49FE00459A2A /* Main_iPad.storyboard in Resources */,
+				DE0F130B1B84697C00B6E543 /* Icon@2x.png in Resources */,
 				DE93B0911B4E4C6900459A2A /* ShareSDK.bundle in Resources */,
+				DE0F13081B84697C00B6E543 /* Icon-72.png in Resources */,
 				DE93B06A1B4E49FE00459A2A /* Images.xcassets in Resources */,
+				DE0F12F81B84685B00B6E543 /* RennSDK.bundle in Resources */,
 				DE93B0B01B4E4CBD00459A2A /* WeiboSDK.bundle in Resources */,
 				DE93B0621B4E49FE00459A2A /* Main_iPhone.storyboard in Resources */,
 				DE93B0591B4E49FE00459A2A /* InfoPlist.strings in Resources */,
+				DE0F12F61B84685B00B6E543 /* GooglePlus.bundle in Resources */,
+				DE0F130A1B84697C00B6E543 /* Icon.png in Resources */,
+				DE0F13091B84697C00B6E543 /* Icon-72@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -970,7 +1038,8 @@
 					"$(inherited)",
 					"$(SRCROOT)/../bin",
 					"$(SRCROOT)/../extends/QQSDK",
-					/Users/liujinghuang/Desktop/ShareSDKv3.0.0/bin,
+					"$(SRCROOT)/../extends/GooglePlusSDK",
+					"$(SRCROOT)/../extends/RenRenSDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestShareSDKUI/TestShareSDKUI-Prefix.pch";
@@ -1007,7 +1076,8 @@
 					"$(inherited)",
 					"$(SRCROOT)/../bin",
 					"$(SRCROOT)/../extends/QQSDK",
-					/Users/liujinghuang/Desktop/ShareSDKv3.0.0/bin,
+					"$(SRCROOT)/../extends/GooglePlusSDK",
+					"$(SRCROOT)/../extends/RenRenSDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestShareSDKUI/TestShareSDKUI-Prefix.pch";

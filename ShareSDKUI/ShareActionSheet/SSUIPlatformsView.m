@@ -70,20 +70,20 @@ static const CGFloat itemH = 78;
     {
         marginY = (viewH - self.totalRow *itemH)/ (self.totalRow - 1);
     }
-
+    
     for (int index = 0; index < [self.items count]; index++)
     {
-
         if (self.itemArr.count > index)
         {
             _itemView = self.itemArr[index];
         }
         else
         {
-            _itemView = [[SSUIShareActinoSheetItemView alloc] initWithItem:self.items[index] index:(index + self.platformIndex *self.totalRow*self.totalColums)];
+            _itemView = [[SSUIShareActinoSheetItemView alloc] initWithIndex:(index + self.platformIndex *self.totalRow*self.totalColums)];
             [self.itemArr addObject:_itemView];
         }
         
+        _itemView.item = self.items[index];
         _itemView.hidden = NO;
         _itemView.clickHandle = self.clickHandle;
         _itemView.cancelHandle = self.cancelHandle;

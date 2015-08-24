@@ -49,7 +49,8 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                  [obj isEqual: @(SSDKPlatformSubTypeWechatFav)] ||
                  [obj isEqual: @(SSDKPlatformTypeQQ)] ||
                  [obj isEqual: @(SSDKPlatformSubTypeQZone)] ||
-                 [obj isEqual: @(SSDKPlatformSubTypeQQFriend)])
+                 [obj isEqual: @(SSDKPlatformSubTypeQQFriend)] ||
+                 [obj isEqual: @(SSDKPlatformTypeInstagram)])
              {
                  if (![ShareSDK isClientInstalled:[obj integerValue]])
                  {
@@ -144,6 +145,7 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                 [ShareSDK share:platItem.platformType
                      parameters:shareParams
                  onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+                     
                      if (shareStateChangedHandler)
                      {
                          shareStateChangedHandler (state, platItem.platformType, userData, contentEntity, error, YES);
@@ -196,7 +198,8 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                                                @(SSDKPlatformSubTypeWechatFav),
                                                @(SSDKPlatformTypeMail),
                                                @(SSDKPlatformTypeSMS),
-                                               @(SSDKPlatformTypeCopy)
+                                               @(SSDKPlatformTypeCopy),
+                                               @(SSDKPlatformTypeGooglePlus)
                                                ];
 
     if ([unSupportOneKeySharePlatforms containsObject:@(platformType)])
@@ -319,7 +322,5 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
     [SSUIShareActionSheetStyle setSupportedInterfaceOrientation:toInterfaceOrientation];
     [SSUIEditorViewStyle setSupportedInterfaceOrientation:toInterfaceOrientation];
 }
-
-
 
 @end

@@ -50,16 +50,15 @@
                                  title:@"分享标题"
                                   type:SSDKContentTypeImage];
     
-
     //1.2、自定义分享平台（非必要）
     NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
-//    SSUIShareActionSheetCustomItem *item = [SSUIShareActionSheetCustomItem itemWithIcon:[UIImage imageNamed:@"Icon.png"]
-//                                                                                  label:@"自定义"
-//                                                                                onClick:^{
-//                                                                                    
-//                                                                                    NSLog(@"=== 自定义item点击 ===");
-//                                                                                }];
-//    [activePlatforms addObject:item];
+    SSUIShareActionSheetCustomItem *item = [SSUIShareActionSheetCustomItem itemWithIcon:[UIImage imageNamed:@"Icon.png"]
+                                                                                  label:@"自定义"
+                                                                                onClick:^{
+                                                                                    
+                                                                                    NSLog(@"=== 自定义item点击 ===");
+                                                                                }];
+    [activePlatforms addObject:item];
     
     //1.3、自定义分享编辑页面（非必要）
 //    [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:249/255.0 green:0/255.0 blue:12/255.0 alpha:0.5]];
@@ -78,7 +77,7 @@
     //2、弹出分享菜单栏
 //    SSUIShareActionSheetController *actionSheet = [ShareSDK showShareActionSheet:sender
     [ShareSDK showShareActionSheet:sender
-                             items:activePlatforms
+                             items:nil
                        shareParams:params
                onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
                    

@@ -130,7 +130,23 @@ static const CGFloat platformItemH = 78.0;
         [self.view addSubview:_cancelButton];
     }
     
+    UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+    [self.view addGestureRecognizer:tapGr];
+    
     return self;
+}
+
+-(void)viewTapped:(UITapGestureRecognizer*)tapGr
+{
+    __weak SSUIiPhoneShareActionSheetViewController *actionSheet = self;
+    
+    [self dismissAnimation:^{
+        
+        if (actionSheet.cancelHandle)
+        {
+            actionSheet.cancelHandle ();
+        }
+    }];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

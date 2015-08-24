@@ -215,7 +215,9 @@
                                                    @(SSDKPlatformSubTypeWechatFav),
                                                    @(SSDKPlatformTypeSMS),
                                                    @(SSDKPlatformTypeMail),
-                                                   @(SSDKPlatformTypeCopy)
+                                                   @(SSDKPlatformTypeCopy),
+                                                   @(SSDKPlatformTypeGooglePlus),
+                                                   @(SSDKPlatformTypeInstagram)
                                                    ];
             
             if ([unNeedAuthorizedPlatforms containsObject:[_platformTypes objectAtIndex:0]])
