@@ -2,7 +2,7 @@
 //  SSUIiPadShareActionSheet.m
 //  ShareSDKUI
 //
-//  Created by fenghj on 15/6/18.
+//  Created by 刘 靖煌 on 15/6/18.
 //  Copyright (c) 2015年 mob. All rights reserved.
 //
 
@@ -11,8 +11,10 @@
 #import "SSUIiPadShareActionSheetViewController.h"
 #import "SSUIShareActionSheetStyle_Private.h"
 #import <MOBFoundation/MOBFDevice.h>
+#import <MOBFoundation/MOBFoundation.h>
 
 @interface SSUIiPadShareActionSheet ()
+<UIPopoverPresentationControllerDelegate>
 
 @property (nonatomic, strong) SSUIiPadShareActionSheetViewController *viewCtr;
 
@@ -27,32 +29,53 @@
         self.items = items;
         
         _viewCtr = [[SSUIiPadShareActionSheetViewController alloc] initWithItems:self.items];
-        _viewCtr.view.backgroundColor = [UIColor clearColor];
-        _popover = [[UIPopoverController alloc] initWithContentViewController:_viewCtr];
         
-        if ([MOBFDevice versionCompare:@"7.0"] >= 0)
+        //分屏适配
+        if (!([MOBFDevice versionCompare:@"8.0"] >= 0))
         {
-            if ([SSUIShareActionSheetStyle sharedInstance].actionSheetColor)
+            _popover = [[UIPopoverController alloc] initWithContentViewController:_viewCtr];
+            if ([MOBFDevice versionCompare:@"7.0"] >= 0)
             {
-                _popover.backgroundColor = [SSUIShareActionSheetStyle sharedInstance].actionSheetColor;
+                if ([SSUIShareActionSheetStyle sharedInstance].actionSheetColor)
+                {
+                    _popover.backgroundColor = [SSUIShareActionSheetStyle sharedInstance].actionSheetColor;
+                }
             }
+            
+            _popover.popoverContentSize = CGSizeMake(300, 400);
+            _popover.delegate = self;
         }
-
-        _popover.popoverContentSize = CGSizeMake(300, 400);
-        _popover.delegate = self;
     }
     
     return self;
 }
 
+#pragma mark - SSUIBaseShareActionSheet
+
 -(void)showInView:(UIView *)view
 {
     [_viewCtr showInView:view];
-    
-    [_popover presentPopoverFromRect:view.bounds
-                              inView:view
-            permittedArrowDirections:UIPopoverArrowDirectionAny
-                            animated:YES];
+
+    //分屏适配
+    if ([MOBFDevice versionCompare:@"8.0"] >= 0)
+    {
+        _viewCtr.modalPresentationStyle = UIModalPresentationPopover;
+        _viewCtr.popoverPresentationController.sourceView = view;
+        _viewCtr.popoverPresentationController.sourceRect = view.bounds;
+        _viewCtr.popoverPresentationController.delegate = self;
+        _viewCtr.preferredContentSize = CGSizeMake(300, 400);
+        
+        [[MOBFViewController currentViewController] presentViewController:_viewCtr
+                                                                 animated:YES
+                                                               completion:^{}];
+    }
+    else
+    {
+        [_popover presentPopoverFromRect:view.bounds
+                                  inView:view
+                permittedArrowDirections:UIPopoverArrowDirectionAny
+                                animated:YES];
+    }
 }
 
 - (void)onItemClick:(SSUIShareActionSheetItemClickHandler)itemClickHandler
@@ -71,13 +94,38 @@
 
 - (void)dismiss
 {
-    if (_popover.popoverVisible)
+    //分屏适配
+    if ([MOBFDevice versionCompare:@"8.0"] >= 0)
     {
-        [_popover dismissPopoverAnimated:NO];
+//        [_viewCtr dismissModalViewControllerAnimated:YES];
+        [_viewCtr dismissViewControllerAnimated:YES
+                                     completion:^{}];
+    }
+    else
+    {
+        if (_popover.popoverVisible)
+        {
+            [_popover dismissPopoverAnimated:NO];
+        }
     }
 }
 
 -(void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    if (self.cancelHandler)
+    {
+        self.cancelHandler ();
+    }
+}
+
+#pragma mark - UIPopoverPresentationControllerDelegate
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
+{
+    return UIModalPresentationNone;
+}
+
+-(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
 {
     if (self.cancelHandler)
     {

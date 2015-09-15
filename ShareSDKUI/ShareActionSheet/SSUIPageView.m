@@ -34,7 +34,6 @@ static const CGFloat pageControlH = 35;
         _totalRow = rowCount;
         _totalColums = columnCount;
         
-        
         self.backgroundColor = [UIColor whiteColor];
         
         if ([SSUIShareActionSheetStyle sharedInstance].actionSheetColor)

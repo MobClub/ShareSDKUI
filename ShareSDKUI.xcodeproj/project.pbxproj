@@ -11,7 +11,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = DE93B0B71B4E4DC800459A2A /* Build configuration list for PBXAggregateTarget "CreatePackage" */;
 			buildPhases = (
-				DE93B0BC1B4E4DD600459A2A /* ShellScript */,
+				DE93B0BC1B4E4DD600459A2A /* Run Script */,
 			);
 			dependencies = (
 				DE93B0BB1B4E4DD300459A2A /* PBXTargetDependency */,
@@ -77,6 +77,7 @@
 		DE64BADF1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE64BADD1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.m */; };
 		DE748C8E1B68DCB200CC1B4B /* ShareSDKUI.h in Headers */ = {isa = PBXBuildFile; fileRef = D0DD5A7A1B329AA7001D6161 /* ShareSDKUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE75D3861B70536D00A1F1CD /* ShareSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE75D3851B70536D00A1F1CD /* ShareSDKUI.bundle */; };
+		DE7E28251B9554BD00B6EF17 /* sharesdk1.png in Resources */ = {isa = PBXBuildFile; fileRef = DE7E28241B9554BD00B6EF17 /* sharesdk1.png */; };
 		DE93B04F1B4E49FE00459A2A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE93B04E1B4E49FE00459A2A /* Foundation.framework */; };
 		DE93B0511B4E49FE00459A2A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE93B0501B4E49FE00459A2A /* CoreGraphics.framework */; };
 		DE93B0531B4E49FE00459A2A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE93B0521B4E49FE00459A2A /* UIKit.framework */; };
@@ -215,6 +216,7 @@
 		DE64BADC1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIiPhoneShareActionSheetViewController.h; sourceTree = "<group>"; };
 		DE64BADD1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIiPhoneShareActionSheetViewController.m; sourceTree = "<group>"; };
 		DE75D3851B70536D00A1F1CD /* ShareSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ShareSDKUI.bundle; path = ../../bin/ShareSDKUI.bundle; sourceTree = "<group>"; };
+		DE7E28241B9554BD00B6EF17 /* sharesdk1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sharesdk1.png; sourceTree = "<group>"; };
 		DE93B04C1B4E49FE00459A2A /* TestShareSDKUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestShareSDKUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE93B04E1B4E49FE00459A2A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DE93B0501B4E49FE00459A2A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -493,6 +495,7 @@
 		DE93B0541B4E49FE00459A2A /* TestShareSDKUI */ = {
 			isa = PBXGroup;
 			children = (
+				DE7E28241B9554BD00B6EF17 /* sharesdk1.png */,
 				DE75D3851B70536D00A1F1CD /* ShareSDKUI.bundle */,
 				DEA264231B6F770A00840353 /* ShareSDKUI.framework */,
 				DECF63AB1B54B53100B6197E /* LaunchScreen.xib */,
@@ -782,6 +785,7 @@
 				DE93B0651B4E49FE00459A2A /* Main_iPad.storyboard in Resources */,
 				DE0F130B1B84697C00B6E543 /* Icon@2x.png in Resources */,
 				DE93B0911B4E4C6900459A2A /* ShareSDK.bundle in Resources */,
+				DE7E28251B9554BD00B6EF17 /* sharesdk1.png in Resources */,
 				DE0F13081B84697C00B6E543 /* Icon-72.png in Resources */,
 				DE93B06A1B4E49FE00459A2A /* Images.xcassets in Resources */,
 				DE0F12F81B84685B00B6E543 /* RennSDK.bundle in Resources */,
@@ -797,13 +801,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		DE93B0BC1B4E4DD600459A2A /* ShellScript */ = {
+		DE93B0BC1B4E4DD600459A2A /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -924,6 +929,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jinghuang Liu (H4ZH7W6LU4)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -940,6 +946,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -967,6 +974,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jinghuang Liu (H4ZH7W6LU4)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -977,6 +985,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
@@ -991,7 +1000,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../bin";
 				INFOPLIST_FILE = ShareSDKUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = mh_object;
 				MACOSX_DEPLOYMENT_TARGET = "";
@@ -1013,7 +1022,7 @@
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				INFOPLIST_FILE = ShareSDKUI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = mh_object;
 				MACOSX_DEPLOYMENT_TARGET = "";
@@ -1034,6 +1043,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jinghuang Liu (H4ZH7W6LU4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jinghuang Liu (H4ZH7W6LU4)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../bin",
@@ -1072,6 +1082,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jinghuang Liu (H4ZH7W6LU4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jinghuang Liu (H4ZH7W6LU4)";
 				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../bin",

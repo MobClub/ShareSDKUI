@@ -44,7 +44,9 @@
                                  @(SSDKPlatformTypeDouBan),
                                  @(SSDKPlatformTypeKaixin),
                                  @(SSDKPlatformTypeGooglePlus),
-                                 @(SSDKPlatformTypePocket)
+                                 @(SSDKPlatformTypePocket),
+                                 @(SSDKPlatformTypeLinkedIn),
+                                 @(SSDKPlatformTypeTumblr)
                                  ];
     
     //ShareSDK和平台初始化
@@ -153,6 +155,16 @@
                       [appInfo SSDKSetupPocketByConsumerKey:@"11496-de7c8c5eb25b2c9fcdc2b627"
                                                 redirectUri:@"pocketapp1234"
                                                    authType:SSDKAuthTypeBoth];
+                      break;
+                  case SSDKPlatformTypeLinkedIn:
+                      [appInfo SSDKSetupLinkedInByApiKey:@"ejo5ibkye3vo"
+                                               secretKey:@"cC7B2jpxITqPLZ5M"
+                                             redirectUrl:@"http://sharesdk.cn"];
+                      break;
+                  case SSDKPlatformTypeTumblr:
+                      [appInfo SSDKSetupTumblrByConsumerKey:@"2QUXqO9fcgGdtGG1FcvML6ZunIQzAEL8xY6hIaxdJnDti2DYwM"
+                                             consumerSecret:@"3Rt0sPFj7u2g39mEVB3IBpOzKnM3JnTtxX2bao2JKk4VV1gtNo"
+                                                callbackUrl:@"http://sharesdk.cn"];
                       break;
                   default:
                       break;

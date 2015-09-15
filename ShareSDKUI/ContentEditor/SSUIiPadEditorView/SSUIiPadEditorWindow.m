@@ -29,9 +29,7 @@
 
 -(void)setSubmitHandler:(SSUIShareContentEditorViewSubmitHandler)submitHandler
 {
-    
     ((SSUIiPadEditorViewController *)self.rootViewController).submitHandler = submitHandler;
-    
 }
 
 - (SSUIShareContentEditorViewSubmitHandler)submitHandler

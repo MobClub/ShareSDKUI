@@ -98,6 +98,13 @@
     [self updateLayout];
 }
 
+- (void)setNeedsLayout
+{
+    _needLayout = YES;
+    [self layoutSubviews];
+}
+
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];

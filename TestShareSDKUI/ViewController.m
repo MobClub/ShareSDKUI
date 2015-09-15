@@ -36,6 +36,25 @@
     btn2.frame = CGRectMake((self.view.frame.size.width - 200)/2, 200, 200, 50);
     [btn2 addTarget:self action:@selector(ShowShareContentEditorView:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];
+    
+    UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [btn3 setTitle:@"Test button" forState:UIControlStateNormal];
+    [btn3 sizeToFit];
+    btn3.frame = CGRectMake((self.view.frame.size.width - 200)/2, 300, 200, 50);
+    [btn3 addTarget:self action:@selector(TestButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn3];
+}
+
+-(void)TestButton:(id)sender
+{
+    [ShareSDK authorize:SSDKPlatformTypeWechat
+               settings:nil
+         onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+             if (error)
+             {
+                 NSLog(@"error : %@",error);
+             }
+         }];
 }
 
 #pragma mark -
@@ -45,13 +64,14 @@
     //1、构造分享内容
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params SSDKSetupShareParamsByText:@"ShareSDK is the most comprehensive Social SDK in the world , which share easily with 40+ platforms , from around the world.For more information,please visit http://www.mob.com website."
-                                images:@[@"http://www.mob.com/AssetsMob/images/index/video-img1.png"]
+                                images:@[[[NSBundle mainBundle] pathForResource:@"sharesdk1" ofType:@"png"]]
                                    url:[NSURL URLWithString:@"http://www.mob.com"]
                                  title:@"分享标题"
                                   type:SSDKContentTypeImage];
     
     //1.2、自定义分享平台（非必要）
-    NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
+    NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:@[@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ),@(SSDKPlatformTypeRenren),@(SSDKPlatformTypeSinaWeibo),@(SSDKPlatformTypeSMS),@(SSDKPlatformTypeTwitter)]];
+//    NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:@[@(SSDKPlatformSubTypeWechatTimeline),@(SSDKPlatformSubTypeWechatSession),@(SSDKPlatformSubTypeWechatFav),@(SSDKPlatformSubTypeQQFriend),@(SSDKPlatformSubTypeQZone),@(SSDKPlatformTypeRenren),@(SSDKPlatformTypeSinaWeibo),@(SSDKPlatformTypeSMS),@(SSDKPlatformTypeTwitter)]];
     SSUIShareActionSheetCustomItem *item = [SSUIShareActionSheetCustomItem itemWithIcon:[UIImage imageNamed:@"Icon.png"]
                                                                                   label:@"自定义"
                                                                                 onClick:^{

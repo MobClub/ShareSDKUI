@@ -9,6 +9,7 @@
 #import "SSUIiPadEditorViewController.h"
 #import "SSUIShareContentEditorDef.h"
 #import "SSUIEditorViewStyle_Private.h"
+#import <MOBFoundation/MOBFDevice.h>
 
 #define CONTENT_VIEW_WIDTH 480
 #define CONTENT_VIEW_HEIGHT 300
@@ -26,7 +27,11 @@
                                                                             PADDING_TOP,
                                                                             CONTENT_VIEW_WIDTH,
                                                                             CONTENT_VIEW_HEIGHT)];
-    _contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+    
+    if ([MOBFDevice versionCompare:@"9.0"] < 0)
+    {
+        _contentView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+    }
     [self.view addSubview:_contentView];
 
 }
@@ -59,6 +64,17 @@
     }
     
     return [super shouldAutorotateToInterfaceOrientation:toInterfaceOrientation];
+}
+
+//iOS9分屏委托
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator 
+{
+    if ([MOBFDevice versionCompare:@"8.0"])
+    {
+        [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    }
+    
+    [_contentView updateLayoutWithSplitViewSize:size];
 }
 
 //iOS 6

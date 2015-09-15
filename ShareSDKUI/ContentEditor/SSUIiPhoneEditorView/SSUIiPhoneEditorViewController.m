@@ -190,7 +190,6 @@
     if (self.cancelHandler) {
          self.cancelHandler();
     }
-    
 }
 /**
  *	@brief	发送按钮点击

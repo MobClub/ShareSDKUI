@@ -2,7 +2,7 @@
 //  SSUIiPadShareActionSheetViewController.m
 //  ShareSDKUI
 //
-//  Created by 刘靖煌 on 15/7/15.
+//  Created by 刘 靖煌 on 15/7/15.
 //  Copyright (c) 2015年 mob. All rights reserved.
 //
 
@@ -33,7 +33,6 @@
 {
     if ([SSUIShareActionSheetStyle sharedInstance].supportedInterfaceOrientation)
     {
-        
         switch ([SSUIShareActionSheetStyle sharedInstance].supportedInterfaceOrientation)
         {
             case UIInterfaceOrientationMaskPortrait:
@@ -65,7 +64,7 @@
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([SSUIShareActionSheetStyle sharedInstance].supportedInterfaceOrientation)
     {

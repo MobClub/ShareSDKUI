@@ -52,7 +52,14 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                  [obj isEqual: @(SSDKPlatformSubTypeQQFriend)] ||
                  [obj isEqual: @(SSDKPlatformTypeInstagram)])
              {
-                 if (![ShareSDK isClientInstalled:[obj integerValue]])
+                 if ([obj isEqual:@(SSDKPlatformSubTypeQZone)])
+                 {
+                     if (![ShareSDK isClientInstalled:(SSDKPlatformSubTypeQQFriend)])
+                     {
+                         [activePlatforms removeObject:@(SSDKPlatformSubTypeQZone)];
+                     }
+                 }
+                 else if (![ShareSDK isClientInstalled:[obj integerValue]])
                  {
                      [activePlatforms removeObject:obj];
                  }
@@ -105,7 +112,13 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
             //构造其他平台列表
             if ([otherPlatformTypes containsObject:@(platItem.platformType)])
             {
+                
                 [otherPlatformTypes removeObject:@(platItem.platformType)];
+            }
+            else if([otherPlatformTypes containsObject:[NSString stringWithFormat:@"%@",@(platItem.platformType)]])
+            {
+                //ANE,Unity情况下obj为NSString类型
+                [otherPlatformTypes removeObject:[NSString stringWithFormat:@"%@",@(platItem.platformType)]];
             }
             
             //对微信和QQ等包含多个平台的平台处理
@@ -199,7 +212,8 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                                                @(SSDKPlatformTypeMail),
                                                @(SSDKPlatformTypeSMS),
                                                @(SSDKPlatformTypeCopy),
-                                               @(SSDKPlatformTypeGooglePlus)
+                                               @(SSDKPlatformTypeGooglePlus),
+                                               @(SSDKPlatformTypeInstagram)
                                                ];
 
     if ([unSupportOneKeySharePlatforms containsObject:@(platformType)])
@@ -230,6 +244,12 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                 case SSDKPlatformTypeTencentWeibo:
                 case SSDKPlatformTypeFacebook:
                 case SSDKPlatformTypeTwitter:
+                case SSDKPlatformTypeDouBan:
+                case SSDKPlatformTypeRenren:
+                case SSDKPlatformTypeKaixin:
+                case SSDKPlatformTypeLinkedIn:
+                case SSDKPlatformTypePocket:
+                case SSDKPlatformTypeTumblr:
                     [platforms addObject:platformNum];
                     break;
                 default:

@@ -2,7 +2,7 @@
 //  SSUIShareActionSheet.m
 //  ShareSDKUI
 //
-//  Created by fenghj on 15/6/18.
+//  Created by 刘 靖煌 on 15/6/18.
 //  Copyright (c) 2015年 mob. All rights reserved.
 //
 
@@ -66,7 +66,15 @@
                  [obj isEqual: @(SSDKPlatformSubTypeQQFriend)] ||
                  [obj isEqual: @(SSDKPlatformTypeInstagram)])
              {
-                 if (![ShareSDK isClientInstalled:[obj integerValue]])
+                 
+                 if ([obj isEqual:@(SSDKPlatformSubTypeQZone)])
+                 {
+                     if (![ShareSDK isClientInstalled:(SSDKPlatformSubTypeQQFriend)])
+                     {
+                         [activePlatforms removeObject:@(SSDKPlatformSubTypeQZone)];
+                     }
+                 }
+                 else if (![ShareSDK isClientInstalled:[obj integerValue]])
                  {
                      [activePlatforms removeObject:obj];
                  }
@@ -79,15 +87,17 @@
     {
         if (![activePlatforms containsObject:@(SSDKPlatformSubTypeWechatSession)])
         {
-            [activePlatforms addObject:@(SSDKPlatformSubTypeWechatSession)];
-        }
-
-        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeWechatTimeline)]) {
-            [activePlatforms addObject:@(SSDKPlatformSubTypeWechatTimeline)];
+            [activePlatforms insertObject:@(SSDKPlatformSubTypeWechatSession) atIndex:[activePlatforms indexOfObject:@(SSDKPlatformTypeWechat)]];
         }
         
-        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeWechatFav)]) {
-            [activePlatforms addObject:@(SSDKPlatformSubTypeWechatFav)];
+        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeWechatTimeline)])
+        {
+            [activePlatforms insertObject:@(SSDKPlatformSubTypeWechatTimeline) atIndex:[activePlatforms indexOfObject:@(SSDKPlatformTypeWechat)]];
+        }
+        
+        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeWechatFav)])
+        {
+            [activePlatforms insertObject:@(SSDKPlatformSubTypeWechatFav) atIndex:[activePlatforms indexOfObject:@(SSDKPlatformTypeWechat)]];
         }
         
         [activePlatforms removeObject:@(SSDKPlatformTypeWechat)];
@@ -95,14 +105,16 @@
     
     if ([activePlatforms containsObject:@(SSDKPlatformTypeQQ)])
     {
-        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeQZone)]) {
-            [activePlatforms addObject:@(SSDKPlatformSubTypeQZone)];
+        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeQQFriend)])
+        {
+            [activePlatforms insertObject:@(SSDKPlatformSubTypeQQFriend) atIndex:[activePlatforms indexOfObject:@(SSDKPlatformTypeQQ)]];
         }
         
-        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeQQFriend)]) {
-            [activePlatforms addObject:@(SSDKPlatformSubTypeQQFriend)];
+        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeQZone)])
+        {
+            [activePlatforms insertObject:@(SSDKPlatformSubTypeQZone) atIndex:[activePlatforms indexOfObject:@(SSDKPlatformTypeQQ)]];
         }
-        
+
         [activePlatforms removeObject:@(SSDKPlatformTypeQQ)];
     }
     
@@ -117,6 +129,7 @@
             if ([activePlatforms containsObject:obj])
             {
                 [showActivePlatforms addObject:obj];
+                
                 [actionSheetItems addObject:[SSUIShareActionSheetItem itemWithPlatformType:[obj integerValue]]];
             }
         }
@@ -126,12 +139,23 @@
             if ([activePlatforms containsObject:@(platformType)])
             {
                 [showActivePlatforms addObject:@(platformType)];
+                
                 [actionSheetItems addObject:obj];
             }
         }
         else if ([obj isKindOfClass:[SSUIShareActionSheetItem class]])
         {
             [actionSheetItems addObject:obj];
+        }
+        else if ([obj isKindOfClass:[NSString class]])
+        {
+            //ANE,Unity情况下obj为NSString类型
+            if ([activePlatforms containsObject:obj])
+            {
+                [showActivePlatforms addObject:obj];
+                
+                [actionSheetItems addObject:[SSUIShareActionSheetItem itemWithPlatformType:[obj integerValue]]];
+            }
         }
     }];
     
@@ -167,6 +191,11 @@
 {
     self.selfRef = nil;
     [self.shareActionSheet dismiss];
+}
+
+-(void)dealloc
+{
+    
 }
 
 - (void)onItemClick:(SSUIShareActionSheetItemClickHandler)itemClickHandler

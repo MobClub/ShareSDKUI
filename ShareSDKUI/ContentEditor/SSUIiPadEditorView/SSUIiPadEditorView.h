@@ -24,5 +24,13 @@
                  image:(SSDKImage*)image
   interfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
         viewController:(UIViewController *)viewController;
-             
+
+/**
+ *  分屏处理布局
+ *
+ *  @param size 分屏后的屏幕尺寸
+ */
+
+- (void)updateLayoutWithSplitViewSize:(CGSize)size;
+
 @end

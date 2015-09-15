@@ -14,6 +14,12 @@
 #define NAV_BAR_PADDING_LEFT 10.0
 #define NAV_BAR_PADDING_RIGHT 10.0
 
+#define ORIGINAL_FRAME_X 144.0
+#define ORIGINAL_FRAME_Y 60.0
+#define ORIGINAL_FRAME_W 480.0
+#define ORIGINAL_FRAME_H 300.0
+#define GAP 5.0
+
 @interface SSUIiPadEditorView()
 {
 @private
@@ -23,6 +29,7 @@
     SSUIiPhoneEditorView *_contentView;
     NSArray* _platformTypes;
     SSDKImage* _image;
+    BOOL _needRelayout;
 }
 @end
 
@@ -33,6 +40,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
+        
         self.backgroundColor = [UIColor whiteColor];
         self.layer.cornerRadius = 10;
 
@@ -71,20 +79,30 @@
                                        (NAV_BAR_HEIGHT - SSUI_HEIGHT(_sendButton)) / 2,
                                        SSUI_WIDTH(_sendButton),
                                        SSUI_HEIGHT(_sendButton));
-        _sendButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
+        _sendButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |
+        UIViewAutoresizingFlexibleRightMargin |
+        UIViewAutoresizingFlexibleBottomMargin |
+        UIViewAutoresizingFlexibleTopMargin;
         
         
         _titleView = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleView.font = [UIFont systemFontOfSize:17];
         _titleView.textColor = [UIColor blackColor];
-        _titleView.text = NSLocalizedStringWithDefaultValue(@"ShareContent", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"ShareContent", nil);
+        _titleView.text = NSLocalizedStringWithDefaultValue(@"ShareContent",
+                                                            @"ShareSDKUI_Localizable",
+                                                            [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]],
+                                                            @"ShareContent",
+                                                            nil);
         
         [_titleView sizeToFit];
         _titleView.frame = CGRectMake((SSUI_WIDTH(self) - SSUI_WIDTH(_titleView)) / 2,
                                       (NAV_BAR_HEIGHT - SSUI_HEIGHT(_titleView)) / 2,
                                       SSUI_WIDTH(_titleView),
                                       SSUI_HEIGHT(_titleView));
-        _titleView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin;
+        _titleView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|
+        UIViewAutoresizingFlexibleRightMargin |
+        UIViewAutoresizingFlexibleBottomMargin |
+        UIViewAutoresizingFlexibleTopMargin;
         
         [self setUIStyle];
         [self addSubview:_cancelButton];
@@ -94,15 +112,20 @@
         NSString* bundlePath = [[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"];
         UIImageView *lineView = [[UIImageView alloc] initWithImage:[MOBFImage imageName:@"ContentEditorImg/line@2x.gif" bundle:[NSBundle bundleWithPath:bundlePath]]];
         lineView.backgroundColor =  [UIColor greenColor];
-        lineView.frame = CGRectMake(0.0, NAV_BAR_HEIGHT - 1, SSUI_WIDTH(self), SSUI_HEIGHT(lineView));
+        lineView.frame = CGRectMake(0.0,
+                                    NAV_BAR_HEIGHT - 1,
+                                    SSUI_WIDTH(self),
+                                    SSUI_HEIGHT(lineView));
         lineView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self addSubview:lineView];
 
-        //原来的代码中，iphone/ipad 共用同一个editview,toolbar及toobarItem.如有需要，可重新命名“SSUIiPhoneEditorView”类
-        _contentView = [[SSUIiPhoneEditorView alloc] initWithFrame:CGRectMake(0.0, NAV_BAR_HEIGHT, SSUI_WIDTH(self), SSUI_HEIGHT(self) - NAV_BAR_HEIGHT)];
+        _contentView = [[SSUIiPhoneEditorView alloc] initWithFrame:CGRectMake(0.0,
+                                                                              NAV_BAR_HEIGHT, SSUI_WIDTH(self),
+                                                                              SSUI_HEIGHT(self) - NAV_BAR_HEIGHT)];
         if ([SSUIEditorViewStyle sharedInstance].contentViewBackgroundColor) {
             [_contentView setBackgroundColor:[SSUIEditorViewStyle sharedInstance].contentViewBackgroundColor];
         }
+        _needRelayout= NO;
         [self addSubview:_contentView];
         
     }
@@ -110,7 +133,8 @@
     return self;
 }
 
--(void)setUIStyle{
+-(void)setUIStyle
+{
     
     if ([SSUIEditorViewStyle sharedInstance].title)
     {
@@ -142,12 +166,47 @@
     
 }
 
--(void)updateWithType:(NSArray *)platType content:(NSString *)content image:(SSDKImage *)image interfaceOrientation:(UIInterfaceOrientation)interfaceOrientation viewController:(UIViewController *)viewController{
+-(void)updateWithType:(NSArray *)platType content:(NSString *)content image:(SSDKImage *)image interfaceOrientation:(UIInterfaceOrientation)interfaceOrientation viewController:(UIViewController *)viewController
+{
     
     _platformTypes = platType;
     _image = image;
     [_contentView updateWithContent:content image:image platformTypes:platType interfaceOrientation:interfaceOrientation];
     
+}
+
+
+
+-(void)updateLayoutWithSplitViewSize:(CGSize)size
+{
+    CGFloat width = size.width;
+    if (width < ORIGINAL_FRAME_W)
+    {
+        self.frame = CGRectMake(GAP,
+                                ORIGINAL_FRAME_Y ,
+                                width - 2*GAP ,
+                                ORIGINAL_FRAME_H);
+        
+        _contentView.frame = CGRectMake(GAP,
+                                        NAV_BAR_HEIGHT,
+                                        width - 2*GAP,
+                                        SSUI_HEIGHT(self) - NAV_BAR_HEIGHT);
+        [_contentView setNeedsLayout];
+     
+    }
+    else
+    {
+        self.frame = CGRectMake((width - ORIGINAL_FRAME_W)/2,
+                                ORIGINAL_FRAME_Y,
+                                ORIGINAL_FRAME_W,
+                                ORIGINAL_FRAME_H);
+        
+        _contentView.frame = CGRectMake(0.0,
+                                        NAV_BAR_HEIGHT,
+                                        ORIGINAL_FRAME_W,
+                                        SSUI_HEIGHT(self) - NAV_BAR_HEIGHT);
+        [_contentView setNeedsLayout];
+    }
 }
 
 - (void)cancelButtonClickHandler:(id)sender

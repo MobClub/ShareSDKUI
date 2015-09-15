@@ -51,7 +51,11 @@
     self.selRef = nil;
     [self.shareContentWindow dismiss];
     self.shareContentWindow = nil;
-  
+}
+
+- (void)dealloc
+{
+    
 }
 
 

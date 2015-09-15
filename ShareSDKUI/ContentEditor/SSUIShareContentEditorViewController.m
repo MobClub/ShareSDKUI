@@ -19,6 +19,8 @@
  */
 @property (nonatomic, strong) SSUIBaseShareContentEditor *shareContentEditor;
 
+//@property (nonatomic, strong) SSUIShareContentEditorViewController *selfRef;
+
 @end
 
 @implementation SSUIShareContentEditorViewController
@@ -50,6 +52,11 @@
 - (void)dismiss
 {
     [self.shareContentEditor dismiss];
+}
+
+-(void)dealloc
+{
+    
 }
 
 - (void)onSubmit:(SSUIShareContentEditorViewSubmitHandler)submitHandler
