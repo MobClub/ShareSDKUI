@@ -45,6 +45,11 @@
     [self.view addSubview:btn3];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 -(void)TestButton:(id)sender
 {
     [ShareSDK authorize:SSDKPlatformTypeWechat
@@ -80,16 +85,19 @@
                                                                                 }];
     [activePlatforms addObject:item];
     
-    //1.3、自定义分享编辑页面（非必要）
-//    [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:249/255.0 green:0/255.0 blue:12/255.0 alpha:0.5]];
-//    [SSUIShareActionSheetStyle setActionSheetColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
-//    [SSUIShareActionSheetStyle setCancelButtonBackgroundColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
-//    [SSUIShareActionSheetStyle setCancelButtonLabelColor:[UIColor whiteColor]];
-//    [SSUIShareActionSheetStyle setItemNameColor:[UIColor whiteColor]];
-//    [SSUIShareActionSheetStyle setItemNameFont:[UIFont systemFontOfSize:10]];
-//    [SSUIShareActionSheetStyle setCurrentPageIndicatorTintColor:[UIColor colorWithRed:156/255.0 green:156/255.0 blue:156/255.0 alpha:1.0]];
-//    [SSUIShareActionSheetStyle setPageIndicatorTintColor:[UIColor colorWithRed:62/255.0 green:62/255.0 blue:62/255.0 alpha:1.0]];
-//    [SSUIShareActionSheetStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskLandscape];
+    //1.3、自定义分享菜单栏（非必要）
+    [SSUIShareActionSheetStyle setStatusBarStyle:UIStatusBarStyleLightContent];
+    [SSUIEditorViewStyle setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:249/255.0 green:0/255.0 blue:12/255.0 alpha:0.5]];
+    [SSUIShareActionSheetStyle setActionSheetColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
+    [SSUIShareActionSheetStyle setCancelButtonBackgroundColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
+    [SSUIShareActionSheetStyle setCancelButtonLabelColor:[UIColor whiteColor]];
+    [SSUIShareActionSheetStyle setItemNameColor:[UIColor whiteColor]];
+    [SSUIShareActionSheetStyle setItemNameFont:[UIFont systemFontOfSize:10]];
+    [SSUIShareActionSheetStyle setCurrentPageIndicatorTintColor:[UIColor colorWithRed:156/255.0 green:156/255.0 blue:156/255.0 alpha:1.0]];
+    [SSUIShareActionSheetStyle setPageIndicatorTintColor:[UIColor colorWithRed:62/255.0 green:62/255.0 blue:62/255.0 alpha:1.0]];
+    [SSUIShareActionSheetStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskLandscape];
     
     //1.4、自定义支持的屏幕方向
     [ShareSDK setSupportedInterfaceOrientation:UIInterfaceOrientationMaskAllButUpsideDown];
@@ -170,20 +178,21 @@
     
     NSArray* othetplarForms = [NSArray arrayWithObjects:@(SSDKPlatformTypeTencentWeibo),@(SSDKPlatformTypeFacebook),@(SSDKPlatformTypeTwitter) ,nil];
 
-//    [SSUIEditorViewStyle setTitle:@"自定义标题"];
-//    [SSUIEditorViewStyle setTitleColor:[UIColor yellowColor]];
-//        [SSUIEditorViewStyle setiPhoneNavigationBarBackgroundImage:[UIImage imageNamed:@"wenBG.jpg"]];
-//       [SSUIEditorViewStyle setiPhoneNavigationBarBackgroundColor:[UIColor purpleColor]];
-//    [SSUIEditorViewStyle setiPadNavigationBarBackgroundColor:[UIColor lightGrayColor]];
-//    [SSUIEditorViewStyle setCancelButtonLabel:@"ccccc"];
-//    [SSUIEditorViewStyle setCancelButtonImage:[UIImage imageNamed:@"wenButton.jpg"]];
-//    [SSUIEditorViewStyle setCancelButtonLabelColor:[UIColor blueColor]];
-//    
-//    [SSUIEditorViewStyle setShareButtonImage:[UIImage imageNamed:@"wenButton.jpg"]];
-//    [SSUIEditorViewStyle setShareButtonLabelColor:[UIColor greenColor]];
-//    [SSUIEditorViewStyle setShareButtonLabel:@"right"];
-//    [SSUIEditorViewStyle setContentViewBackgroundColor:[UIColor brownColor]];
-//    [SSUIEditorViewStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskLandscape];
+    [SSUIEditorViewStyle setStatusBarStyle:UIStatusBarStyleLightContent];
+    [SSUIEditorViewStyle setTitle:@"自定义标题"];
+    [SSUIEditorViewStyle setTitleColor:[UIColor yellowColor]];
+        [SSUIEditorViewStyle setiPhoneNavigationBarBackgroundImage:[UIImage imageNamed:@"wenBG.jpg"]];
+       [SSUIEditorViewStyle setiPhoneNavigationBarBackgroundColor:[UIColor purpleColor]];
+    [SSUIEditorViewStyle setiPadNavigationBarBackgroundColor:[UIColor lightGrayColor]];
+    [SSUIEditorViewStyle setCancelButtonLabel:@"ccccc"];
+    [SSUIEditorViewStyle setCancelButtonImage:[UIImage imageNamed:@"wenButton.jpg"]];
+    [SSUIEditorViewStyle setCancelButtonLabelColor:[UIColor blueColor]];
+    
+    [SSUIEditorViewStyle setShareButtonImage:[UIImage imageNamed:@"wenButton.jpg"]];
+    [SSUIEditorViewStyle setShareButtonLabelColor:[UIColor greenColor]];
+    [SSUIEditorViewStyle setShareButtonLabel:@"right"];
+    [SSUIEditorViewStyle setContentViewBackgroundColor:[UIColor brownColor]];
+    [SSUIEditorViewStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskLandscape];
     
     [ShareSDK showShareEditor:SSDKPlatformTypeSinaWeibo
            otherPlatformTypes:othetplarForms

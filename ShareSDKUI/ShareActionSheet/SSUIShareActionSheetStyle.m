@@ -69,5 +69,10 @@ static SSUIShareActionSheetStyle *style = nil;
     [SSUIShareActionSheetStyle sharedInstance].supportedInterfaceOrientation = toInterfaceOrientation;
 }
 
++ (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle
+{
+    [SSUIShareActionSheetStyle sharedInstance].statusBarStyle = statusBarStyle;
+}
+
 
 @end

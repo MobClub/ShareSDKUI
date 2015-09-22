@@ -64,6 +64,15 @@
     return YES;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    if ([SSUIShareActionSheetStyle sharedInstance].statusBarStyle)
+    {
+        return [SSUIShareActionSheetStyle sharedInstance].statusBarStyle;
+    }
+    return UIStatusBarStyleDefault;
+}
+
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([SSUIShareActionSheetStyle sharedInstance].supportedInterfaceOrientation)

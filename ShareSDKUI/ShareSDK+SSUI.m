@@ -50,7 +50,8 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                  [obj isEqual: @(SSDKPlatformTypeQQ)] ||
                  [obj isEqual: @(SSDKPlatformSubTypeQZone)] ||
                  [obj isEqual: @(SSDKPlatformSubTypeQQFriend)] ||
-                 [obj isEqual: @(SSDKPlatformTypeInstagram)])
+                 [obj isEqual: @(SSDKPlatformTypeInstagram)] ||
+                 [obj isEqual: @(SSDKPlatformTypeWhatsApp)])
              {
                  if ([obj isEqual:@(SSDKPlatformSubTypeQZone)])
                  {
@@ -213,7 +214,8 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                                                @(SSDKPlatformTypeSMS),
                                                @(SSDKPlatformTypeCopy),
                                                @(SSDKPlatformTypeGooglePlus),
-                                               @(SSDKPlatformTypeInstagram)
+                                               @(SSDKPlatformTypeInstagram),
+                                               @(SSDKPlatformTypeWhatsApp)
                                                ];
 
     if ([unSupportOneKeySharePlatforms containsObject:@(platformType)])

@@ -80,4 +80,9 @@ static SSUIEditorViewStyle *style = nil;
     [SSUIEditorViewStyle sharedInstance].supportedInterfaceOrientation = toInterfaceOrientation;
 }
 
++ (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle
+{
+    [SSUIEditorViewStyle sharedInstance].statusBarStyle = statusBarStyle;
+}
+
 @end

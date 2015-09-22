@@ -46,7 +46,10 @@
                                  @(SSDKPlatformTypeGooglePlus),
                                  @(SSDKPlatformTypePocket),
                                  @(SSDKPlatformTypeLinkedIn),
-                                 @(SSDKPlatformTypeTumblr)
+                                 @(SSDKPlatformTypeTumblr),
+                                 @(SSDKPlatformTypeFlickr),
+                                 @(SSDKPlatformTypeWhatsApp),
+                                 @(SSDKPlatformTypeYouDaoNote)
                                  ];
     
     //ShareSDK和平台初始化
@@ -165,6 +168,15 @@
                       [appInfo SSDKSetupTumblrByConsumerKey:@"2QUXqO9fcgGdtGG1FcvML6ZunIQzAEL8xY6hIaxdJnDti2DYwM"
                                              consumerSecret:@"3Rt0sPFj7u2g39mEVB3IBpOzKnM3JnTtxX2bao2JKk4VV1gtNo"
                                                 callbackUrl:@"http://sharesdk.cn"];
+                      break;
+                  case SSDKPlatformTypeFlickr:
+                      [appInfo SSDKSetupFlickrByApiKey:@"33d833ee6b6fca49943363282dd313dd"
+                                             apiSecret:@"3a2c5b42a8fbb8bb"];
+                      break;
+                  case SSDKPlatformTypeYouDaoNote:
+                      [appInfo SSDKSetupYouDaoNoteByConsumerKey:@"dcde25dca105bcc36884ed4534dab940"
+                                                 consumerSecret:@"d98217b4020e7f1874263795f44838fe"
+                                                    redirectUri:@"http://www.sharesdk.cn/"];
                       break;
                   default:
                       break;

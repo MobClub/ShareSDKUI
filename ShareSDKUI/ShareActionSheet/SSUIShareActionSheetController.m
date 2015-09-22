@@ -16,6 +16,8 @@
 #import <ShareSDK/ShareSDK+Base.h>
 #import <MOBFoundation/MOBFoundation.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
+#import "SSUIShareActionSheetStyle.h"
+#import "SSUIShareActionSheetStyle_Private.h"
 
 @interface SSUIShareActionSheetController ()
 
@@ -28,7 +30,7 @@
 
 - (instancetype)initWithItems:(NSArray *)items
 {
-    self.directSharePlatforms = [NSMutableSet setWithObjects:@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ),nil];
+    self.directSharePlatforms = [NSMutableSet setWithObjects:@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ),@(SSDKPlatformTypeInstagram),@(SSDKPlatformTypeWhatsApp),nil];
     
     NSMutableArray *activePlatforms = nil;
     if (!items)
@@ -64,7 +66,8 @@
                  [obj isEqual: @(SSDKPlatformTypeQQ)] ||
                  [obj isEqual: @(SSDKPlatformSubTypeQZone)] ||
                  [obj isEqual: @(SSDKPlatformSubTypeQQFriend)] ||
-                 [obj isEqual: @(SSDKPlatformTypeInstagram)])
+                 [obj isEqual: @(SSDKPlatformTypeInstagram)] ||
+                 [obj isEqual: @(SSDKPlatformTypeWhatsApp)])
              {
                  
                  if ([obj isEqual:@(SSDKPlatformSubTypeQZone)])

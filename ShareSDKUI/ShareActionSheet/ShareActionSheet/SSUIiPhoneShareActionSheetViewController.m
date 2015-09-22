@@ -201,6 +201,15 @@ static const CGFloat platformItemH = 78.0;
     return UIInterfaceOrientationMaskAll;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    if ([SSUIShareActionSheetStyle sharedInstance].statusBarStyle)
+    {
+        return [SSUIShareActionSheetStyle sharedInstance].statusBarStyle;
+    }
+    return UIStatusBarStyleDefault;
+}
+
 - (void)updateLayout
 {
     if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))

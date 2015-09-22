@@ -56,6 +56,11 @@
 @property (nonatomic, assign) UIInterfaceOrientationMask supportedInterfaceOrientation;
 
 /**
+ *  分享菜单栏状态栏的风格
+ */
+@property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
+
+/**
  *  获取授权视图风格共享实例
  *
  *  @return 风格类实例

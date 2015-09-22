@@ -75,6 +75,15 @@
     return UIInterfaceOrientationMaskAll;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    if ([SSUIEditorViewStyle sharedInstance].statusBarStyle)
+    {
+        return [SSUIEditorViewStyle sharedInstance].statusBarStyle;
+    }
+    return UIStatusBarStyleDefault;
+}
+
 
 -(void)updateWithContent:(NSString *)content image:(SSDKImage *)image platformTypes:(NSArray *)platformTypes{
     

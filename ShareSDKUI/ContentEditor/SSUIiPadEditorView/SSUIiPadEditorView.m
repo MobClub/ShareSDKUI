@@ -237,7 +237,8 @@
                                                    @(SSDKPlatformTypeMail),
                                                    @(SSDKPlatformTypeCopy),
                                                    @(SSDKPlatformTypeGooglePlus),
-                                                   @(SSDKPlatformTypeInstagram)
+                                                   @(SSDKPlatformTypeInstagram),
+                                                   @(SSDKPlatformTypeWhatsApp)
                                                    ];
 
             if ([unNeedAuthorizedPlatforms containsObject:[_platformTypes objectAtIndex:0]])

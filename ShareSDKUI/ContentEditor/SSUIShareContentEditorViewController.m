@@ -19,8 +19,6 @@
  */
 @property (nonatomic, strong) SSUIBaseShareContentEditor *shareContentEditor;
 
-//@property (nonatomic, strong) SSUIShareContentEditorViewController *selfRef;
-
 @end
 
 @implementation SSUIShareContentEditorViewController
