@@ -71,6 +71,7 @@
 		DE1EA3631B4F62DE00DE95E2 /* SSUIShareContentEditorDef.h in Headers */ = {isa = PBXBuildFile; fileRef = DE1EA3421B4F62DE00DE95E2 /* SSUIShareContentEditorDef.h */; };
 		DE1EA3641B4F62DE00DE95E2 /* SSUIShareContentEditorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DE1EA3431B4F62DE00DE95E2 /* SSUIShareContentEditorViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE1EA3651B4F62DE00DE95E2 /* SSUIShareContentEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE1EA3441B4F62DE00DE95E2 /* SSUIShareContentEditorViewController.m */; };
+		DE6333F91BB91836007FB9A2 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE6333F81BB91836007FB9A2 /* AdSupport.framework */; };
 		DE64BADA1B55F9BB00201E90 /* SSUIiPadShareActionSheetViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DE64BAD81B55F9BB00201E90 /* SSUIiPadShareActionSheetViewController.h */; };
 		DE64BADB1B55F9BB00201E90 /* SSUIiPadShareActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE64BAD91B55F9BB00201E90 /* SSUIiPadShareActionSheetViewController.m */; };
 		DE64BADE1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = DE64BADC1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.h */; };
@@ -211,6 +212,7 @@
 		DE1EA3421B4F62DE00DE95E2 /* SSUIShareContentEditorDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIShareContentEditorDef.h; sourceTree = "<group>"; };
 		DE1EA3431B4F62DE00DE95E2 /* SSUIShareContentEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIShareContentEditorViewController.h; sourceTree = "<group>"; };
 		DE1EA3441B4F62DE00DE95E2 /* SSUIShareContentEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIShareContentEditorViewController.m; sourceTree = "<group>"; };
+		DE6333F81BB91836007FB9A2 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/AdSupport.framework; sourceTree = DEVELOPER_DIR; };
 		DE64BAD81B55F9BB00201E90 /* SSUIiPadShareActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIiPadShareActionSheetViewController.h; sourceTree = "<group>"; };
 		DE64BAD91B55F9BB00201E90 /* SSUIiPadShareActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIiPadShareActionSheetViewController.m; sourceTree = "<group>"; };
 		DE64BADC1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIiPhoneShareActionSheetViewController.h; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE6333F91BB91836007FB9A2 /* AdSupport.framework in Frameworks */,
 				DE0F13031B84691800B6E543 /* AddressBook.framework in Frameworks */,
 				DE0F13011B84691100B6E543 /* AssetsLibrary.framework in Frameworks */,
 				DE0F12FF1B84690A00B6E543 /* MediaPlayer.framework in Frameworks */,
@@ -471,6 +474,7 @@
 		DE93B04D1B4E49FE00459A2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE6333F81BB91836007FB9A2 /* AdSupport.framework */,
 				DE0F13021B84691800B6E543 /* AddressBook.framework */,
 				DE0F13001B84691100B6E543 /* AssetsLibrary.framework */,
 				DE0F12FE1B84690A00B6E543 /* MediaPlayer.framework */,

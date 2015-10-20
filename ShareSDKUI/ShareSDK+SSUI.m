@@ -51,7 +51,8 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                  [obj isEqual: @(SSDKPlatformSubTypeQZone)] ||
                  [obj isEqual: @(SSDKPlatformSubTypeQQFriend)] ||
                  [obj isEqual: @(SSDKPlatformTypeInstagram)] ||
-                 [obj isEqual: @(SSDKPlatformTypeWhatsApp)])
+                 [obj isEqual: @(SSDKPlatformTypeWhatsApp)] ||
+                 [obj isEqual: @(SSDKPlatformTypeLine)])
              {
                  if ([obj isEqual:@(SSDKPlatformSubTypeQZone)])
                  {
@@ -72,7 +73,7 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
     {
         NSError *error = [NSError errorWithDomain:SSDKErrorDomain
                                              code:SSDKErrorCodePlatformNotFound
-                                         userInfo:@{@"error description ":@" There is no valid platform to show . the reason may be that the active platform need app client to share and the ios device do not have one."}];
+                                         userInfo:@{@"error description ":NSLocalizedStringWithDefaultValue(@"InputTheShareContent", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"InputTheShareContent", nil)}];
         shareStateChangedHandler (SSDKResponseStateFail, SSDKPlatformTypeUnknown, nil, nil, error, YES);
     }
     
@@ -159,7 +160,6 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                 [ShareSDK share:platItem.platformType
                      parameters:shareParams
                  onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
-                     
                      if (shareStateChangedHandler)
                      {
                          shareStateChangedHandler (state, platItem.platformType, userData, contentEntity, error, YES);
@@ -215,7 +215,8 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                                                @(SSDKPlatformTypeCopy),
                                                @(SSDKPlatformTypeGooglePlus),
                                                @(SSDKPlatformTypeInstagram),
-                                               @(SSDKPlatformTypeWhatsApp)
+                                               @(SSDKPlatformTypeWhatsApp),
+                                               @(SSDKPlatformTypeLine)
                                                ];
 
     if ([unSupportOneKeySharePlatforms containsObject:@(platformType)])
@@ -327,7 +328,6 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
             [ShareSDK share:platformType
                  parameters:shareParams
              onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
-                 
                  completedCount ++;
                  if (shareStateChangedHandler)
                  {

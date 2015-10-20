@@ -59,15 +59,22 @@
     //分屏适配
     if ([MOBFDevice versionCompare:@"8.0"] >= 0)
     {
-        _viewCtr.modalPresentationStyle = UIModalPresentationPopover;
-        _viewCtr.popoverPresentationController.sourceView = view;
-        _viewCtr.popoverPresentationController.sourceRect = view.bounds;
-        _viewCtr.popoverPresentationController.delegate = self;
-        _viewCtr.preferredContentSize = CGSizeMake(300, 400);
-        
-        [[MOBFViewController currentViewController] presentViewController:_viewCtr
-                                                                 animated:YES
-                                                               completion:^{}];
+        if (view)
+        {
+            _viewCtr.modalPresentationStyle = UIModalPresentationPopover;
+            _viewCtr.popoverPresentationController.sourceView = view;
+            _viewCtr.popoverPresentationController.sourceRect = view.bounds;
+            _viewCtr.popoverPresentationController.delegate = self;
+            _viewCtr.preferredContentSize = CGSizeMake(300, 400);
+            
+            [[MOBFViewController currentViewController] presentViewController:_viewCtr
+                                                                     animated:YES
+                                                                   completion:^{}];
+        }
+        else
+        {
+            NSLog(@"#warning : It's necessary to point out a view for showShareActionSheet: ...");
+        }
     }
     else
     {

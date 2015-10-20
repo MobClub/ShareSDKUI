@@ -14,6 +14,8 @@
 #import <ShareSDKUI/SSUIShareActionSheetStyle.h>
 #import <ShareSDKUI/SSUIEditorViewStyle.h>
 
+#import <ShareSDKExtension/ShareSDK+Extension.h>
+
 @implementation ViewController
 
 - (void)viewDidLoad
@@ -192,7 +194,7 @@
     [SSUIEditorViewStyle setShareButtonLabelColor:[UIColor greenColor]];
     [SSUIEditorViewStyle setShareButtonLabel:@"right"];
     [SSUIEditorViewStyle setContentViewBackgroundColor:[UIColor brownColor]];
-    [SSUIEditorViewStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskLandscape];
+//    [SSUIEditorViewStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskLandscape];
     
     [ShareSDK showShareEditor:SSDKPlatformTypeSinaWeibo
            otherPlatformTypes:othetplarForms

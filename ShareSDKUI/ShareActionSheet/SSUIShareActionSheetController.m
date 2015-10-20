@@ -67,7 +67,8 @@
                  [obj isEqual: @(SSDKPlatformSubTypeQZone)] ||
                  [obj isEqual: @(SSDKPlatformSubTypeQQFriend)] ||
                  [obj isEqual: @(SSDKPlatformTypeInstagram)] ||
-                 [obj isEqual: @(SSDKPlatformTypeWhatsApp)])
+                 [obj isEqual: @(SSDKPlatformTypeWhatsApp)] ||
+                 [obj isEqual: @(SSDKPlatformTypeLine)])
              {
                  
                  if ([obj isEqual:@(SSDKPlatformSubTypeQZone)])
