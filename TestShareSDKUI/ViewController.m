@@ -28,7 +28,6 @@
     [btn setTitle:@"Show Action Sheet" forState:UIControlStateNormal];
     [btn sizeToFit];
     [btn setFrame:CGRectMake(self.view.frame.size.width/2 - 100, 100, 200, 25)];
-    btn.backgroundColor = [UIColor redColor];
     [btn addTarget:self action:@selector(btnClickHandler:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
@@ -68,13 +67,14 @@
 
 - (void)btnClickHandler:(id)sender
 {
+    NSURL *imgUrl = [NSURL URLWithString:@"http://f.hiphotos.bdimg.com/album/w%3D2048/sign=df8f1fe50dd79123e0e09374990c5882/cf1b9d16fdfaaf51e6d1ce528d5494eef01f7a28.jpg"];
     //1、构造分享内容
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params SSDKSetupShareParamsByText:@"ShareSDK is the most comprehensive Social SDK in the world , which share easily with 40+ platforms , from around the world.For more information,please visit http://www.mob.com website."
-                                images:@[[[NSBundle mainBundle] pathForResource:@"sharesdk1" ofType:@"png"]]
+                                images:@[imgUrl]
                                    url:[NSURL URLWithString:@"http://www.mob.com"]
                                  title:@"分享标题"
-                                  type:SSDKContentTypeImage];
+                                  type:SSDKContentTypeAuto];
     
     //1.2、自定义分享平台（非必要）
     NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:@[@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ),@(SSDKPlatformTypeRenren),@(SSDKPlatformTypeSinaWeibo),@(SSDKPlatformTypeSMS),@(SSDKPlatformTypeTwitter)]];
@@ -90,10 +90,10 @@
     //1.3、自定义分享菜单栏（非必要）
     [SSUIShareActionSheetStyle setStatusBarStyle:UIStatusBarStyleLightContent];
     [SSUIEditorViewStyle setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-    [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:249/255.0 green:0/255.0 blue:12/255.0 alpha:0.5]];
+    [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:137/255.0 green:142/255.0 blue:150/255.0 alpha:0.8]];
     [SSUIShareActionSheetStyle setActionSheetColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
     [SSUIShareActionSheetStyle setCancelButtonBackgroundColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
+    
     [SSUIShareActionSheetStyle setCancelButtonLabelColor:[UIColor whiteColor]];
     [SSUIShareActionSheetStyle setItemNameColor:[UIColor whiteColor]];
     [SSUIShareActionSheetStyle setItemNameFont:[UIFont systemFontOfSize:10]];
@@ -104,13 +104,14 @@
     //1.4、自定义支持的屏幕方向
     [ShareSDK setSupportedInterfaceOrientation:UIInterfaceOrientationMaskAllButUpsideDown];
     
+    
     //2、弹出分享菜单栏
 //    SSUIShareActionSheetController *actionSheet = [ShareSDK showShareActionSheet:sender
     [ShareSDK showShareActionSheet:sender
                              items:nil
                        shareParams:params
                onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-                   
+
                    if (state == SSDKResponseStateSuccess)
                    {
                        NSLog(@"分享成功");
@@ -218,6 +219,7 @@
         }
     }];
 }
+
 
 //- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 //{

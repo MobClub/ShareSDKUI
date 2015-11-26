@@ -134,6 +134,9 @@
 		DE97DF3D1B568D7000D21F5D /* SSUIShareActionSheetStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = DE97DF3B1B568D7000D21F5D /* SSUIShareActionSheetStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE97DF3E1B568D7000D21F5D /* SSUIShareActionSheetStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = DE97DF3C1B568D7000D21F5D /* SSUIShareActionSheetStyle.m */; };
 		DEA264241B6F770A00840353 /* ShareSDKUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA264231B6F770A00840353 /* ShareSDKUI.framework */; };
+		DEA563811BE76048002E9552 /* libAPOpenSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA5637F1BE76048002E9552 /* libAPOpenSdk.a */; };
+		DEA563821BE76048002E9552 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = DEA563801BE76048002E9552 /* README.md */; };
+		DEA563851BE7604F002E9552 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA563841BE7604F002E9552 /* KakaoOpenSDK.framework */; };
 		DECF63AC1B54B53100B6197E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DECF63AB1B54B53100B6197E /* LaunchScreen.xib */; };
 		E2FF0FF01B56922F008EA663 /* SSUIEditorViewStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = E2FF0FEE1B56922F008EA663 /* SSUIEditorViewStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2FF0FF11B56922F008EA663 /* SSUIEditorViewStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FF0FEF1B56922F008EA663 /* SSUIEditorViewStyle.m */; };
@@ -219,6 +222,9 @@
 		DE64BADD1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIiPhoneShareActionSheetViewController.m; sourceTree = "<group>"; };
 		DE75D3851B70536D00A1F1CD /* ShareSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ShareSDKUI.bundle; path = ../../bin/ShareSDKUI.bundle; sourceTree = "<group>"; };
 		DE7E28241B9554BD00B6EF17 /* sharesdk1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sharesdk1.png; sourceTree = "<group>"; };
+		DE90B74A1C06F9B000F22D50 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
+		DE90B74B1C06F9B000F22D50 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Main_iPad.strings; sourceTree = "<group>"; };
+		DE90B74C1C06F9B100F22D50 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DE93B04C1B4E49FE00459A2A /* TestShareSDKUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestShareSDKUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE93B04E1B4E49FE00459A2A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DE93B0501B4E49FE00459A2A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -290,6 +296,11 @@
 		DE97DF3C1B568D7000D21F5D /* SSUIShareActionSheetStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIShareActionSheetStyle.m; sourceTree = "<group>"; };
 		DE97DF3F1B5691C700D21F5D /* SSUIShareActionSheetStyle_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSUIShareActionSheetStyle_Private.h; sourceTree = "<group>"; };
 		DEA264231B6F770A00840353 /* ShareSDKUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ShareSDKUI.framework; path = ../../bin/ShareSDKUI.framework; sourceTree = "<group>"; };
+		DEA5637D1BE76048002E9552 /* APOpenAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APOpenAPI.h; sourceTree = "<group>"; };
+		DEA5637E1BE76048002E9552 /* APOpenAPIObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APOpenAPIObject.h; sourceTree = "<group>"; };
+		DEA5637F1BE76048002E9552 /* libAPOpenSdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAPOpenSdk.a; sourceTree = "<group>"; };
+		DEA563801BE76048002E9552 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		DEA563841BE7604F002E9552 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		DECF63AB1B54B53100B6197E /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		E2FF0FEE1B56922F008EA663 /* SSUIEditorViewStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSUIEditorViewStyle.h; path = SSUIiPhoneEditorView/SSUIEditorViewStyle.h; sourceTree = "<group>"; };
 		E2FF0FEF1B56922F008EA663 /* SSUIEditorViewStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSUIEditorViewStyle.m; path = SSUIiPhoneEditorView/SSUIEditorViewStyle.m; sourceTree = "<group>"; };
@@ -313,6 +324,7 @@
 				DE0F13011B84691100B6E543 /* AssetsLibrary.framework in Frameworks */,
 				DE0F12FF1B84690A00B6E543 /* MediaPlayer.framework in Frameworks */,
 				DE0F12FD1B84690300B6E543 /* CoreLocation.framework in Frameworks */,
+				DEA563851BE7604F002E9552 /* KakaoOpenSDK.framework in Frameworks */,
 				DE0F12FB1B8468FD00B6E543 /* CoreMotion.framework in Frameworks */,
 				DE93B0DA1B4E4ED300459A2A /* libsqlite3.dylib in Frameworks */,
 				DE0F12F51B84685B00B6E543 /* GoogleOpenSource.framework in Frameworks */,
@@ -329,6 +341,7 @@
 				DE93B0931B4E4C6900459A2A /* ShareSDKConnector.framework in Frameworks */,
 				DE93B0511B4E49FE00459A2A /* CoreGraphics.framework in Frameworks */,
 				DE93B0B21B4E4CBD00459A2A /* libWeChatSDK.a in Frameworks */,
+				DEA563811BE76048002E9552 /* libAPOpenSdk.a in Frameworks */,
 				DE93B0AF1B4E4CBD00459A2A /* libWeiboSDK.a in Frameworks */,
 				DE93B0BE1B4E4E1300459A2A /* ShareSDKUI.framework in Frameworks */,
 				DEA264241B6F770A00840353 /* ShareSDKUI.framework in Frameworks */,
@@ -549,6 +562,8 @@
 		DE93B0951B4E4CBD00459A2A /* extends */ = {
 			isa = PBXGroup;
 			children = (
+				DEA563831BE7604F002E9552 /* KaKaoSDK */,
+				DEA5637C1BE76048002E9552 /* APSocialSDK */,
 				DE0F12EE1B84685B00B6E543 /* GooglePlusSDK */,
 				DE0F12F21B84685B00B6E543 /* RenRenSDK */,
 				DE93B0961B4E4CBD00459A2A /* QQSDK */,
@@ -645,6 +660,25 @@
 				DE64BADD1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.m */,
 			);
 			path = ShareActionSheet;
+			sourceTree = "<group>";
+		};
+		DEA5637C1BE76048002E9552 /* APSocialSDK */ = {
+			isa = PBXGroup;
+			children = (
+				DEA5637D1BE76048002E9552 /* APOpenAPI.h */,
+				DEA5637E1BE76048002E9552 /* APOpenAPIObject.h */,
+				DEA5637F1BE76048002E9552 /* libAPOpenSdk.a */,
+				DEA563801BE76048002E9552 /* README.md */,
+			);
+			path = APSocialSDK;
+			sourceTree = "<group>";
+		};
+		DEA563831BE7604F002E9552 /* KaKaoSDK */ = {
+			isa = PBXGroup;
+			children = (
+				DEA563841BE7604F002E9552 /* KakaoOpenSDK.framework */,
+			);
+			path = KaKaoSDK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -758,6 +792,7 @@
 				en,
 				Base,
 				"zh-Hans",
+				zh,
 			);
 			mainGroup = D0DD5A671B329802001D6161;
 			productRefGroup = D0DD5A711B329802001D6161 /* Products */;
@@ -866,6 +901,7 @@
 			files = (
 				DE93B0681B4E49FE00459A2A /* ViewController.m in Sources */,
 				DE93B05F1B4E49FE00459A2A /* AppDelegate.m in Sources */,
+				DEA563821BE76048002E9552 /* README.md in Sources */,
 				DE93B05B1B4E49FE00459A2A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -890,6 +926,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				DE93B0581B4E49FE00459A2A /* en */,
+				DE90B74C1C06F9B100F22D50 /* zh */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -898,6 +935,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				DE93B0611B4E49FE00459A2A /* Base */,
+				DE90B74A1C06F9B000F22D50 /* zh */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -906,6 +944,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				DE93B0641B4E49FE00459A2A /* Base */,
+				DE90B74B1C06F9B000F22D50 /* zh */,
 			);
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
@@ -1008,6 +1047,7 @@
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = mh_object;
 				MACOSX_DEPLOYMENT_TARGET = "";
+				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1030,6 +1070,7 @@
 				LINK_WITH_STANDARD_LIBRARIES = NO;
 				MACH_O_TYPE = mh_object;
 				MACOSX_DEPLOYMENT_TARGET = "";
+				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1054,6 +1095,7 @@
 					"$(SRCROOT)/../extends/QQSDK",
 					"$(SRCROOT)/../extends/GooglePlusSDK",
 					"$(SRCROOT)/../extends/RenRenSDK",
+					"$(SRCROOT)/../extends/KaKaoSDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestShareSDKUI/TestShareSDKUI-Prefix.pch";
@@ -1067,6 +1109,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../extends/SinaWeiboSDK",
 					"$(SRCROOT)/../extends/WeChatSDK",
+					"$(SRCROOT)/../extends/APSocialSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1093,6 +1136,7 @@
 					"$(SRCROOT)/../extends/QQSDK",
 					"$(SRCROOT)/../extends/GooglePlusSDK",
 					"$(SRCROOT)/../extends/RenRenSDK",
+					"$(SRCROOT)/../extends/KaKaoSDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TestShareSDKUI/TestShareSDKUI-Prefix.pch";
@@ -1102,6 +1146,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../extends/SinaWeiboSDK",
 					"$(SRCROOT)/../extends/WeChatSDK",
+					"$(SRCROOT)/../extends/APSocialSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1116,6 +1161,7 @@
 		DE93B0B81B4E4DC800459A2A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_BITCODE = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1123,6 +1169,7 @@
 		DE93B0B91B4E4DC800459A2A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ENABLE_BITCODE = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

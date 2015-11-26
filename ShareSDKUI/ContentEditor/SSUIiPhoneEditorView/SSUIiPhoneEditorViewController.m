@@ -218,7 +218,11 @@
                                                    @(SSDKPlatformTypeGooglePlus),
                                                    @(SSDKPlatformTypeInstagram),
                                                    @(SSDKPlatformTypeWhatsApp),
-                                                   @(SSDKPlatformTypeLine)
+                                                   @(SSDKPlatformTypeLine),
+                                                   @(SSDKPlatformTypeKakao),
+                                                   @(SSDKPlatformSubTypeKakaoTalk),
+                                                   @(SSDKPlatformTypePinterest),
+                                                   @(SSDKPlatformTypeAliPaySocial)
                                                    ];
             
             if ([unNeedAuthorizedPlatforms containsObject:[_platformTypes objectAtIndex:0]])
@@ -250,6 +254,7 @@
                      
                      if (state == SSDKResponseStateFail)
                      {
+                         
                          UIAlertView* alert = [[UIAlertView alloc]initWithTitle: NSLocalizedStringWithDefaultValue(@"Alert", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Alert", nil)
                                                                         message:[NSString stringWithFormat:@"%@ - error code:%ld , error message:%@",NSLocalizedStringWithDefaultValue(@"AuthorizeFailed", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"AuthorizeFailed", nil),(long)[error code],[error userInfo]]
                                                                        delegate:self

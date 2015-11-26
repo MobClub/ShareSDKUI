@@ -18,6 +18,7 @@
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 #import "SSUIShareActionSheetStyle.h"
 #import "SSUIShareActionSheetStyle_Private.h"
+#import "ShareSDK+SSUI.h"
 
 @interface SSUIShareActionSheetController ()
 
@@ -30,7 +31,15 @@
 
 - (instancetype)initWithItems:(NSArray *)items
 {
-    self.directSharePlatforms = [NSMutableSet setWithObjects:@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ),@(SSDKPlatformTypeInstagram),@(SSDKPlatformTypeWhatsApp),nil];
+    self.directSharePlatforms = [NSMutableSet setWithObjects:
+                                 @(SSDKPlatformTypeWechat),
+                                 @(SSDKPlatformTypeQQ),
+                                 @(SSDKPlatformTypeInstagram),
+                                 @(SSDKPlatformTypeWhatsApp),
+                                 @(SSDKPlatformTypeLine),
+                                 @(SSDKPlatformSubTypeKakaoTalk),
+                                 @(SSDKPlatformTypeAliPaySocial),
+                                 nil];
     
     NSMutableArray *activePlatforms = nil;
     if (!items)
@@ -55,22 +64,28 @@
     
     //过滤掉未安装客户端且依赖客户端分享的平台
     NSMutableArray *temPlatform = [NSMutableArray arrayWithArray:activePlatforms];
+    NSArray *platformsNeedClient = @[
+                                     @(SSDKPlatformTypeWechat),
+                                     @(SSDKPlatformSubTypeWechatSession),
+                                     @(SSDKPlatformSubTypeWechatTimeline),
+                                     @(SSDKPlatformSubTypeWechatFav),
+                                     @(SSDKPlatformTypeQQ),
+                                     @(SSDKPlatformSubTypeQZone),
+                                     @(SSDKPlatformSubTypeQQFriend),
+                                     @(SSDKPlatformTypeInstagram),
+                                     @(SSDKPlatformTypeWhatsApp),
+                                     @(SSDKPlatformTypeLine),
+                                     @(SSDKPlatformTypeKakao),
+                                     @(SSDKPlatformSubTypeKakaoTalk),
+                                     @(SSDKPlatformTypePinterest),
+                                     @(SSDKPlatformTypeAliPaySocial)
+                                     ];
     [temPlatform enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
      {
          if ([obj isKindOfClass:[NSNumber class]])
          {
-             if ([obj isEqual: @(SSDKPlatformTypeWechat)] ||
-                 [obj isEqual: @(SSDKPlatformSubTypeWechatSession)]||
-                 [obj isEqual: @(SSDKPlatformSubTypeWechatTimeline)]||
-                 [obj isEqual: @(SSDKPlatformSubTypeWechatFav)] ||
-                 [obj isEqual: @(SSDKPlatformTypeQQ)] ||
-                 [obj isEqual: @(SSDKPlatformSubTypeQZone)] ||
-                 [obj isEqual: @(SSDKPlatformSubTypeQQFriend)] ||
-                 [obj isEqual: @(SSDKPlatformTypeInstagram)] ||
-                 [obj isEqual: @(SSDKPlatformTypeWhatsApp)] ||
-                 [obj isEqual: @(SSDKPlatformTypeLine)])
+             if ([platformsNeedClient containsObject:obj])
              {
-                 
                  if ([obj isEqual:@(SSDKPlatformSubTypeQZone)])
                  {
                      if (![ShareSDK isClientInstalled:(SSDKPlatformSubTypeQQFriend)])
@@ -86,7 +101,7 @@
          }
      }];
     
-    //对微信和QQ等包含多个平台的平台处理
+    //对微信和QQ、Kakao等包含多个平台的平台处理
     if ([activePlatforms containsObject:@(SSDKPlatformTypeWechat)])
     {
         if (![activePlatforms containsObject:@(SSDKPlatformSubTypeWechatSession)])
@@ -105,6 +120,21 @@
         }
         
         [activePlatforms removeObject:@(SSDKPlatformTypeWechat)];
+    }
+    
+    if ([activePlatforms containsObject:@(SSDKPlatformTypeKakao)])
+    {
+        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeKakaoStory)])
+        {
+            [activePlatforms insertObject:@(SSDKPlatformSubTypeKakaoStory) atIndex:[activePlatforms indexOfObject:@(SSDKPlatformTypeKakao)]];
+        }
+        
+        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeKakaoTalk)])
+        {
+            [activePlatforms insertObject:@(SSDKPlatformSubTypeKakaoTalk) atIndex:[activePlatforms indexOfObject:@(SSDKPlatformTypeKakao)]];
+        }
+        
+        [activePlatforms removeObject:@(SSDKPlatformTypeKakao)];
     }
     
     if ([activePlatforms containsObject:@(SSDKPlatformTypeQQ)])
@@ -153,7 +183,7 @@
         }
         else if ([obj isKindOfClass:[NSString class]])
         {
-            //ANE,Unity情况下obj为NSString类型
+            //ANE、Unity情况下obj为NSString类型
             if ([activePlatforms containsObject:obj])
             {
                 [showActivePlatforms addObject:obj];

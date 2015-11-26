@@ -27,6 +27,52 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
 
 @implementation ShareSDK (SSUI)
 
+//+ (NSArray *)platformsShowInShareActionSheet
+//{
+//    //过滤掉未安装客户端且依赖客户端分享的平台
+//    NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
+//    NSArray *platformsNeedClient = @[
+//                                     @(SSDKPlatformTypeWechat),
+//                                     @(SSDKPlatformSubTypeWechatSession),
+//                                     @(SSDKPlatformSubTypeWechatTimeline),
+//                                     @(SSDKPlatformSubTypeWechatFav),
+//                                     @(SSDKPlatformTypeQQ),
+//                                     @(SSDKPlatformSubTypeQZone),
+//                                     @(SSDKPlatformSubTypeQQFriend),
+//                                     @(SSDKPlatformTypeInstagram),
+//                                     @(SSDKPlatformTypeWhatsApp),
+//                                     @(SSDKPlatformTypeLine),
+//                                     @(SSDKPlatformTypeKakao),
+//                                     @(SSDKPlatformSubTypeKakaoTalk),
+//                                     @(SSDKPlatformTypePinterest),
+//                                     @(SSDKPlatformTypeAliPaySocial)
+//                                     ];
+//    
+//    NSMutableArray *temPlatform = [NSMutableArray arrayWithArray:activePlatforms];
+//    [temPlatform enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+//     {
+//         if ([obj isKindOfClass:[NSNumber class]])
+//         {
+//             if ([platformsNeedClient containsObject:obj])
+//             {
+//                 if ([obj isEqual:@(SSDKPlatformSubTypeQZone)])
+//                 {
+//                     if (![ShareSDK isClientInstalled:(SSDKPlatformSubTypeQQFriend)])
+//                     {
+//                         [activePlatforms removeObject:@(SSDKPlatformSubTypeQZone)];
+//                     }
+//                 }
+//                 else if (![ShareSDK isClientInstalled:[obj integerValue]])
+//                 {
+//                     [activePlatforms removeObject:obj];
+//                 }
+//             }
+//         }
+//     }];
+//    
+//    return temPlatform;
+//}
+
 + (SSUIShareActionSheetController *)showShareActionSheet:(UIView *)view
                                                    items:(NSArray *)items
                                              shareParams:(NSMutableDictionary *)shareParams
@@ -35,24 +81,31 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
     SSUIShareActionSheetController *actionSheet = [ShareSDKUI shareActionSheetWithItems:items];
     __block NSMutableSet *directSharePlt = actionSheet.directSharePlatforms;
     
-    NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
-    
     //过滤掉未安装客户端且依赖客户端分享的平台
+    NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
+    NSArray *platformsNeedClient = @[
+                                     @(SSDKPlatformTypeWechat),
+                                     @(SSDKPlatformSubTypeWechatSession),
+                                     @(SSDKPlatformSubTypeWechatTimeline),
+                                     @(SSDKPlatformSubTypeWechatFav),
+                                     @(SSDKPlatformTypeQQ),
+                                     @(SSDKPlatformSubTypeQZone),
+                                     @(SSDKPlatformSubTypeQQFriend),
+                                     @(SSDKPlatformTypeInstagram),
+                                     @(SSDKPlatformTypeWhatsApp),
+                                     @(SSDKPlatformTypeLine),
+                                     @(SSDKPlatformTypeKakao),
+                                     @(SSDKPlatformSubTypeKakaoTalk),
+                                     @(SSDKPlatformTypePinterest),
+                                     @(SSDKPlatformTypeAliPaySocial)
+                                     ];
+    
     NSMutableArray *temPlatform = [NSMutableArray arrayWithArray:activePlatforms];
     [temPlatform enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
      {
          if ([obj isKindOfClass:[NSNumber class]])
          {
-             if ([obj isEqual: @(SSDKPlatformTypeWechat)] ||
-                 [obj isEqual: @(SSDKPlatformSubTypeWechatSession)]||
-                 [obj isEqual: @(SSDKPlatformSubTypeWechatTimeline)]||
-                 [obj isEqual: @(SSDKPlatformSubTypeWechatFav)] ||
-                 [obj isEqual: @(SSDKPlatformTypeQQ)] ||
-                 [obj isEqual: @(SSDKPlatformSubTypeQZone)] ||
-                 [obj isEqual: @(SSDKPlatformSubTypeQQFriend)] ||
-                 [obj isEqual: @(SSDKPlatformTypeInstagram)] ||
-                 [obj isEqual: @(SSDKPlatformTypeWhatsApp)] ||
-                 [obj isEqual: @(SSDKPlatformTypeLine)])
+             if ([platformsNeedClient containsObject:obj])
              {
                  if ([obj isEqual:@(SSDKPlatformSubTypeQZone)])
                  {
@@ -73,7 +126,7 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
     {
         NSError *error = [NSError errorWithDomain:SSDKErrorDomain
                                              code:SSDKErrorCodePlatformNotFound
-                                         userInfo:@{@"error description ":NSLocalizedStringWithDefaultValue(@"InputTheShareContent", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"InputTheShareContent", nil)}];
+                                         userInfo:@{@"error description ":NSLocalizedStringWithDefaultValue(@"NoValidPlatform", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"NoValidPlatform", nil)}];
         shareStateChangedHandler (SSDKResponseStateFail, SSDKPlatformTypeUnknown, nil, nil, error, YES);
     }
     
@@ -123,7 +176,7 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                 [otherPlatformTypes removeObject:[NSString stringWithFormat:@"%@",@(platItem.platformType)]];
             }
             
-            //对微信和QQ等包含多个平台的平台处理
+            //对微信和QQ、Kakao等包含多个平台的平台处理
             if ([directSharePlt containsObject:@(SSDKPlatformTypeWechat)])
             {
                 if (![directSharePlt containsObject:@(SSDKPlatformSubTypeWechatSession)])
@@ -142,6 +195,21 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                 [directSharePlt removeObject:@(SSDKPlatformTypeWechat)];
             }
             
+            if ([directSharePlt containsObject:@(SSDKPlatformTypeKakao)])
+            {
+                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeKakaoTalk)])
+                {
+                    [directSharePlt addObject:@(SSDKPlatformSubTypeKakaoTalk)];
+                }
+                
+                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeKakaoStory)])
+                {
+                    [directSharePlt addObject:@(SSDKPlatformSubTypeKakaoStory)];
+                }
+                
+                [directSharePlt removeObject:@(SSDKPlatformTypeKakao)];
+            }
+            
             if ([directSharePlt containsObject:@(SSDKPlatformTypeQQ)])
             {
                 if (![directSharePlt containsObject:@(SSDKPlatformSubTypeQZone)]) {
@@ -157,9 +225,15 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
             
             if ([directSharePlt containsObject:@(platItem.platformType)])
             {
+                if (shareStateChangedHandler)
+                {
+                    shareStateChangedHandler (SSDKResponseStateBegin, platItem.platformType, nil, nil, nil, YES);
+                }
+                
                 [ShareSDK share:platItem.platformType
                      parameters:shareParams
-                 onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+                 onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error)
+                {
                      if (shareStateChangedHandler)
                      {
                          shareStateChangedHandler (state, platItem.platformType, userData, contentEntity, error, YES);
@@ -216,7 +290,11 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                                                @(SSDKPlatformTypeGooglePlus),
                                                @(SSDKPlatformTypeInstagram),
                                                @(SSDKPlatformTypeWhatsApp),
-                                               @(SSDKPlatformTypeLine)
+                                               @(SSDKPlatformTypeLine),
+                                               @(SSDKPlatformTypeKakao),
+                                               @(SSDKPlatformSubTypeKakaoTalk),
+                                               @(SSDKPlatformTypePinterest),
+                                               @(SSDKPlatformTypeAliPaySocial)
                                                ];
 
     if ([unSupportOneKeySharePlatforms containsObject:@(platformType)])
