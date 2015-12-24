@@ -39,6 +39,7 @@
                                  @(SSDKPlatformTypeLine),
                                  @(SSDKPlatformSubTypeKakaoTalk),
                                  @(SSDKPlatformTypeAliPaySocial),
+//                                 @(SSDKPlatformTypeYiXin),
                                  nil];
     
     NSMutableArray *activePlatforms = nil;
@@ -150,6 +151,26 @@
         }
 
         [activePlatforms removeObject:@(SSDKPlatformTypeQQ)];
+    }
+    
+    if ([activePlatforms containsObject:@(SSDKPlatformTypeYiXin)])
+    {
+        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeYiXinFav)])
+        {
+            [activePlatforms addObject:@(SSDKPlatformSubTypeYiXinFav)];
+        }
+        
+        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeYiXinSession)])
+        {
+            [activePlatforms addObject:@(SSDKPlatformSubTypeYiXinSession)];
+        }
+        
+        if (![activePlatforms containsObject:@(SSDKPlatformSubTypeYiXinTimeline)])
+        {
+            [activePlatforms addObject:@(SSDKPlatformSubTypeYiXinTimeline)];
+        }
+        
+        [activePlatforms removeObject:@(SSDKPlatformTypeYiXin)];
     }
     
     //过滤菜单列表，如没有集成平台

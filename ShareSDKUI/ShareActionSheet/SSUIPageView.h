@@ -36,7 +36,14 @@
  */
 @property (nonatomic, strong) NSMutableArray *platformArr;
 
+/**
+ *  点击选项处理事件
+ */
 @property (nonatomic, copy) SSUIShareActionSheetItemClickHandler clickHandle;
+
+/**
+ *  取消处理事件
+ */
 @property (nonatomic, copy) SSUIShareActionSheetCancelHandler cancelHandle;
 
 /**

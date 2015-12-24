@@ -222,7 +222,9 @@
                                                    @(SSDKPlatformTypeKakao),
                                                    @(SSDKPlatformSubTypeKakaoTalk),
                                                    @(SSDKPlatformTypePinterest),
-                                                   @(SSDKPlatformTypeAliPaySocial)
+                                                   @(SSDKPlatformTypeAliPaySocial),
+                                                   @(SSDKPlatformTypePrint)
+//                                                   @(SSDKPlatformTypeYiXin)
                                                    ];
             
             if ([unNeedAuthorizedPlatforms containsObject:[_platformTypes objectAtIndex:0]])

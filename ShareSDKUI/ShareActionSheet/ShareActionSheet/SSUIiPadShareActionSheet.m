@@ -27,7 +27,6 @@
     if (self = [super init])
     {
         self.items = items;
-        
         _viewCtr = [[SSUIiPadShareActionSheetViewController alloc] initWithItems:self.items];
         
         //分屏适配
@@ -104,7 +103,6 @@
     //分屏适配
     if ([MOBFDevice versionCompare:@"8.0"] >= 0)
     {
-//        [_viewCtr dismissModalViewControllerAnimated:YES];
         [_viewCtr dismissViewControllerAnimated:YES
                                      completion:^{}];
     }

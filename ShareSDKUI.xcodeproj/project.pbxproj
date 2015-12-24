@@ -79,6 +79,7 @@
 		DE748C8E1B68DCB200CC1B4B /* ShareSDKUI.h in Headers */ = {isa = PBXBuildFile; fileRef = D0DD5A7A1B329AA7001D6161 /* ShareSDKUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE75D3861B70536D00A1F1CD /* ShareSDKUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DE75D3851B70536D00A1F1CD /* ShareSDKUI.bundle */; };
 		DE7E28251B9554BD00B6EF17 /* sharesdk1.png in Resources */ = {isa = PBXBuildFile; fileRef = DE7E28241B9554BD00B6EF17 /* sharesdk1.png */; };
+		DE804EF91C240A4F00ACE20B /* libYixinSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DE804EF61C240A4F00ACE20B /* libYixinSDK.a */; };
 		DE93B04F1B4E49FE00459A2A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE93B04E1B4E49FE00459A2A /* Foundation.framework */; };
 		DE93B0511B4E49FE00459A2A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE93B0501B4E49FE00459A2A /* CoreGraphics.framework */; };
 		DE93B0531B4E49FE00459A2A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE93B0521B4E49FE00459A2A /* UIKit.framework */; };
@@ -222,6 +223,9 @@
 		DE64BADD1B55F9D900201E90 /* SSUIiPhoneShareActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIiPhoneShareActionSheetViewController.m; sourceTree = "<group>"; };
 		DE75D3851B70536D00A1F1CD /* ShareSDKUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = ShareSDKUI.bundle; path = ../../bin/ShareSDKUI.bundle; sourceTree = "<group>"; };
 		DE7E28241B9554BD00B6EF17 /* sharesdk1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sharesdk1.png; sourceTree = "<group>"; };
+		DE804EF61C240A4F00ACE20B /* libYixinSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYixinSDK.a; sourceTree = "<group>"; };
+		DE804EF71C240A4F00ACE20B /* YXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXApi.h; sourceTree = "<group>"; };
+		DE804EF81C240A4F00ACE20B /* YXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXApiObject.h; sourceTree = "<group>"; };
 		DE90B74A1C06F9B000F22D50 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
 		DE90B74B1C06F9B000F22D50 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/Main_iPad.strings; sourceTree = "<group>"; };
 		DE90B74C1C06F9B100F22D50 /* zh */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = zh; path = zh.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -325,6 +329,7 @@
 				DE0F12FF1B84690A00B6E543 /* MediaPlayer.framework in Frameworks */,
 				DE0F12FD1B84690300B6E543 /* CoreLocation.framework in Frameworks */,
 				DEA563851BE7604F002E9552 /* KakaoOpenSDK.framework in Frameworks */,
+				DE804EF91C240A4F00ACE20B /* libYixinSDK.a in Frameworks */,
 				DE0F12FB1B8468FD00B6E543 /* CoreMotion.framework in Frameworks */,
 				DE93B0DA1B4E4ED300459A2A /* libsqlite3.dylib in Frameworks */,
 				DE0F12F51B84685B00B6E543 /* GoogleOpenSource.framework in Frameworks */,
@@ -484,6 +489,16 @@
 			path = SSUIHorizontalTableView;
 			sourceTree = "<group>";
 		};
+		DE804EF51C240A4F00ACE20B /* YiXinSDK */ = {
+			isa = PBXGroup;
+			children = (
+				DE804EF61C240A4F00ACE20B /* libYixinSDK.a */,
+				DE804EF71C240A4F00ACE20B /* YXApi.h */,
+				DE804EF81C240A4F00ACE20B /* YXApiObject.h */,
+			);
+			path = YiXinSDK;
+			sourceTree = "<group>";
+		};
 		DE93B04D1B4E49FE00459A2A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -562,6 +577,7 @@
 		DE93B0951B4E4CBD00459A2A /* extends */ = {
 			isa = PBXGroup;
 			children = (
+				DE804EF51C240A4F00ACE20B /* YiXinSDK */,
 				DEA563831BE7604F002E9552 /* KaKaoSDK */,
 				DEA5637C1BE76048002E9552 /* APSocialSDK */,
 				DE0F12EE1B84685B00B6E543 /* GooglePlusSDK */,
@@ -1110,6 +1126,7 @@
 					"$(SRCROOT)/../extends/SinaWeiboSDK",
 					"$(SRCROOT)/../extends/WeChatSDK",
 					"$(SRCROOT)/../extends/APSocialSDK",
+					"$(SRCROOT)/../extends/YiXinSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1147,6 +1164,7 @@
 					"$(SRCROOT)/../extends/SinaWeiboSDK",
 					"$(SRCROOT)/../extends/WeChatSDK",
 					"$(SRCROOT)/../extends/APSocialSDK",
+					"$(SRCROOT)/../extends/YiXinSDK",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

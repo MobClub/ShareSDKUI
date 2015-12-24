@@ -16,13 +16,12 @@
 static const CGFloat cancelButtonH = 63.0;
 static const CGFloat spacing = 10.0;
 static const CGFloat animationDuration = 0.35;
+static const CGFloat platformItemW = 60.0;
+static const CGFloat platformItemH = 78.0;
 
 static const CGFloat temIntervalW = 30;          //竖屏下临时水平方向间距
 static const CGFloat temIntervalH = 35;          //竖屏下临时竖直方向间距
 static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方向的间距
-
-static const CGFloat platformItemW = 60.0;
-static const CGFloat platformItemH = 78.0;
 
 @interface SSUIiPhoneShareActionSheetViewController ()
 
@@ -126,7 +125,9 @@ static const CGFloat platformItemH = 78.0;
             [_cancelButton setTitleColor:[SSUIShareActionSheetStyle sharedInstance].cancelButtonLabelColor forState:UIControlStateNormal];
         }
         
-        [_cancelButton addTarget:self action:@selector(cancelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_cancelButton addTarget:self
+                          action:@selector(cancelButtonClick:)
+                forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_cancelButton];
     }
     
@@ -191,7 +192,7 @@ static const CGFloat platformItemH = 78.0;
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([SSUIShareActionSheetStyle sharedInstance].supportedInterfaceOrientation)
     {
@@ -282,7 +283,6 @@ static const CGFloat platformItemH = 78.0;
 {
     _pageView.clickHandle = self.clickHandle;
     _pageView.cancelHandle = self.cancelHandle;
-    
     __weak SSUIiPhoneShareActionSheetViewController *theSheet = self;
     
     if (UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation))
@@ -306,7 +306,7 @@ static const CGFloat platformItemH = 78.0;
                          animations:^{
                              
                              theSheet.cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(self.view) - cancelButtonH + spacing, SSUI_WIDTH(self.view) -   2 * spacing, cancelButtonH - 2 * spacing);
-                        
+                             
                              theSheet.pageView.frame = CGRectMake(spacing, theSheet.cancelButton.frame.origin.y - spacing - theSheet.pageViewH, _screenH -  2 * spacing, theSheet.pageViewH);
                              
                          } completion:^(BOOL finished) {}];
@@ -351,7 +351,7 @@ static const CGFloat platformItemH = 78.0;
                           delay:0.0
                         options:0
                      animations:^{
-
+                         
                          actionSheet.pageView.frame = CGRectMake(spacing, SSUI_HEIGHT(actionSheet.view), SSUI_WIDTH(actionSheet.view) -  2 * spacing, actionSheet.pageViewH);
                          actionSheet.cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(actionSheet.view) + actionSheet.pageViewH - spacing, SSUI_WIDTH(actionSheet.view) -  2 * spacing, cancelButtonH - 2 * spacing);
                      }

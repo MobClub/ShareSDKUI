@@ -27,52 +27,6 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
 
 @implementation ShareSDK (SSUI)
 
-//+ (NSArray *)platformsShowInShareActionSheet
-//{
-//    //过滤掉未安装客户端且依赖客户端分享的平台
-//    NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
-//    NSArray *platformsNeedClient = @[
-//                                     @(SSDKPlatformTypeWechat),
-//                                     @(SSDKPlatformSubTypeWechatSession),
-//                                     @(SSDKPlatformSubTypeWechatTimeline),
-//                                     @(SSDKPlatformSubTypeWechatFav),
-//                                     @(SSDKPlatformTypeQQ),
-//                                     @(SSDKPlatformSubTypeQZone),
-//                                     @(SSDKPlatformSubTypeQQFriend),
-//                                     @(SSDKPlatformTypeInstagram),
-//                                     @(SSDKPlatformTypeWhatsApp),
-//                                     @(SSDKPlatformTypeLine),
-//                                     @(SSDKPlatformTypeKakao),
-//                                     @(SSDKPlatformSubTypeKakaoTalk),
-//                                     @(SSDKPlatformTypePinterest),
-//                                     @(SSDKPlatformTypeAliPaySocial)
-//                                     ];
-//    
-//    NSMutableArray *temPlatform = [NSMutableArray arrayWithArray:activePlatforms];
-//    [temPlatform enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-//     {
-//         if ([obj isKindOfClass:[NSNumber class]])
-//         {
-//             if ([platformsNeedClient containsObject:obj])
-//             {
-//                 if ([obj isEqual:@(SSDKPlatformSubTypeQZone)])
-//                 {
-//                     if (![ShareSDK isClientInstalled:(SSDKPlatformSubTypeQQFriend)])
-//                     {
-//                         [activePlatforms removeObject:@(SSDKPlatformSubTypeQZone)];
-//                     }
-//                 }
-//                 else if (![ShareSDK isClientInstalled:[obj integerValue]])
-//                 {
-//                     [activePlatforms removeObject:obj];
-//                 }
-//             }
-//         }
-//     }];
-//    
-//    return temPlatform;
-//}
-
 + (SSUIShareActionSheetController *)showShareActionSheet:(UIView *)view
                                                    items:(NSArray *)items
                                              shareParams:(NSMutableDictionary *)shareParams
@@ -83,6 +37,7 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
     
     //过滤掉未安装客户端且依赖客户端分享的平台
     NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:[ShareSDK activePlatforms]];
+    
     NSArray *platformsNeedClient = @[
                                      @(SSDKPlatformTypeWechat),
                                      @(SSDKPlatformSubTypeWechatSession),
@@ -223,6 +178,26 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                 [directSharePlt removeObject:@(SSDKPlatformTypeQQ)];
             }
             
+//            if ([directSharePlt containsObject:@(SSDKPlatformTypeYiXin)])
+//            {
+//                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeYiXinFav)])
+//                {
+//                    [directSharePlt addObject:@(SSDKPlatformSubTypeYiXinFav)];
+//                }
+//                
+//                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeYiXinSession)])
+//                {
+//                    [directSharePlt addObject:@(SSDKPlatformSubTypeYiXinSession)];
+//                }
+//                
+//                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeYiXinTimeline)])
+//                {
+//                    [directSharePlt addObject:@(SSDKPlatformSubTypeYiXinTimeline)];
+//                }
+//                
+//                [directSharePlt removeObject:@(SSDKPlatformTypeYiXin)];
+//            }
+            
             if ([directSharePlt containsObject:@(platItem.platformType)])
             {
                 if (shareStateChangedHandler)
@@ -276,6 +251,27 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
         image = images [0];
     }
     
+    //判断是否有定制某平台分享参数，如有则编辑框显示的文字和图片替换为定制的
+    NSString *customParamString = [NSString stringWithFormat:@"@platform(%lu)",(unsigned long)platformType];
+    id customDict = [shareParams objectForKey:customParamString];
+    BOOL didCustomShareParam = NO;
+    if (customDict && [customDict isKindOfClass:[NSDictionary class]])
+    {
+        didCustomShareParam = YES;
+        NSArray *customArray = [customDict objectForKey:@"images"];
+        if (customArray && [customArray count] > 0)
+        {
+            image = customArray[0];
+        }
+        
+        NSString *customStr = [customDict objectForKey:@"text"];
+        if (customStr)
+        {
+            text = customStr;
+        }
+        
+    }
+    
     BOOL unSupportOneKeyShare = NO;
     NSArray* unSupportOneKeySharePlatforms = @[@(SSDKPlatformTypeWechat),
                                                @(SSDKPlatformTypeQQ),
@@ -294,7 +290,8 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                                                @(SSDKPlatformTypeKakao),
                                                @(SSDKPlatformSubTypeKakaoTalk),
                                                @(SSDKPlatformTypePinterest),
-                                               @(SSDKPlatformTypeAliPaySocial)
+                                               @(SSDKPlatformTypeAliPaySocial),
+                                               @(SSDKPlatformTypePrint)
                                                ];
 
     if ([unSupportOneKeySharePlatforms containsObject:@(platformType)])
@@ -312,6 +309,10 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
     {
         //如果设置QQ类型，则默认使用QQ好友分享
         platformType = SSDKPlatformSubTypeQQFriend;
+    }
+    else if (platformType == SSDKPlatformTypeYiXin)
+    {
+        platformType = SSDKPlatformSubTypeYiXinSession;
     }
 
     if (otherPlatformTypes && !unSupportOneKeyShare)
@@ -359,10 +360,22 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
         if (content)
         {
             [shareParams setObject:content forKey:@"text"];
+            if (didCustomShareParam)
+            {
+                //如果对某平台有定制参数
+                NSMutableDictionary *customDict = [shareParams objectForKey:[NSString stringWithFormat:@"@platform(%lu)",(unsigned long)platformType]];
+                [customDict setObject:content forKey:@"text"];
+            }
         }
         else
         {
             [shareParams removeObjectForKey:@"text"];
+            if (didCustomShareParam)
+            {
+                //如果对某平台有定制
+                NSMutableDictionary *customDict = [shareParams objectForKey:[NSString stringWithFormat:@"@platform(%lu)",(unsigned long)platformType]];
+                [customDict removeObjectForKey:@"text"];
+            }
         }
         
         NSMutableArray *images = [[shareParams objectForKey:@"images"] mutableCopy];

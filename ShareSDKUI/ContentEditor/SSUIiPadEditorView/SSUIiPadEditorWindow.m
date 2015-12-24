@@ -11,6 +11,13 @@
 #import <ShareSDK/SSDKImage.h>
 #import "SSUIiPadEditorViewController.h"
 
+@interface SSUIiPadEditorWindow()
+{
+    UIWindow * _lastUserWindow;
+}
+
+@end
+
 @implementation SSUIiPadEditorWindow
 
 - (id)init
@@ -50,8 +57,8 @@
 }
 
 
--(void)showWithContent:(NSString *)content image:(SSDKImage *)image platformTypes:(NSArray *)platformTypes{
-    
+-(void)showWithContent:(NSString *)content image:(SSDKImage *)image platformTypes:(NSArray *)platformTypes
+{
     [self makeKeyAndVisible];
     [self becomeKeyWindow];
     
@@ -62,7 +69,6 @@
 {
     [self resignKeyWindow];
     self.hidden = YES;
-    
 }
 
 @end

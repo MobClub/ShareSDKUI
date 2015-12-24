@@ -23,6 +23,9 @@
 //支付宝SDK
 #import "APOpenAPI.h"
 
+//易信SDK头文件
+#import "YXApi.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -67,7 +70,10 @@
                                  @(SSDKPlatformSubTypeKakaoStory),
                                  @(SSDKPlatformTypeDropbox),
                                  @(SSDKPlatformTypeVKontakte),
-                                 @(SSDKPlatformTypeMingDao)
+                                 @(SSDKPlatformTypeMingDao),
+                                 @(SSDKPlatformTypePrint),
+                                 @(SSDKPlatformTypeYiXin),
+                                 @(SSDKPlatformTypeInstapaper)
                                  ];
     
     //ShareSDK和平台初始化
@@ -107,6 +113,10 @@
                              break;
                          case SSDKPlatformTypeAliPaySocial:
                              [ShareSDKConnector connectAliPaySocial:[APOpenAPI class]];
+                             break;
+                             
+                         case SSDKPlatformTypeYiXin:
+                             [ShareSDKConnector connectYiXin:[YXApi class]];
                              break;
                          default:
                              break;
@@ -241,8 +251,20 @@
                       [appInfo SSDKSetupMingDaoByAppKey:@"EEEE9578D1D431D3215D8C21BF5357E3"
                                               appSecret:@"5EDE59F37B3EFA8F65EEFB9976A4E933"
                                             redirectUri:@"http://sharesdk.cn"];
+                      break;
+                 case SSDKPlatformTypeYiXin:
+                      [appInfo SSDKSetupYiXinByAppId:@"yx0d9a9f9088ea44d78680f3274da1765f"
+                                           appSecret:@"1a5bd421ae089c3"
+                                         redirectUri:@"https://open.yixin.im/resource/oauth2_callback.html"
+                                            authType:SSDKAuthTypeBoth];
+                      break;
+                 case SSDKPlatformTypeInstapaper:
+                      [appInfo SSDKSetupInstapaperByConsumerKey:@"4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA"
+                                                 consumerSecret:@"GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe"];
+                      break;
                   default:
                       break;
+                
               }
           }];
 

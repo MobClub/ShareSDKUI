@@ -6,6 +6,7 @@
 	<string>72d8bddd2e3970a531b26d1c69ad2439</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>yixin</string>
 		<string>pinit</string>
 		<string>alipayshare</string>
 		<string>kakaokompassauth</string>
@@ -63,6 +64,7 @@
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>yx0d9a9f9088ea44d78680f3274da1765f</string>
 				<string>ap2015072400185895</string>
 				<string>kakao72d8bddd2e3970a531b26d1c69ad2439</string>
 				<string>tb2QUXqO9fcgGdtGG1FcvML6ZunIQzAEL8xY6hIaxdJnDti2DYwM</string>

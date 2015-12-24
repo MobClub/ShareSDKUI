@@ -70,12 +70,11 @@
 //iOS9分屏委托
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator>)coordinator 
 {
-    if ([MOBFDevice versionCompare:@"8.0"])
+    if ([MOBFDevice versionCompare:@"9.0"] >= 0)
     {
         [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+        [_contentView updateLayoutWithSplitViewSize:size];
     }
-    
-    [_contentView updateLayoutWithSplitViewSize:size];
 }
 
 //iOS 6
@@ -84,7 +83,7 @@
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([SSUIEditorViewStyle sharedInstance].supportedInterfaceOrientation)
     {

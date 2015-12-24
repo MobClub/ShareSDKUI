@@ -9,11 +9,11 @@
 #import "SSUIShareActionSheetStyle.h"
 #import "SSUIShareActionSheetStyle_Private.h"
 
-static SSUIShareActionSheetStyle *style = nil;
 @implementation SSUIShareActionSheetStyle
 
 + (instancetype)sharedInstance
 {
+    static SSUIShareActionSheetStyle *style = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
         if (style == nil)

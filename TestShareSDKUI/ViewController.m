@@ -201,25 +201,24 @@
            otherPlatformTypes:othetplarForms
                   shareParams:params
           onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-        
-        if (state == SSDKResponseStateSuccess)
-        {
-            NSLog(@"平台:%lu 分享成功！",(unsigned long)platformType);
-            NSLog(@"平台:%@ 分享的图片！",[contentEntity images]);
-            
-        }
-        if (state == SSDKResponseStateFail)
-        {
-            NSLog(@"平台:%lu 分享失败,错误信息:\n%@",(unsigned long)platformType,error);
-        }
-        
-        if (state == SSDKResponseStateCancel)
-        {
-            NSLog(@"平台:%lu 取消分享",(unsigned long)platformType);
-        }
+              
+              if (state == SSDKResponseStateSuccess)
+              {
+                  NSLog(@"平台:%lu 分享成功！",(unsigned long)platformType);
+                  NSLog(@"平台:%@ 分享的图片！",[contentEntity images]);
+              }
+              
+              if (state == SSDKResponseStateFail)
+              {
+                  NSLog(@"平台:%lu 分享失败,错误信息:\n%@",(unsigned long)platformType,error);
+              }
+              
+              if (state == SSDKResponseStateCancel)
+              {
+                  NSLog(@"平台:%lu 取消分享",(unsigned long)platformType);
+              }
     }];
 }
-
 
 //- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 //{

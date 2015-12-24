@@ -25,7 +25,9 @@ static const CGFloat itemH = 78;
 
 @implementation SSUIPlatformsView
 
-- (instancetype)initWithTotalColumn:(NSInteger)columnCount totalRow:(NSInteger)rowCount platformIndex:(NSInteger)index
+- (instancetype)initWithTotalColumn:(NSInteger)columnCount
+                           totalRow:(NSInteger)rowCount
+                      platformIndex:(NSInteger)index
 {
     if (self = [super init])
     {
