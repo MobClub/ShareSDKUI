@@ -40,12 +40,12 @@
 
 - (void)showInView:(UIView *)view
 {
+    [_viewCtr showInView:view];
+    
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     _window.userInteractionEnabled = YES;
     _window.rootViewController = _viewCtr;
     [_window makeKeyAndVisible];
-    
-    [_viewCtr showInView:view];
 }
 
 - (void)onItemClick:(SSUIShareActionSheetItemClickHandler)itemClickHandler
