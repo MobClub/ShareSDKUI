@@ -16,6 +16,7 @@
 
 @property (nonatomic, copy) SSUIShareActionSheetItemClickHandler clickHandle;
 @property (nonatomic, copy) SSUIShareActionSheetCancelHandler cancelHandle;
+@property (nonatomic, assign) NSInteger itemsCount;
 
 - (instancetype)initWithItems:(NSArray *)items;
 

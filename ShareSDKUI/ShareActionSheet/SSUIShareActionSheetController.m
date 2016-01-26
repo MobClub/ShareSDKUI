@@ -39,7 +39,8 @@
                                  @(SSDKPlatformTypeLine),
                                  @(SSDKPlatformSubTypeKakaoTalk),
                                  @(SSDKPlatformTypeAliPaySocial),
-//                                 @(SSDKPlatformTypeYiXin),
+                                 @(SSDKPlatformTypeFacebookMessenger),
+                                 @(SSDKPlatformTypeYiXin),
                                  nil];
     
     NSMutableArray *activePlatforms = nil;
@@ -79,7 +80,8 @@
                                      @(SSDKPlatformTypeKakao),
                                      @(SSDKPlatformSubTypeKakaoTalk),
                                      @(SSDKPlatformTypePinterest),
-                                     @(SSDKPlatformTypeAliPaySocial)
+                                     @(SSDKPlatformTypeAliPaySocial),
+                                     @(SSDKPlatformTypeFacebookMessenger)
                                      ];
     [temPlatform enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
      {

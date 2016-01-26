@@ -243,7 +243,8 @@
                                                    @(SSDKPlatformTypeKakao),
                                                    @(SSDKPlatformSubTypeKakaoTalk),
                                                    @(SSDKPlatformTypeAliPaySocial),
-                                                   @(SSDKPlatformTypePrint)
+                                                   @(SSDKPlatformTypePrint),
+                                                   @(SSDKPlatformTypeFacebookMessenger)
                                                    ];
 
             if ([unNeedAuthorizedPlatforms containsObject:[_platformTypes objectAtIndex:0]])

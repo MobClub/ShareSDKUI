@@ -94,14 +94,33 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
         _pageView.layer.cornerRadius = 12.0;
         
         //取消按钮
-        _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _cancelButton.layer.cornerRadius = 12.0;
-        _cancelButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-        _cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(self.view) + _pageViewH - spacing, SSUI_WIDTH(self.view) -  2 * spacing, cancelButtonH - 2 * spacing);
-        _cancelButton.backgroundColor = [UIColor whiteColor];
-        [_cancelButton setTitleColor:[MOBFColor colorWithRGB:0x037bff] forState:UIControlStateNormal];
-        [_cancelButton setTitle:NSLocalizedStringWithDefaultValue(@"Cancel", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Cancel", nil)
-                       forState:UIControlStateNormal];
+        if (![SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
+        {
+            _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            _cancelButton.layer.cornerRadius = 12.0;
+            _cancelButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+            _cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(self.view) + _pageViewH - spacing, SSUI_WIDTH(self.view) -  2 * spacing, cancelButtonH - 2 * spacing);
+            _cancelButton.backgroundColor = [UIColor whiteColor];
+            [_cancelButton setTitleColor:[MOBFColor colorWithRGB:0x037bff] forState:UIControlStateNormal];
+            [_cancelButton setTitle:NSLocalizedStringWithDefaultValue(@"Cancel", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Cancel", nil)
+                           forState:UIControlStateNormal];
+            
+            //如果有自定义颜色
+            if ([SSUIShareActionSheetStyle sharedInstance].cancelButtonBackgroundColor)
+            {
+                _cancelButton.backgroundColor = [SSUIShareActionSheetStyle sharedInstance].cancelButtonBackgroundColor;
+            }
+            
+            if ([SSUIShareActionSheetStyle sharedInstance].cancelButtonLabelColor)
+            {
+                [_cancelButton setTitleColor:[SSUIShareActionSheetStyle sharedInstance].cancelButtonLabelColor forState:UIControlStateNormal];
+            }
+            
+            [_cancelButton addTarget:self
+                              action:@selector(cancelButtonClick:)
+                    forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:_cancelButton];
+        }
         
         if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))
         {
@@ -113,22 +132,7 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
         }
         
         [self.view addSubview:_pageView];
-        
-        //如果有自定义颜色
-        if ([SSUIShareActionSheetStyle sharedInstance].cancelButtonBackgroundColor)
-        {
-            _cancelButton.backgroundColor = [SSUIShareActionSheetStyle sharedInstance].cancelButtonBackgroundColor;
-        }
-        
-        if ([SSUIShareActionSheetStyle sharedInstance].cancelButtonLabelColor)
-        {
-            [_cancelButton setTitleColor:[SSUIShareActionSheetStyle sharedInstance].cancelButtonLabelColor forState:UIControlStateNormal];
-        }
-        
-        [_cancelButton addTarget:self
-                          action:@selector(cancelButtonClick:)
-                forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:_cancelButton];
+
     }
     
     UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
@@ -269,14 +273,29 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
     _pageView.totalColums = self.totalColumns;
     _pageView.totalRow = self.totalRows;
     
-    _pageView.frame = CGRectMake(spacing, _cancelButton.frame.origin.y - spacing - _pageViewH, _screenH -  2 * spacing, _pageViewH);
+    if ([SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
+    {
+        _pageView.frame = CGRectMake(spacing, _screenW - spacing - _pageViewH, _screenH -  2 * spacing, _pageViewH);
+    }
+    else
+    {
+        _pageView.frame = CGRectMake(spacing, _cancelButton.frame.origin.y - spacing - _pageViewH, _screenH -  2 * spacing, _pageViewH);
+    }
 }
 
 - (void)layoutPortrait
 {
     _pageView.totalColums = self.totalColumns;
     _pageView.totalRow = self.totalRows;
-    _pageView.frame = CGRectMake(spacing, _cancelButton.frame.origin.y - spacing - _pageViewH , _screenW -  2 * spacing, _pageViewH);
+    
+    if ([SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
+    {
+        _pageView.frame = CGRectMake(spacing, _screenH - spacing - _pageViewH , _screenW -  2 * spacing, _pageViewH);
+    }
+    else
+    {
+        _pageView.frame = CGRectMake(spacing, _cancelButton.frame.origin.y - spacing - _pageViewH , _screenW -  2 * spacing, _pageViewH);
+    }
 }
 
 - (void)showInView:(UIView *)view
@@ -292,9 +311,17 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              
-                             theSheet.cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(self.view) - cancelButtonH + spacing, SSUI_WIDTH(self.view) - 2 * spacing, cancelButtonH - 2 * spacing);
+                             if([SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
+                             {
+                                 theSheet.pageView.frame = CGRectMake(spacing, _screenH - spacing - theSheet.pageViewH, _screenW -  2 * spacing, theSheet.pageViewH);
+                             }
+                             else
+                             {
+                                 theSheet.cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(self.view) - cancelButtonH + spacing, SSUI_WIDTH(self.view) - 2 * spacing, cancelButtonH - 2 * spacing);
+                                 
+                                 theSheet.pageView.frame = CGRectMake(spacing, theSheet.cancelButton.frame.origin.y - spacing - theSheet.pageViewH, _screenW -  2 * spacing, theSheet.pageViewH);
+                             }
                              
-                             theSheet.pageView.frame = CGRectMake(spacing, theSheet.cancelButton.frame.origin.y - spacing - theSheet.pageViewH, _screenW -  2 * spacing, theSheet.pageViewH);
                              
                          } completion:^(BOOL finished) {}];
     }
@@ -305,10 +332,16 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
                             options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              
-                             theSheet.cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(self.view) - cancelButtonH + spacing, SSUI_WIDTH(self.view) -   2 * spacing, cancelButtonH - 2 * spacing);
-                             
-                             theSheet.pageView.frame = CGRectMake(spacing, theSheet.cancelButton.frame.origin.y - spacing - theSheet.pageViewH, _screenH -  2 * spacing, theSheet.pageViewH);
-                             
+                             if ([SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
+                             {
+                                 theSheet.pageView.frame = CGRectMake(spacing, _screenW - spacing - theSheet.pageViewH, _screenH -  2 * spacing, theSheet.pageViewH);
+                             }
+                             else
+                             {
+                                 theSheet.cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(self.view) - cancelButtonH + spacing, SSUI_WIDTH(self.view) -   2 * spacing, cancelButtonH - 2 * spacing);
+                                 
+                                 theSheet.pageView.frame = CGRectMake(spacing, theSheet.cancelButton.frame.origin.y - spacing - theSheet.pageViewH, _screenH -  2 * spacing, theSheet.pageViewH);
+                             }
                          } completion:^(BOOL finished) {}];
     }
     
@@ -353,7 +386,11 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
                      animations:^{
                          
                          actionSheet.pageView.frame = CGRectMake(spacing, SSUI_HEIGHT(actionSheet.view), SSUI_WIDTH(actionSheet.view) -  2 * spacing, actionSheet.pageViewH);
-                         actionSheet.cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(actionSheet.view) + actionSheet.pageViewH - spacing, SSUI_WIDTH(actionSheet.view) -  2 * spacing, cancelButtonH - 2 * spacing);
+                         
+                         if([SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
+                         {
+                             actionSheet.cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(actionSheet.view) + actionSheet.pageViewH - spacing, SSUI_WIDTH(actionSheet.view) -  2 * spacing, cancelButtonH - 2 * spacing);
+                         }
                      }
                      completion:^(BOOL finished) {
                          

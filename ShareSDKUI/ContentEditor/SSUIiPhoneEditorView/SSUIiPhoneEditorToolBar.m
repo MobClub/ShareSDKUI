@@ -48,8 +48,7 @@
         _textLabel.textColor = [MOBFColor colorWithRGB:0x9a9a9a];
         _textLabel.font = [UIFont systemFontOfSize:12];
         _textLabel.text = NSLocalizedStringWithDefaultValue(@"ShareTo", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"ShareTo", nil);
-        
-        _textLabel.textAlignment = UITextAlignmentCenter;
+        _textLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_textLabel];
         
         _platTableView = [[SSUIHorizontalTableView alloc] initWithFrame:CGRectMake(LABEL_WIDTH, SSUI_BOTTOM(lineView), SSUI_WIDTH(self) - LABEL_WIDTH, SSUI_HEIGHT(self) - SSUI_HEIGHT(lineView))];

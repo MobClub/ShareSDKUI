@@ -61,6 +61,11 @@
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
 
 /**
+ *  取消按钮是否隐藏
+ */
+@property (nonatomic, assign) BOOL isCancelButtomHidden;
+
+/**
  *  获取授权视图风格共享实例
  *
  *  @return 风格类实例

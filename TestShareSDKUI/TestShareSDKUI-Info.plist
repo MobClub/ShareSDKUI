@@ -2,10 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>FacebookAppID</key>
+	<string>107704292745179</string>
 	<key>KAKAO_APP_KEY</key>
 	<string>72d8bddd2e3970a531b26d1c69ad2439</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>fb-messenger</string>
 		<string>yixin</string>
 		<string>pinit</string>
 		<string>alipayshare</string>
@@ -64,6 +67,7 @@
 			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>fb107704292745179</string>
 				<string>yx0d9a9f9088ea44d78680f3274da1765f</string>
 				<string>ap2015072400185895</string>
 				<string>kakao72d8bddd2e3970a531b26d1c69ad2439</string>

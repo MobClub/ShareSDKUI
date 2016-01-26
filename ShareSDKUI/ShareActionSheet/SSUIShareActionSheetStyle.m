@@ -74,5 +74,9 @@
     [SSUIShareActionSheetStyle sharedInstance].statusBarStyle = statusBarStyle;
 }
 
++ (void)isCancelButtomHidden:(BOOL)isCancelButtomHidden
+{
+    [SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden = isCancelButtomHidden;
+}
 
 @end

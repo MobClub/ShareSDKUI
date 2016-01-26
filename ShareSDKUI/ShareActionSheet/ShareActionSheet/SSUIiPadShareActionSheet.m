@@ -13,6 +13,9 @@
 #import <MOBFoundation/MOBFDevice.h>
 #import <MOBFoundation/MOBFoundation.h>
 
+extern const CGFloat SSUIPageViewW;
+extern const CGFloat SSUIPageViewH;
+
 @interface SSUIiPadShareActionSheet ()
 <UIPopoverPresentationControllerDelegate>
 
@@ -29,6 +32,8 @@
         self.items = items;
         _viewCtr = [[SSUIiPadShareActionSheetViewController alloc] initWithItems:self.items];
         
+        _row = ceil([items count] * 1.0 /3.0);
+        
         //分屏适配
         if (!([MOBFDevice versionCompare:@"8.0"] >= 0))
         {
@@ -41,7 +46,16 @@
                 }
             }
             
-            _popover.popoverContentSize = CGSizeMake(300, 400);
+            if (_row > 2)
+            {
+                _popover.popoverContentSize = CGSizeMake(SSUIPageViewW, SSUIPageViewH);
+            }
+            else
+            {
+                //根据行数调整高度
+                _popover.popoverContentSize = CGSizeMake(SSUIPageViewW, 80*(_row + 1));
+            }
+        
             _popover.delegate = self;
         }
     }
@@ -64,8 +78,17 @@
             _viewCtr.popoverPresentationController.sourceView = view;
             _viewCtr.popoverPresentationController.sourceRect = view.bounds;
             _viewCtr.popoverPresentationController.delegate = self;
-            _viewCtr.preferredContentSize = CGSizeMake(300, 400);
             
+            if (_row > 2)
+            {
+                _viewCtr.preferredContentSize = CGSizeMake(SSUIPageViewW, SSUIPageViewH);
+            }
+            else
+            {
+                //根据行数调整高度
+                _viewCtr.preferredContentSize = CGSizeMake(SSUIPageViewW, 80*(_row + 1));
+            }
+        
             [[MOBFViewController currentViewController] presentViewController:_viewCtr
                                                                      animated:YES
                                                                    completion:^{}];

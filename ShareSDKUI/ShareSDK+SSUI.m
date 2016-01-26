@@ -52,7 +52,8 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                                      @(SSDKPlatformTypeKakao),
                                      @(SSDKPlatformSubTypeKakaoTalk),
                                      @(SSDKPlatformTypePinterest),
-                                     @(SSDKPlatformTypeAliPaySocial)
+                                     @(SSDKPlatformTypeAliPaySocial),
+                                     @(SSDKPlatformTypeFacebookMessenger)
                                      ];
     
     NSMutableArray *temPlatform = [NSMutableArray arrayWithArray:activePlatforms];
@@ -92,8 +93,8 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
         }
     }];
     
-    [actionSheet onItemClick:^(NSInteger index, SSUIShareActionSheetItem *item) {
-        
+    [actionSheet onItemClick:^(NSInteger index, SSUIShareActionSheetItem *item)
+    {
         if ([item isKindOfClass:[SSUIShareActionSheetPlatformItem class]])
         {
             //获取一个平台类型列表，用于传入editor中的otherPlatformTypes中
@@ -106,8 +107,8 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
             }
             else
             {
-                [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-                    
+                [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+                {
                     if ([obj isKindOfClass:[NSNumber class]])
                     {
                         if ([activePlatforms containsObject:obj])
@@ -150,6 +151,25 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                 [directSharePlt removeObject:@(SSDKPlatformTypeWechat)];
             }
             
+            //易信
+            if([directSharePlt containsObject:@(SSDKPlatformTypeYiXin)])
+            {
+                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeYiXinSession)])
+                {
+                    [directSharePlt addObject:@(SSDKPlatformSubTypeYiXinSession)];
+                }
+                
+                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeYiXinTimeline)])
+                {
+                    [directSharePlt addObject:@(SSDKPlatformSubTypeYiXinTimeline)];
+                }
+                
+                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeYiXinFav)])
+                {
+                    [directSharePlt addObject:@(SSDKPlatformSubTypeYiXinFav)];
+                }
+            }
+            
             if ([directSharePlt containsObject:@(SSDKPlatformTypeKakao)])
             {
                 if (![directSharePlt containsObject:@(SSDKPlatformSubTypeKakaoTalk)])
@@ -177,26 +197,6 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                 
                 [directSharePlt removeObject:@(SSDKPlatformTypeQQ)];
             }
-            
-//            if ([directSharePlt containsObject:@(SSDKPlatformTypeYiXin)])
-//            {
-//                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeYiXinFav)])
-//                {
-//                    [directSharePlt addObject:@(SSDKPlatformSubTypeYiXinFav)];
-//                }
-//                
-//                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeYiXinSession)])
-//                {
-//                    [directSharePlt addObject:@(SSDKPlatformSubTypeYiXinSession)];
-//                }
-//                
-//                if (![directSharePlt containsObject:@(SSDKPlatformSubTypeYiXinTimeline)])
-//                {
-//                    [directSharePlt addObject:@(SSDKPlatformSubTypeYiXinTimeline)];
-//                }
-//                
-//                [directSharePlt removeObject:@(SSDKPlatformTypeYiXin)];
-//            }
             
             if ([directSharePlt containsObject:@(platItem.platformType)])
             {
@@ -269,7 +269,6 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
         {
             text = customStr;
         }
-        
     }
     
     BOOL unSupportOneKeyShare = NO;
@@ -291,7 +290,8 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                                                @(SSDKPlatformSubTypeKakaoTalk),
                                                @(SSDKPlatformTypePinterest),
                                                @(SSDKPlatformTypeAliPaySocial),
-                                               @(SSDKPlatformTypePrint)
+                                               @(SSDKPlatformTypePrint),
+                                               @(SSDKPlatformTypeFacebookMessenger)
                                                ];
 
     if ([unSupportOneKeySharePlatforms containsObject:@(platformType)])

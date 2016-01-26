@@ -75,17 +75,18 @@
                                    url:[NSURL URLWithString:@"http://www.mob.com"]
                                  title:@"分享标题"
                                   type:SSDKContentTypeAuto];
+    [params SSDKEnableUseClientShare];
     
     //1.2、自定义分享平台（非必要）
-    NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:@[@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ),@(SSDKPlatformTypeRenren),@(SSDKPlatformTypeSinaWeibo),@(SSDKPlatformTypeSMS),@(SSDKPlatformTypeTwitter)]];
+//    NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:@[@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ),@(SSDKPlatformTypeRenren),@(SSDKPlatformTypeSinaWeibo),@(SSDKPlatformTypeSMS),@(SSDKPlatformTypeTwitter)]];
 //    NSMutableArray *activePlatforms = [NSMutableArray arrayWithArray:@[@(SSDKPlatformSubTypeWechatTimeline),@(SSDKPlatformSubTypeWechatSession),@(SSDKPlatformSubTypeWechatFav),@(SSDKPlatformSubTypeQQFriend),@(SSDKPlatformSubTypeQZone),@(SSDKPlatformTypeRenren),@(SSDKPlatformTypeSinaWeibo),@(SSDKPlatformTypeSMS),@(SSDKPlatformTypeTwitter)]];
-    SSUIShareActionSheetCustomItem *item = [SSUIShareActionSheetCustomItem itemWithIcon:[UIImage imageNamed:@"Icon.png"]
-                                                                                  label:@"自定义"
-                                                                                onClick:^{
-                                                                                    
-                                                                                    NSLog(@"=== 自定义item点击 ===");
-                                                                                }];
-    [activePlatforms addObject:item];
+//    SSUIShareActionSheetCustomItem *item = [SSUIShareActionSheetCustomItem itemWithIcon:[UIImage imageNamed:@"Icon.png"]
+//                                                                                  label:@"自定义"
+//                                                                                onClick:^{
+//                                                                                    
+//                                                                                    NSLog(@"=== 自定义item点击 ===");
+//                                                                                }];
+//    [activePlatforms addObject:item];
     
     //1.3、自定义分享菜单栏（非必要）
     [SSUIShareActionSheetStyle setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -93,7 +94,7 @@
     [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:137/255.0 green:142/255.0 blue:150/255.0 alpha:0.8]];
     [SSUIShareActionSheetStyle setActionSheetColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
     [SSUIShareActionSheetStyle setCancelButtonBackgroundColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
-    
+
     [SSUIShareActionSheetStyle setCancelButtonLabelColor:[UIColor whiteColor]];
     [SSUIShareActionSheetStyle setItemNameColor:[UIColor whiteColor]];
     [SSUIShareActionSheetStyle setItemNameFont:[UIFont systemFontOfSize:10]];
@@ -101,61 +102,84 @@
     [SSUIShareActionSheetStyle setPageIndicatorTintColor:[UIColor colorWithRed:62/255.0 green:62/255.0 blue:62/255.0 alpha:1.0]];
     [SSUIShareActionSheetStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskLandscape];
     
+    NSMutableArray *active = [ShareSDK activePlatforms];
+    
+//    [SSUIShareActionSheetStyle isCancelButtomHidden:YES];
+    
+    BOOL isClient =  [ShareSDK isClientInstalled:SSDKPlatformTypeFacebookMessenger];
+    
     //1.4、自定义支持的屏幕方向
     [ShareSDK setSupportedInterfaceOrientation:UIInterfaceOrientationMaskAllButUpsideDown];
     
     
     //2、弹出分享菜单栏
-//    SSUIShareActionSheetController *actionSheet = [ShareSDK showShareActionSheet:sender
-    [ShareSDK showShareActionSheet:sender
+    SSUIShareActionSheetController *actionSheet = [ShareSDK showShareActionSheet:sender
+//    [ShareSDK showShareActionSheet:sender
                              items:nil
                        shareParams:params
                onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
-
-                   if (state == SSDKResponseStateSuccess)
+                   
+                   switch (state)
                    {
-                       NSLog(@"分享成功");
-                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享成功"
-                                                                       message:nil
-                                                                      delegate:nil
-                                                             cancelButtonTitle:@"OK"
-                                                             otherButtonTitles:nil, nil];
-                       [alert show];
-                   }
-                   else if(state == SSDKResponseStateFail)
-                   {
-                       if (platformType == SSDKPlatformTypeSMS && [error code] == 201)
+                       case SSDKResponseStateSuccess:
                        {
-                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
-                                                                           message:@"失败原因可能是：1、短信应用没有设置帐号；2、设备不支持短信应用；3、短信应用在iOS 7以上才能发送带附件的短信；"
+                           NSLog(@"分享成功");
+                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                           message:nil
                                                                           delegate:nil
                                                                  cancelButtonTitle:@"OK"
                                                                  otherButtonTitles:nil, nil];
                            [alert show];
                        }
-                       else if(platformType == SSDKPlatformTypeMail && [error code] == 201)
+                           break;
+                       case SSDKResponseStateFail:
                        {
-                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
-                                                                           message:@"失败原因可能是：1、邮件应用没有设置帐号；2、设备不支持邮件应用；"
+                           if (platformType == SSDKPlatformTypeSMS && [error code] == 201)
+                           {
+                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                               message:@"失败原因可能是：1、短信应用没有设置帐号；2、设备不支持短信应用；3、短信应用在iOS 7以上才能发送带附件的短信；"
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"OK"
+                                                                     otherButtonTitles:nil, nil];
+                               [alert show];
+                           }
+                           else if(platformType == SSDKPlatformTypeMail && [error code] == 201)
+                           {
+                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                               message:@"失败原因可能是：1、邮件应用没有设置帐号；2、设备不支持邮件应用；"
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"OK"
+                                                                     otherButtonTitles:nil, nil];
+                               [alert show];
+                           }
+                           else
+                           {
+                               NSLog(@"分享失败");
+                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                               message:[NSString stringWithFormat:@"%@",error]
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"OK"
+                                                                     otherButtonTitles:nil, nil];
+                               [alert show];
+                           }
+                       }
+                       case SSDKResponseStateCancel:
+                       {
+                           NSLog(@"取消");
+                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"取消分享"
+                                                                           message:nil
                                                                           delegate:nil
                                                                  cancelButtonTitle:@"OK"
                                                                  otherButtonTitles:nil, nil];
                            [alert show];
                        }
-                       else
-                       {
-                           NSLog(@"分享失败");
-                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
-                                                                           message:[NSString stringWithFormat:@"%@",error]
-                                                                          delegate:nil
-                                                                 cancelButtonTitle:@"OK"
-                                                                 otherButtonTitles:nil, nil];
-                           [alert show];
-                       }
+                           
+                       default:
+                           break;
                    }
                }];
     
-//    [actionSheet.directSharePlatforms removeObject:@(SSDKPlatformTypeWechat)];
+    [actionSheet.directSharePlatforms removeObject:@(SSDKPlatformTypeWechat)];
 }
 
 -(void)ShowShareContentEditorView:(id*)sender

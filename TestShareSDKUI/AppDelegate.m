@@ -26,11 +26,14 @@
 //易信SDK头文件
 #import "YXApi.h"
 
+//Facebook Messenger SDK
+#import <FBSDKMessengerShareKit/FBSDKMessengerSharer.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSString *str = NSLocalizedStringWithDefaultValue(@"NoValidPlatform", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"NoValidPlatform", nil);
+//    NSString *str = NSLocalizedStringWithDefaultValue(@"NoValidPlatform", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"NoValidPlatform", nil);
     
     //需要集成的平台
     NSArray *activePlatforms = @[
@@ -73,7 +76,8 @@
                                  @(SSDKPlatformTypeMingDao),
                                  @(SSDKPlatformTypePrint),
                                  @(SSDKPlatformTypeYiXin),
-                                 @(SSDKPlatformTypeInstapaper)
+                                 @(SSDKPlatformTypeInstapaper),
+                                 @(SSDKPlatformTypeFacebookMessenger)
                                  ];
     
     //ShareSDK和平台初始化
@@ -102,10 +106,10 @@
                          case SSDKPlatformTypeRenren:
                              [ShareSDKConnector connectRenren:[RennClient class]];
                              break;
-                         case SSDKPlatformTypeGooglePlus:
-                             [ShareSDKConnector connectGooglePlus:[GPPSignIn class]
-                                                       shareClass:[GPPShare class]];
-                             break;
+//                         case SSDKPlatformTypeGooglePlus:
+//                             [ShareSDKConnector connectGooglePlus:[GPPSignIn class]
+//                                                       shareClass:[GPPShare class]];
+//                             break;
                          case SSDKPlatformTypeKakao:
                          case SSDKPlatformSubTypeKakaoStory:
                          case SSDKPlatformSubTypeKakaoTalk:
@@ -118,6 +122,9 @@
                          case SSDKPlatformTypeYiXin:
                              [ShareSDKConnector connectYiXin:[YXApi class]];
                              break;
+                         case SSDKPlatformTypeFacebookMessenger:
+                              [ShareSDKConnector connectFacebookMessenger:[FBSDKMessengerSharer class]];
+                              break;
                          default:
                              break;
                      }
@@ -183,10 +190,14 @@
                                            redirectUri:@"http://www.sharesdk.cn/"];
                       break;
                   case SSDKPlatformTypeGooglePlus:
+//                      [appInfo SSDKSetupGooglePlusByClientID:@"232554794995.apps.googleusercontent.com"
+//                                                clientSecret:@"PEdFgtrMw97aCvf0joQj7EMk"
+//                                                 redirectUri:@"http://localhost"
+//                                                    authType:SSDKAuthTypeBoth];
+                      
                       [appInfo SSDKSetupGooglePlusByClientID:@"232554794995.apps.googleusercontent.com"
                                                 clientSecret:@"PEdFgtrMw97aCvf0joQj7EMk"
-                                                 redirectUri:@"http://localhost"
-                                                    authType:SSDKAuthTypeBoth];
+                                                 redirectUri:@"http://localhost"];
                       break;
                   case SSDKPlatformTypePocket:
                       [appInfo SSDKSetupPocketByConsumerKey:@"11496-de7c8c5eb25b2c9fcdc2b627"

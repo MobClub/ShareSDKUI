@@ -14,6 +14,7 @@
 @interface SSUIiPadShareActionSheet : SSUIBaseShareActionSheet <UIPopoverControllerDelegate>
 {
     UIPopoverController *_popover;
+    NSInteger _row;
 }
 
 - (instancetype)initWithItems:(NSArray *)items;

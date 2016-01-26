@@ -73,7 +73,16 @@ static const CGFloat pageControlH = 35;
  */
 - (instancetype)initWithItems:(NSArray *)items
 {
-    return [self initWithItems:items totalColumn:3 totalRow:3];
+    NSInteger row = ceil([items count] * 1.0 /3.0);
+    if (row > 2)
+    {
+        return [self initWithItems:items totalColumn:3 totalRow:3];
+    }
+    else
+    {
+        return [self initWithItems:items totalColumn:3 totalRow:row];
+    }
+    
 }
 
 - (void)setupScrollViewWithItems:(NSArray *)items
@@ -96,6 +105,7 @@ static const CGFloat pageControlH = 35;
         {
             _pageCtr = [[UIPageControl alloc] init];
         }
+        
         _pageCtr.numberOfPages = self.pageNum;
         _pageCtr.userInteractionEnabled = NO;
         _pageCtr.hidden = NO;

@@ -10,6 +10,9 @@
 #import "SSUIPageView.h"
 #import "SSUIShareActionSheetStyle_Private.h"
 
+const CGFloat SSUIPageViewW = 300;
+const CGFloat SSUIPageViewH = 400;
+
 @interface SSUIiPadShareActionSheetViewController ()
 
 @property (nonatomic, strong) SSUIPageView *pageView;
@@ -23,6 +26,7 @@
     if (self = [super init])
     {
         _pageView = [[SSUIPageView alloc] initWithItems:items];
+        _itemsCount = [items count];
         [self.view addSubview:_pageView];
     }
     
@@ -87,7 +91,19 @@
 {
     [super viewDidLoad];
     
-    _pageView.frame = CGRectMake(0, 0, 300, 400);
+    self.view.backgroundColor = [UIColor purpleColor];
+    
+    NSInteger row = ceil(_itemsCount * 1.0 /3.0);
+    
+    if (row >2)
+    {
+        _pageView.frame = CGRectMake(0, 0, SSUIPageViewW, SSUIPageViewH);
+    }
+    else
+    {
+        //根据行数调整高度
+        _pageView.frame = CGRectMake(0, 0, SSUIPageViewW, 80*(row+1));
+    }
 }
 
 - (void)showInView:(UIView *)view

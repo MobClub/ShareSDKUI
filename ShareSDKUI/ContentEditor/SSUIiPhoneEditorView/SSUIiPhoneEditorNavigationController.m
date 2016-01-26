@@ -65,7 +65,7 @@
     return YES;
 }
 
-- (NSUInteger)supportedInterfaceOrientations
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
     if ([SSUIEditorViewStyle sharedInstance].supportedInterfaceOrientation)
     {
