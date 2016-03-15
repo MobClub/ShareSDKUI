@@ -100,16 +100,16 @@
     [SSUIShareActionSheetStyle setItemNameFont:[UIFont systemFontOfSize:10]];
     [SSUIShareActionSheetStyle setCurrentPageIndicatorTintColor:[UIColor colorWithRed:156/255.0 green:156/255.0 blue:156/255.0 alpha:1.0]];
     [SSUIShareActionSheetStyle setPageIndicatorTintColor:[UIColor colorWithRed:62/255.0 green:62/255.0 blue:62/255.0 alpha:1.0]];
-    [SSUIShareActionSheetStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskLandscape];
+    [SSUIShareActionSheetStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskPortrait];
     
     NSMutableArray *active = [ShareSDK activePlatforms];
     
-//    [SSUIShareActionSheetStyle isCancelButtomHidden:YES];
+    [SSUIShareActionSheetStyle isCancelButtomHidden:YES];
     
     BOOL isClient =  [ShareSDK isClientInstalled:SSDKPlatformTypeFacebookMessenger];
     
     //1.4、自定义支持的屏幕方向
-    [ShareSDK setSupportedInterfaceOrientation:UIInterfaceOrientationMaskAllButUpsideDown];
+//    [ShareSDK setSupportedInterfaceOrientation:UIInterfaceOrientationMaskAllButUpsideDown];
     
     
     //2、弹出分享菜单栏

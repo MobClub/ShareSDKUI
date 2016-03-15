@@ -211,6 +211,8 @@
 
 - (void)cancelButtonClickHandler:(id)sender
 {
+    [_contentView.contentView resignFirstResponder];
+    
     if (self.cancelHandler)
     {
         self.cancelHandler();

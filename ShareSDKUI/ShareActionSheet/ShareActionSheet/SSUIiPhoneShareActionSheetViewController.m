@@ -387,7 +387,7 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
                          
                          actionSheet.pageView.frame = CGRectMake(spacing, SSUI_HEIGHT(actionSheet.view), SSUI_WIDTH(actionSheet.view) -  2 * spacing, actionSheet.pageViewH);
                          
-                         if([SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
+                         if(![SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
                          {
                              actionSheet.cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(actionSheet.view) + actionSheet.pageViewH - spacing, SSUI_WIDTH(actionSheet.view) -  2 * spacing, cancelButtonH - 2 * spacing);
                          }
