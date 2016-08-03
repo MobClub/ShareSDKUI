@@ -20,8 +20,8 @@
 @property (nonatomic, copy) SSUIShareContentEditorViewSubmitHandler submitHandler;
 @property (nonatomic, copy) SSUIShareContentEditorViewCancelHandler cancelHandler;
 
--(void)updateWithContent:(NSString *)content
-                   image:(SSDKImage *)image
-           platformTypes:(NSArray *)platformTypes;
+- (void)updateWithContent:(NSString *)content
+                    image:(SSDKImage *)image
+            platformTypes:(NSArray *)platformTypes;
 
 @end

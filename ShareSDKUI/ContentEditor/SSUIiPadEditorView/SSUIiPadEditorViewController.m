@@ -102,11 +102,18 @@
     return UIStatusBarStyleDefault;
 }
 
--(void)updateWithContent:(NSString *)content image:(SSDKImage *)image platformTypes:(NSArray *)platformTypes{
+-(void)updateWithContent:(NSString *)content
+                   image:(SSDKImage *)image
+           platformTypes:(NSArray *)platformTypes
+{
     
     _platformTypes = platformTypes;
     
-    [_contentView updateWithType:_platformTypes content:content image:image interfaceOrientation:self.interfaceOrientation viewController:self];
+    [_contentView updateWithType:_platformTypes
+                         content:content
+                           image:image
+            interfaceOrientation:self.interfaceOrientation
+                  viewController:self];
     
     _contentView.submitHandler = self.submitHandler;
     _contentView.cancelHandler = self.cancelHandler;

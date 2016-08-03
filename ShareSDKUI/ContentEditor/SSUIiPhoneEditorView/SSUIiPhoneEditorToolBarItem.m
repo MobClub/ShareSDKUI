@@ -11,6 +11,7 @@
 #import <ShareSDK/SSDKTypeDefine.h>
 #import <MOBFoundation/MOBFImage.h>
 #import "SSUITypeDef.h"
+#import "SSUIShareActionSheetStyle_Private.h"
 
 #define ICON_WIDTH 21
 #define ICON_HEIGHT 21
@@ -64,7 +65,16 @@
         NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"ShareSDKUI"
                                                                ofType:@"bundle"];
         NSBundle *uiBundle = [NSBundle bundleWithPath:bundlePath];
-        UIImage *iconImage = [MOBFImage imageName:[NSString stringWithFormat:@"Icon/sns_icon_%ld.png",(long)[[_data objectForKey:KEY_TYPE] integerValue]] bundle:uiBundle];
+        UIImage *iconImage = [MOBFImage imageName:[NSString stringWithFormat:@"Icon/sns_icon_%ld.png",
+                                                   (long)[[_data objectForKey:KEY_TYPE] integerValue]]
+                                           bundle:uiBundle];
+        
+        if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple)
+        {
+            iconImage = [MOBFImage imageName:[NSString stringWithFormat:@"Icon_simple/sns_icon_%ld.png",
+                                  (long)[[_data objectForKey:KEY_TYPE] integerValue]]
+                          bundle:uiBundle];
+        }
         
         BOOL selected = [[_data objectForKey:KEY_SELECTED] boolValue];
         
@@ -78,13 +88,37 @@
 }
 
 //获取灰度图方法
--(UIImage*)getGrayImage:(UIImage*)sourceImage
+- (UIImage *)getGrayImage:(UIImage *)sourceImage
 {
     int width = sourceImage.size.width;
     int height = sourceImage.size.height;
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
-    CGContextRef context = CGBitmapContextCreate (nil,width,height,8,0,colorSpace,kCGBitmapByteOrderDefault);
+    
+    CGContextRef context = NULL;
+    
+    if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple)
+    {
+        context = CGBitmapContextCreate (nil,
+                                         width,
+                                         height,
+                                         8,
+                                         0,
+                                         colorSpace,
+                                         kCGImageAlphaOnly);
+    }
+    else
+    {
+        context = CGBitmapContextCreate (nil,
+                                         width,
+                                         height,
+                                         8,
+                                         0,
+                                         colorSpace,
+                                         kCGBitmapByteOrderDefault);
+    }
+
+    
     CGColorSpaceRelease(colorSpace);
     
     if (context == NULL)
@@ -92,11 +126,17 @@
         return nil;
     }
     
-    CGContextDrawImage(context,CGRectMake(0, 0, width, height), sourceImage.CGImage);
+    CGContextDrawImage(context,
+                       CGRectMake(0, 0, width, height),
+                       sourceImage.CGImage);
     
     CGImageRef img = CGBitmapContextCreateImage(context);
     UIImage *grayImage = [UIImage imageWithCGImage:img];
-    UIImage *finalImage = [MOBFImage roundRectImage:grayImage withSize:CGSizeMake(30 , 30) ovalWidth:5.0 ovalHeight:5.0 ovalType:MOBFOvalTypeAll];
+    UIImage *finalImage = [MOBFImage roundRectImage:grayImage
+                                           withSize:CGSizeMake(30 , 30)
+                                          ovalWidth:5.0
+                                         ovalHeight:5.0
+                                           ovalType:MOBFOvalTypeAll];
     CGContextRelease(context);
     CFRelease(img);
     

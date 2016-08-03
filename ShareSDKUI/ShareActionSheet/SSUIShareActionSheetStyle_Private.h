@@ -11,6 +11,11 @@
 @interface SSUIShareActionSheetStyle ()
 
 /**
+ *  ShareSDK UI风格
+ */
+@property (nonatomic, assign) ShareActionSheetStyle style;
+
+/**
  *  分享菜单栏颜色
  */
 @property (nonatomic, strong) UIColor *actionSheetColor;

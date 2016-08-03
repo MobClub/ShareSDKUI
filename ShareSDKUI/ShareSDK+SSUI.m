@@ -13,6 +13,7 @@
 #import <ShareSDK/ShareSDK+Base.h>
 #import "SSUIShareActionSheetStyle.h"
 #import "SSUIEditorViewStyle.h"
+#import "SSUIEditorViewStyle_Private.h"
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 
 /**
@@ -272,28 +273,98 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
     }
     
     BOOL unSupportOneKeyShare = NO;
-    NSArray* unSupportOneKeySharePlatforms = @[@(SSDKPlatformTypeWechat),
-                                               @(SSDKPlatformTypeQQ),
-                                               @(SSDKPlatformSubTypeQQFriend),
-                                               @(SSDKPlatformSubTypeQZone),
-                                               @(SSDKPlatformSubTypeWechatSession),
-                                               @(SSDKPlatformSubTypeWechatTimeline),
-                                               @(SSDKPlatformSubTypeWechatFav),
-                                               @(SSDKPlatformTypeMail),
-                                               @(SSDKPlatformTypeSMS),
-                                               @(SSDKPlatformTypeCopy),
-                                               @(SSDKPlatformTypeGooglePlus),
-                                               @(SSDKPlatformTypeInstagram),
-                                               @(SSDKPlatformTypeWhatsApp),
-                                               @(SSDKPlatformTypeLine),
-                                               @(SSDKPlatformTypeKakao),
-                                               @(SSDKPlatformSubTypeKakaoTalk),
-                                               @(SSDKPlatformTypePinterest),
-                                               @(SSDKPlatformTypeAliPaySocial),
-                                               @(SSDKPlatformTypePrint),
-                                               @(SSDKPlatformTypeFacebookMessenger)
-                                               ];
-
+    NSMutableArray *unSupportOneKeySharePlatforms = [NSMutableArray arrayWithArray:@[@(SSDKPlatformTypeWechat),
+                                                                                     @(SSDKPlatformTypeQQ),
+                                                                                     @(SSDKPlatformSubTypeQQFriend),
+                                                                                     @(SSDKPlatformSubTypeQZone),
+                                                                                     @(SSDKPlatformSubTypeWechatSession),
+                                                                                     @(SSDKPlatformSubTypeWechatTimeline),
+                                                                                     @(SSDKPlatformSubTypeWechatFav),
+                                                                                     @(SSDKPlatformTypeMail),
+                                                                                     @(SSDKPlatformTypeSMS),
+                                                                                     @(SSDKPlatformTypeCopy),
+                                                                                     @(SSDKPlatformTypeGooglePlus),
+                                                                                     @(SSDKPlatformTypeInstagram),
+                                                                                     @(SSDKPlatformTypeWhatsApp),
+                                                                                     @(SSDKPlatformTypeLine),
+                                                                                     @(SSDKPlatformTypeKakao),
+                                                                                     @(SSDKPlatformSubTypeKakaoTalk),
+                                                                                     @(SSDKPlatformTypePinterest),
+                                                                                     @(SSDKPlatformTypeAliPaySocial),
+                                                                                     @(SSDKPlatformTypePrint),
+                                                                                     @(SSDKPlatformTypeFacebookMessenger)
+                                                                                     ]];
+    
+    
+    //如果平台为Facebook且分享类型为webPage时,FB不需要授权
+    if (platformType == SSDKPlatformTypeFacebook)
+    {
+        static BOOL unSupport = NO;
+        NSString *facebookKey = [NSString stringWithFormat:@"@platform(%lu)",(unsigned long)SSDKPlatformTypeFacebook];
+        NSDictionary *facebookParams = [shareParams objectForKey:facebookKey];
+        
+        if (facebookParams)
+        {
+            if ([[facebookParams objectForKey:@"type"] integerValue] == SSDKContentTypeWebPage)
+            {
+                unSupport = YES;
+            }
+        }
+        else
+        {
+            if ([[shareParams objectForKey:@"type"] integerValue] == SSDKContentTypeWebPage)
+            {
+                unSupport = YES;
+            }
+            else if ([[shareParams objectForKey:@"type"] integerValue] == SSDKContentTypeAuto)
+            {
+                if ([shareParams objectForKey:@"title"] && [shareParams objectForKey:@"url"])
+                {
+                    unSupport = YES;
+                }
+                
+            }
+        }
+        
+        if (unSupport)
+        {
+            [unSupportOneKeySharePlatforms addObject:@(SSDKPlatformTypeFacebook)];
+            [[SSUIEditorViewStyle sharedInstance].unNeedAuthPlatforms addObject:@(SSDKPlatformTypeFacebook)];
+        }
+    }
+    
+    //如果平台为Sina且分享类型为webPage时(客户端分享),不需要授权
+    if (platformType == SSDKPlatformTypeSinaWeibo)
+    {
+        if ([[shareParams objectForKey:@"@client_share"] boolValue])
+        {
+            static BOOL unSupport = NO;
+            NSString *sinaKey = [NSString stringWithFormat:@"@platform(%lu)",(unsigned long)SSDKPlatformTypeSinaWeibo];
+            NSDictionary *sinaParams = [shareParams objectForKey:sinaKey];
+            if (sinaParams)
+            {
+                if ([[sinaParams objectForKey:@"type"] integerValue] == SSDKContentTypeWebPage)
+                {
+                    unSupport = YES;
+                }
+            }
+            else
+            {
+                if ([[shareParams objectForKey:@"type"] integerValue] == SSDKContentTypeWebPage)
+                {
+                    unSupport = YES;
+                }
+            }
+            
+            if (unSupport)
+            {
+                [unSupportOneKeySharePlatforms addObject:@(SSDKPlatformTypeFacebook)];
+                [[SSUIEditorViewStyle sharedInstance].unNeedAuthPlatforms addObject:@(SSDKPlatformTypeSinaWeibo)];
+            }
+        }
+    }
+    
+    
     if ([unSupportOneKeySharePlatforms containsObject:@(platformType)])
     {
         unSupportOneKeyShare = YES;

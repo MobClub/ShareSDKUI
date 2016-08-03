@@ -13,15 +13,13 @@
 #import <MOBFoundation/MOBFDevice.h>
 #import "SSUIShareActionSheetStyle_Private.h"
 
-static const CGFloat cancelButtonH = 63.0;
-static const CGFloat spacing = 10.0;
 static const CGFloat animationDuration = 0.35;
 static const CGFloat platformItemW = 60.0;
-static const CGFloat platformItemH = 78.0;
-
 static const CGFloat temIntervalW = 30;          //竖屏下临时水平方向间距
 static const CGFloat temIntervalH = 35;          //竖屏下临时竖直方向间距
 static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方向的间距
+
+static const CGFloat maxPlatformsItemW = 105;
 
 @interface SSUIiPhoneShareActionSheetViewController ()
 
@@ -41,33 +39,45 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
 
 @implementation SSUIiPhoneShareActionSheetViewController
 
-
 - (instancetype)initWithItems:(NSArray *)items
 {
     if (self = [super init])
     {
-        self.items = items;
-
+        UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
+        [self.view addGestureRecognizer:tapGr];
+        
+        _spacing = 10.0;
+        _cancelButtonH = 63.0;
+        _platformItemH = 78.0;
+        
         //屏幕宽度
         _screenW = [UIScreen mainScreen].bounds.size.width < [UIScreen mainScreen].bounds.size.height ? [UIScreen mainScreen].bounds.size.width : [UIScreen mainScreen].bounds.size.height;
-
+        
         //屏幕高度
         _screenH = [UIScreen mainScreen].bounds.size.width > [UIScreen mainScreen].bounds.size.height ? [UIScreen mainScreen].bounds.size.width : [UIScreen mainScreen].bounds.size.height;
-
+        
+        if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple)
+        {
+            _spacing = 0;
+            _cancelButtonH = 43.0;
+        }
+        
+        self.items = items;
+        
         if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))
         {
-            _pageViewW = _screenH - 2 * spacing;
+            _pageViewW = _screenH - 2 * _spacing;
             _totalRows = 2;
             _intervalH = temLandscapeIntervalH;
         }
         else
         {
-            _pageViewW = _screenW - 2 * spacing;
+            _pageViewW = _screenW - 2 * _spacing;
             _totalRows = 3;
             _intervalH = temIntervalH;
         }
         
-        _pageViewH = _totalRows * platformItemH + _intervalH * (_totalRows - 1) + 70;
+        _pageViewH = _totalRows * _platformItemH + _intervalH * (_totalRows - 1) + 70;
 
         CGFloat contentViewW = _pageViewW;
         
@@ -78,28 +88,69 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
         else
         {
             //计算行数和列数
-            _totalColumns = (contentViewW + temIntervalW) / (temIntervalW + platformItemW);
+            if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple)
+            {
+                _totalColumns = 4;
+                
+                CGFloat temWidth;
+                
+                //如果是横屏
+                if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))
+                {
+                    temWidth = _screenH;
+                }
+                else
+                {
+                    temWidth = _screenW;
+                }
+                
+                while ( maxPlatformsItemW < temWidth/_totalColumns)
+                {
+                    _totalColumns = _totalColumns + 1;
+                }
+                
+                _platformItemH = temWidth/_totalColumns;
+                _pageViewH = _platformItemH * _totalRows + 35;
+            }
+            else
+            {
+                _totalColumns = (contentViewW + temIntervalW) / (temIntervalW + platformItemW);
+            }
             
             //根据集成平台个数决定高度
-            if ([self.items count] < _totalRows * _totalColumns)
+            if ([self.items count] <= _totalRows * _totalColumns)
             {
                 _totalRows = ceil([self.items count]*1.0 / _totalColumns);
-                _pageViewH = platformItemH * _totalRows + _intervalH * (_totalRows - 1) + 70;
+                _pageViewH = _platformItemH * _totalRows + _intervalH * (_totalRows - 1) + 70;
+                
+                if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple)
+                {
+                    _pageViewH = _platformItemH * _totalRows;
+                }
             }
-            _pageView = [[SSUIPageView alloc] initWithItems:items totalColumn:_totalColumns totalRow:_totalRows];
+
+            _pageView = [[SSUIPageView alloc] initWithItems:items totalColumn:_totalColumns totalRow:_totalRows platformItemH:_platformItemH];
             _pageView.autoresizingMask =  UIViewAutoresizingFlexibleTopMargin;
         }
-
-        _pageView.clipsToBounds = YES;
-        _pageView.layer.cornerRadius = 12.0;
         
+        if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSystem)
+        {
+            _pageView.clipsToBounds = YES;
+            _pageView.layer.cornerRadius = 12.0;
+            
+         }
+
         //取消按钮
         if (![SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
         {
             _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            _cancelButton.layer.cornerRadius = 12.0;
+            if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSystem)
+            {
+                _cancelButton.layer.cornerRadius = 12.0;
+            }
+            
             _cancelButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-            _cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(self.view) + _pageViewH - spacing, SSUI_WIDTH(self.view) -  2 * spacing, cancelButtonH - 2 * spacing);
+            _cancelButton.frame = CGRectMake(_spacing, SSUI_HEIGHT(self.view) + _pageViewH - _spacing, SSUI_WIDTH(self.view) -  2 * _spacing, _cancelButtonH - 2 * _spacing);
             _cancelButton.backgroundColor = [UIColor whiteColor];
             [_cancelButton setTitleColor:[MOBFColor colorWithRGB:0x037bff] forState:UIControlStateNormal];
             [_cancelButton setTitle:NSLocalizedStringWithDefaultValue(@"Cancel", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Cancel", nil)
@@ -124,19 +175,15 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
         
         if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))
         {
-            _pageView.frame = CGRectMake(spacing, _screenW, _screenH - 2 * spacing, _pageViewH);
+            _pageView.frame = CGRectMake(_spacing, _screenW, _screenH - 2 * _spacing, _pageViewH);
         }
         else
         {
-            _pageView.frame = CGRectMake(spacing, _screenH, _screenW - 2 * spacing, _pageViewH);
+            _pageView.frame = CGRectMake(_spacing, _screenH, _screenW - 2 * _spacing, _pageViewH);
         }
         
         [self.view addSubview:_pageView];
-
     }
-    
-    UITapGestureRecognizer *tapGr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
-    [self.view addGestureRecognizer:tapGr];
     
     return self;
 }
@@ -220,39 +267,67 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
     if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))
     {
         _pageViewH = _screenW * 0.6;
-        _pageViewW = _screenH - 2 * spacing;
+        _pageViewW = _screenH - 2 * _spacing;
         _intervalH = temLandscapeIntervalH;
     }
     else
     {
         _pageViewH = _screenH * 0.6;
-        _pageViewW = _screenW - 2 * spacing;
+        _pageViewW = _screenW - 2 * _spacing;
         _intervalH = temIntervalH;
     }
     
     if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))
     {
-        _pageViewW = _screenH - 2 * spacing;
+        _pageViewW = _screenH - 2 * _spacing;
         _totalRows = 2;
-        
     }
     else
     {
-        _pageViewW = _screenW - 2 * spacing;
+        _pageViewW = _screenW - 2 * _spacing;
         _totalRows = 3;
     }
 
-    _pageViewH = _totalRows * platformItemH + _intervalH * (_totalRows - 1) + 70;
+    _pageViewH = _totalRows * _platformItemH + _intervalH * (_totalRows - 1) + 70;
     CGFloat contentViewW = _pageViewW;
     
     //计算行数和列数
     _totalColumns = (contentViewW + temIntervalW) / (temIntervalW + platformItemW);
+    if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple)
+    {
+        _totalColumns = 4;
+        
+        CGFloat temWidth;
+        
+        //如果是横屏
+        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))
+        {
+            temWidth = _screenH;
+        }
+        else
+        {
+            temWidth = _screenW;
+        }
+        
+        while ( maxPlatformsItemW < temWidth/_totalColumns)
+        {
+            _totalColumns = _totalColumns + 1;
+        }
+        
+        _platformItemH = temWidth/_totalColumns;
+        _pageViewH = _platformItemH * _totalRows + 35;
+    }
     
     //根据集成平台个数决定高度
-    if ([self.items count] < _totalRows * _totalColumns)
+    if ([self.items count] <= _totalRows * _totalColumns)
     {
         _totalRows = ceil([self.items count]*1.0 / _totalColumns);
-        _pageViewH = platformItemH * _totalRows + _intervalH * (_totalRows - 1) + 70;
+        _pageViewH = _platformItemH * _totalRows + _intervalH * (_totalRows - 1) + 70;
+        
+        if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple)
+        {
+            _pageViewH = _platformItemH * _totalRows;
+        }
     }
     
     if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation))
@@ -272,14 +347,20 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
 {
     _pageView.totalColums = self.totalColumns;
     _pageView.totalRow = self.totalRows;
+    _pageView.platformItemW = _platformItemH;
+    
+    if([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple)
+    {
+        _pageView.platformItemW = self.platformItemH;
+    }
     
     if ([SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
     {
-        _pageView.frame = CGRectMake(spacing, _screenW - spacing - _pageViewH, _screenH -  2 * spacing, _pageViewH);
+        _pageView.frame = CGRectMake(_spacing, _screenW - _spacing - _pageViewH, _screenH -  2 * _spacing, _pageViewH);
     }
     else
     {
-        _pageView.frame = CGRectMake(spacing, _cancelButton.frame.origin.y - spacing - _pageViewH, _screenH -  2 * spacing, _pageViewH);
+        _pageView.frame = CGRectMake(_spacing, _cancelButton.frame.origin.y - _spacing - _pageViewH, _screenH -  2 * _spacing, _pageViewH);
     }
 }
 
@@ -287,14 +368,20 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
 {
     _pageView.totalColums = self.totalColumns;
     _pageView.totalRow = self.totalRows;
+    _pageView.platformItemW = _platformItemH;
+    
+    if([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple)
+    {
+        _pageView.platformItemW = self.platformItemH;
+    }
     
     if ([SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
     {
-        _pageView.frame = CGRectMake(spacing, _screenH - spacing - _pageViewH , _screenW -  2 * spacing, _pageViewH);
+        _pageView.frame = CGRectMake(_spacing, _screenH - _spacing - _pageViewH , _screenW -  2 * _spacing, _pageViewH);
     }
     else
     {
-        _pageView.frame = CGRectMake(spacing, _cancelButton.frame.origin.y - spacing - _pageViewH , _screenW -  2 * spacing, _pageViewH);
+        _pageView.frame = CGRectMake(_spacing, _cancelButton.frame.origin.y - _spacing - _pageViewH , _screenW -  2 * _spacing, _pageViewH);
     }
 }
 
@@ -313,13 +400,13 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
                              
                              if([SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
                              {
-                                 theSheet.pageView.frame = CGRectMake(spacing, _screenH - spacing - theSheet.pageViewH, _screenW -  2 * spacing, theSheet.pageViewH);
+                                 theSheet.pageView.frame = CGRectMake(_spacing, _screenH - _spacing - theSheet.pageViewH, _screenW -  2 * _spacing, theSheet.pageViewH);
                              }
                              else
                              {
-                                 theSheet.cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(self.view) - cancelButtonH + spacing, SSUI_WIDTH(self.view) - 2 * spacing, cancelButtonH - 2 * spacing);
+                                 theSheet.cancelButton.frame = CGRectMake(_spacing, SSUI_HEIGHT(self.view) - _cancelButtonH + _spacing, SSUI_WIDTH(self.view) - 2 * _spacing, _cancelButtonH - 2 * _spacing);
                                  
-                                 theSheet.pageView.frame = CGRectMake(spacing, theSheet.cancelButton.frame.origin.y - spacing - theSheet.pageViewH, _screenW -  2 * spacing, theSheet.pageViewH);
+                                 theSheet.pageView.frame = CGRectMake(_spacing, theSheet.cancelButton.frame.origin.y - _spacing - theSheet.pageViewH, _screenW -  2 * _spacing, theSheet.pageViewH);
                              }
                              
                              
@@ -334,13 +421,13 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
                              
                              if ([SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
                              {
-                                 theSheet.pageView.frame = CGRectMake(spacing, _screenW - spacing - theSheet.pageViewH, _screenH -  2 * spacing, theSheet.pageViewH);
+                                 theSheet.pageView.frame = CGRectMake(_spacing, _screenW - _spacing - theSheet.pageViewH, _screenH -  2 * _spacing, theSheet.pageViewH);
                              }
                              else
                              {
-                                 theSheet.cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(self.view) - cancelButtonH + spacing, SSUI_WIDTH(self.view) -   2 * spacing, cancelButtonH - 2 * spacing);
+                                 theSheet.cancelButton.frame = CGRectMake(_spacing, SSUI_HEIGHT(self.view) - _cancelButtonH + _spacing, SSUI_WIDTH(self.view) -   2 * _spacing, _cancelButtonH - 2 * _spacing);
                                  
-                                 theSheet.pageView.frame = CGRectMake(spacing, theSheet.cancelButton.frame.origin.y - spacing - theSheet.pageViewH, _screenH -  2 * spacing, theSheet.pageViewH);
+                                 theSheet.pageView.frame = CGRectMake(_spacing, theSheet.cancelButton.frame.origin.y - _spacing - theSheet.pageViewH, _screenH -  2 * _spacing, theSheet.pageViewH);
                              }
                          } completion:^(BOOL finished) {}];
     }
@@ -385,11 +472,11 @@ static const CGFloat temLandscapeIntervalH = 10; //横屏下临时的竖直方�
                         options:0
                      animations:^{
                          
-                         actionSheet.pageView.frame = CGRectMake(spacing, SSUI_HEIGHT(actionSheet.view), SSUI_WIDTH(actionSheet.view) -  2 * spacing, actionSheet.pageViewH);
+                         actionSheet.pageView.frame = CGRectMake(_spacing, SSUI_HEIGHT(actionSheet.view), SSUI_WIDTH(actionSheet.view) -  2 * _spacing, actionSheet.pageViewH);
                          
                          if(![SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
                          {
-                             actionSheet.cancelButton.frame = CGRectMake(spacing, SSUI_HEIGHT(actionSheet.view) + actionSheet.pageViewH - spacing, SSUI_WIDTH(actionSheet.view) -  2 * spacing, cancelButtonH - 2 * spacing);
+                             actionSheet.cancelButton.frame = CGRectMake(_spacing, SSUI_HEIGHT(actionSheet.view) + actionSheet.pageViewH - _spacing, SSUI_WIDTH(actionSheet.view) -  2 * _spacing, _cancelButtonH - 2 * _spacing);
                          }
                      }
                      completion:^(BOOL finished) {

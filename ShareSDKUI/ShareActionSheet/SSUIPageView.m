@@ -11,9 +11,6 @@
 #import <MOBFoundation/MOBFDevice.h>
 #import "SSUIShareActionSheetStyle_Private.h"
 
-static const CGFloat topIntervalH = 35;
-static const CGFloat pageControlH = 35;
-
 @interface SSUIPageView () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSArray *items;
@@ -27,12 +24,25 @@ static const CGFloat pageControlH = 35;
 
 - (instancetype)initWithItems:(NSArray *)items totalColumn:(NSInteger)columnCount totalRow:(NSInteger)rowCount
 {
+    return [self initWithItems:items totalColumn:columnCount totalRow:rowCount platformItemH:78.0];
+}
+
+- (instancetype)initWithItems:(NSArray *)items totalColumn:(NSInteger)columnCount totalRow:(NSInteger)rowCount platformItemH:(CGFloat)itemH
+{
     if (self = [super init])
     {
         _platformArr = [NSMutableArray array];
         _items = items;
         _totalRow = rowCount;
         _totalColums = columnCount;
+        _topIntervalH = 35.0;
+        _pageControlH = 35.0;
+
+        if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple && ![MOBFDevice isPad])
+        {
+            _topIntervalH = 0.0;
+            _platformItemW = itemH;
+        }
         
         self.backgroundColor = [UIColor whiteColor];
         
@@ -82,7 +92,6 @@ static const CGFloat pageControlH = 35;
     {
         return [self initWithItems:items totalColumn:3 totalRow:row];
     }
-    
 }
 
 - (void)setupScrollViewWithItems:(NSArray *)items
@@ -111,6 +120,7 @@ static const CGFloat pageControlH = 35;
         _pageCtr.hidden = NO;
         _pageCtr.currentPageIndicatorTintColor = [UIColor colorWithRed:22/255.0 green:100/255.0 blue:255/255.0 alpha:1.0];
         _pageCtr.pageIndicatorTintColor = [UIColor colorWithRed:160/255.0 green:199/255.0 blue:250/255.0 alpha:1.0];
+        _pageCtr.backgroundColor = [UIColor whiteColor];
         
         if ([SSUIShareActionSheetStyle sharedInstance].currentPageIndicatorTintColor)
         {
@@ -145,10 +155,15 @@ static const CGFloat pageControlH = 35;
     [self setupPageControlWithItems:_items];
 }
 
+- (void)setPlatformItemW:(CGFloat)platformItemW
+{
+    _platformItemW = platformItemW;
+}
+
 -(void)layoutSubviews
 {
     CGFloat platformViewW = SSUI_WIDTH(self);
-    CGFloat platformViewH = SSUI_HEIGHT(self) - topIntervalH - pageControlH;
+    CGFloat platformViewH = SSUI_HEIGHT(self) - _topIntervalH - _pageControlH;
     
     _scrollView.contentSize = CGSizeMake(SSUI_WIDTH(self) * self.pageNum, 0);
     _scrollView.frame = CGRectMake(0, 0, SSUI_WIDTH(self), SSUI_HEIGHT(self));
@@ -175,9 +190,16 @@ static const CGFloat pageControlH = 35;
         _platformView.hidden = NO;
         _platformView.totalRow = self.totalRow;
         _platformView.totalColums = self.totalColums;
-    
+        _platformView.platformItemW = self.platformItemW;
         _platformView.items = arr;
-        _platformView.frame = CGRectMake(index * platformViewW, topIntervalH, platformViewW, platformViewH);
+        
+        if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple && ![MOBFDevice isPad])
+        {
+            platformViewH = _platformItemW * _platformView.totalRow;
+        }
+        
+        _platformView.frame = CGRectMake(index * platformViewW, _topIntervalH, platformViewW, platformViewH);
+        
         _platformView.clickHandle = self.clickHandle;
         _platformView.cancelHandle = self.cancelHandle;
         [self.scrollView addSubview:_platformView];
@@ -190,7 +212,7 @@ static const CGFloat pageControlH = 35;
         view.hidden = YES;
     }
     
-    _pageCtr.frame = CGRectMake(0, SSUI_HEIGHT(self) - pageControlH, SSUI_WIDTH(self), pageControlH);
+    _pageCtr.frame = CGRectMake(0, SSUI_HEIGHT(self) - _pageControlH, SSUI_WIDTH(self), _pageControlH - 1);
     _scrollView.contentOffset = CGPointMake(_pageCtr.currentPage * platformViewW, 0.0);
 }
 
@@ -203,6 +225,46 @@ static const CGFloat pageControlH = 35;
     double pageDouble = offsetX / scrollView.frame.size.width;
     int pageInt = (int)(pageDouble + 0.5);
     _pageCtr.currentPage = pageInt;
+}
+
+- (void)needRedrawRect:(CGRect)rect
+{
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    
+    CGFloat _screenW = [UIScreen mainScreen].bounds.size.width < [UIScreen mainScreen].bounds.size.height ? [UIScreen mainScreen].bounds.size.width : [UIScreen mainScreen].bounds.size.height;
+    
+    CGFloat _screenH = [UIScreen mainScreen].bounds.size.width > [UIScreen mainScreen].bounds.size.height ? [UIScreen mainScreen].bounds.size.width : [UIScreen mainScreen].bounds.size.height;
+    
+    [path moveToPoint:CGPointMake(0, CGRectGetMaxY(_pageCtr.frame)+1)];
+    
+    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))
+    {
+        [path addLineToPoint:CGPointMake(_screenH, CGRectGetMaxY(_pageCtr.frame)+1)];
+    }
+    else
+    {
+        [path addLineToPoint:CGPointMake(_screenW, CGRectGetMaxY(_pageCtr.frame)+1)];
+    }
+    
+    // 设置线宽
+    path.lineWidth = 1.0;
+    
+    // 设置画笔颜色
+    UIColor *strokeColor = [UIColor colorWithRed:242.0/255 green:242.0/255 blue:242.0/255 alpha:0.8];
+    [strokeColor set];
+    
+    // 根据我们设置的各个点连线
+    [path stroke];
+}
+
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+    
+    if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple && ![MOBFDevice isPad])
+    {
+        [self needRedrawRect:rect];
+    }
 }
 
 @end

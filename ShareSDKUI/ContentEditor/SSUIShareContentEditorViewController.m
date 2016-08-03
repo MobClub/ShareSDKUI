@@ -31,11 +31,15 @@
     {
         if ([MOBFDevice isPad])
         {
-            self.shareContentEditor = [[SSUIiPadShareContentEditor alloc] initWithContent:content image:image platformTypes:platformTypes];
+            self.shareContentEditor = [[SSUIiPadShareContentEditor alloc] initWithContent:content
+                                                                                    image:image
+                                                                            platformTypes:platformTypes];
         }
         else
         {
-            self.shareContentEditor = [[SSUIiPhoneShareContentEditor alloc] initWithContent:content image:image platformTypes:platformTypes];
+            self.shareContentEditor = [[SSUIiPhoneShareContentEditor alloc] initWithContent:content
+                                                                                      image:image
+                                                                              platformTypes:platformTypes];
         }
     }
     
@@ -52,7 +56,7 @@
     [self.shareContentEditor dismiss];
 }
 
--(void)dealloc
+- (void)dealloc
 {
     
 }

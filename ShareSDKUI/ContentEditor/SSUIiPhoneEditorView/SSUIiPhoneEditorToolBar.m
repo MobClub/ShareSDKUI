@@ -32,7 +32,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        NSString* bundlePath = [[NSBundle mainBundle] pathForResource:@"ShareSDKUI"
+        NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"ShareSDKUI"
                                                                ofType:@"bundle"];
         
         UIImageView *lineView = [[UIImageView alloc] initWithImage:[MOBFImage imageName:@"ContentEditorImg/line@2x.gif"
@@ -44,14 +44,26 @@
         lineView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self addSubview:lineView];
         
-        _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, SSUI_BOTTOM(lineView), LABEL_WIDTH, SSUI_HEIGHT(self) - SSUI_HEIGHT(lineView))];
+        _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0,
+                                                               SSUI_BOTTOM(lineView),
+                                                               LABEL_WIDTH,
+                                                               SSUI_HEIGHT(self) - SSUI_HEIGHT(lineView))];
+        
         _textLabel.textColor = [MOBFColor colorWithRGB:0x9a9a9a];
         _textLabel.font = [UIFont systemFontOfSize:12];
-        _textLabel.text = NSLocalizedStringWithDefaultValue(@"ShareTo", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"ShareTo", nil);
+        _textLabel.text = NSLocalizedStringWithDefaultValue(@"ShareTo",
+                                                            @"ShareSDKUI_Localizable",
+                                                            [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]],
+                                                            @"ShareTo",
+                                                            nil);
         _textLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_textLabel];
         
-        _platTableView = [[SSUIHorizontalTableView alloc] initWithFrame:CGRectMake(LABEL_WIDTH, SSUI_BOTTOM(lineView), SSUI_WIDTH(self) - LABEL_WIDTH, SSUI_HEIGHT(self) - SSUI_HEIGHT(lineView))];
+        _platTableView = [[SSUIHorizontalTableView alloc] initWithFrame:CGRectMake(LABEL_WIDTH,
+                                                                                   SSUI_BOTTOM(lineView),
+                                                                                   SSUI_WIDTH(self) - LABEL_WIDTH,
+                                                                                   SSUI_HEIGHT(self) - SSUI_HEIGHT(lineView))];
+        
         _platTableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
         _platTableView.itemWidth = ITEM_WIDTH;
         _platTableView.dataSource = self;
@@ -130,18 +142,19 @@
     {
         //判断是否需要授权
         BOOL authorized = [ShareSDK hasAuthorized:platType];
-        if (authorized) {
-                
+        if (authorized)
+        {
             [data setObject:[NSNumber numberWithBool:selected] forKey:KEY_SELECTED];
             [_platTableView reloadData];
-                
-        }else{
-                
+        }
+        else
+        {
             [ShareSDK authorize:platType
                        settings:nil
                  onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
                     
-                if (state == SSDKResponseStateSuccess) {
+                if (state == SSDKResponseStateSuccess)
+                {
                     [data setObject:[NSNumber numberWithBool:selected] forKey:KEY_SELECTED];
                     [theToolbar.platTableView reloadData];
                 }

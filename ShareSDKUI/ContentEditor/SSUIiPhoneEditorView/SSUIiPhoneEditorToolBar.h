@@ -28,7 +28,7 @@
  */
 @property (nonatomic,readonly) NSArray *selectedPlatforms;
 
-@property (nonatomic, strong)  SSUIHorizontalTableView* platTableView;
+@property (nonatomic, strong)  SSUIHorizontalTableView *platTableView;
 
 /**
  *	@brief	更新工具栏

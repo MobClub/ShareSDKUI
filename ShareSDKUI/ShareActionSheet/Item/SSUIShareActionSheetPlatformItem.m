@@ -8,6 +8,7 @@
 
 #import "SSUIShareActionSheetPlatformItem.h"
 #import <MOBFoundation/MOBFImage.h>
+#import "SSUIShareActionSheetStyle_Private.h"
 
 static NSBundle *uiBundle = nil;
 
@@ -31,6 +32,11 @@ static NSBundle *uiBundle = nil;
         }
         
         _icon = [MOBFImage imageName:[NSString stringWithFormat:@"Icon/sns_icon_%zi.png",_platformType] bundle:uiBundle];
+        
+        if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple)
+        {
+            _icon = [MOBFImage imageName:[NSString stringWithFormat:@"Icon_simple/sns_icon_%zi.png",_platformType] bundle:uiBundle];
+        }
         
         NSString *temName = [NSString stringWithFormat:@"ShareType_%zi",_platformType];
         _label = NSLocalizedStringWithDefaultValue(temName, @"ShareSDKUI_Localizable", uiBundle, temName, nil);

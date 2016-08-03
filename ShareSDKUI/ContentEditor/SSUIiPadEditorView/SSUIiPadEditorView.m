@@ -27,8 +27,8 @@
     UIButton *_sendButton;
     UILabel *_titleView;
     SSUIiPhoneEditorView *_contentView;
-    NSArray* _platformTypes;
-    SSDKImage* _image;
+    NSArray *_platformTypes;
+    SSDKImage *_image;
     BOOL _needRelayout;
 }
 @end
@@ -48,7 +48,9 @@
         if ([SSUIEditorViewStyle sharedInstance].cancelButtonLabel)
         {
             [_cancelButton setTitle:[SSUIEditorViewStyle sharedInstance].cancelButtonLabel forState:UIControlStateNormal];
-        }else{
+        }
+        else
+        {
             [_cancelButton setTitle:NSLocalizedStringWithDefaultValue(@"Cancel", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Cancel", nil) forState:UIControlStateNormal];
         }
         
@@ -67,10 +69,17 @@
         if ([SSUIEditorViewStyle sharedInstance].shareButtonLabel)
         {
             [_sendButton setTitle:[SSUIEditorViewStyle sharedInstance].shareButtonLabel forState:UIControlStateNormal];
-        }else{
-            
-            [_sendButton setTitle:NSLocalizedStringWithDefaultValue(@"Share", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Share", nil) forState:UIControlStateNormal];
         }
+        else
+        {
+            
+            [_sendButton setTitle:NSLocalizedStringWithDefaultValue(@"Share",
+                                                                    @"ShareSDKUI_Localizable",
+                                                                    [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]],
+                                                                    @"Share", nil)
+                         forState:UIControlStateNormal];
+        }
+        
         [_sendButton setTitleColor:[MOBFColor colorWithRGB:0x007aff] forState:UIControlStateNormal];
         _sendButton.titleLabel.font = [UIFont systemFontOfSize:15];
         [_sendButton addTarget:self action:@selector(sendButtonClickHandler:) forControlEvents:UIControlEventTouchUpInside];
@@ -109,7 +118,7 @@
         [self addSubview:_sendButton];
         [self addSubview:_titleView];
 
-        NSString* bundlePath = [[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"];
+        NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"];
         UIImageView *lineView = [[UIImageView alloc] initWithImage:[MOBFImage imageName:@"ContentEditorImg/line@2x.gif" bundle:[NSBundle bundleWithPath:bundlePath]]];
         lineView.backgroundColor =  [UIColor greenColor];
         lineView.frame = CGRectMake(0.0,
@@ -133,51 +142,69 @@
     return self;
 }
 
--(void)setUIStyle
+- (void)setUIStyle
 {
     
     if ([SSUIEditorViewStyle sharedInstance].title)
     {
         _titleView.text = [SSUIEditorViewStyle sharedInstance].title;
     }
+    
     if ([SSUIEditorViewStyle sharedInstance].titleColor)
     {
         _titleView.textColor = [SSUIEditorViewStyle sharedInstance].titleColor;
     }
+    
     if ([SSUIEditorViewStyle sharedInstance].cancelButtonImage)
     {
-         [_cancelButton setBackgroundImage:[SSUIEditorViewStyle sharedInstance].cancelButtonImage forState:UIControlStateNormal];
+         [_cancelButton setBackgroundImage:[SSUIEditorViewStyle sharedInstance].cancelButtonImage
+                                  forState:UIControlStateNormal];
     }
+    
     if ([SSUIEditorViewStyle sharedInstance].cancelButtonLabelColor)
     {
-        [_cancelButton setTitleColor:[SSUIEditorViewStyle sharedInstance].cancelButtonLabelColor forState:UIControlStateNormal];
+        [_cancelButton setTitleColor:[SSUIEditorViewStyle sharedInstance].cancelButtonLabelColor
+                            forState:UIControlStateNormal];
     }
+    
     if ([SSUIEditorViewStyle sharedInstance].shareButtonImage)
     {
-        [_sendButton setBackgroundImage:[SSUIEditorViewStyle sharedInstance].shareButtonImage forState:UIControlStateNormal];
+        [_sendButton setBackgroundImage:[SSUIEditorViewStyle sharedInstance].shareButtonImage
+                               forState:UIControlStateNormal];
     }
+    
     if ([SSUIEditorViewStyle sharedInstance].shareButtonLabelColor)
     {
-        [_sendButton setTitleColor:[SSUIEditorViewStyle sharedInstance].shareButtonLabelColor forState:UIControlStateNormal];
+        [_sendButton setTitleColor:[SSUIEditorViewStyle sharedInstance].shareButtonLabelColor
+                          forState:UIControlStateNormal];
     }
-    if ([SSUIEditorViewStyle sharedInstance].iPadNavigationbarBackgroundColor) {
+    
+    if ([SSUIEditorViewStyle sharedInstance].iPadNavigationbarBackgroundColor)
+    {
         [self setBackgroundColor:[SSUIEditorViewStyle sharedInstance].iPadNavigationbarBackgroundColor];
     }
     
 }
 
--(void)updateWithType:(NSArray *)platType content:(NSString *)content image:(SSDKImage *)image interfaceOrientation:(UIInterfaceOrientation)interfaceOrientation viewController:(UIViewController *)viewController
+- (void)updateWithType:(NSArray *)platType
+               content:(NSString *)content
+                 image:(SSDKImage *)image
+  interfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+        viewController:(UIViewController *)viewController
 {
     
     _platformTypes = platType;
     _image = image;
-    [_contentView updateWithContent:content image:image platformTypes:platType interfaceOrientation:interfaceOrientation];
+    [_contentView updateWithContent:content
+                              image:image
+                      platformTypes:platType
+               interfaceOrientation:interfaceOrientation];
     
 }
 
 
 
--(void)updateLayoutWithSplitViewSize:(CGSize)size
+- (void)updateLayoutWithSplitViewSize:(CGSize)size
 {
     CGFloat width = size.width;
     if (width < ORIGINAL_FRAME_W)
@@ -187,7 +214,7 @@
                                 width - 2*GAP ,
                                 ORIGINAL_FRAME_H);
         
-        _contentView.frame = CGRectMake(GAP,
+        _contentView.frame = CGRectMake(0,
                                         NAV_BAR_HEIGHT,
                                         width - 2*GAP,
                                         SSUI_HEIGHT(self) - NAV_BAR_HEIGHT);
@@ -223,31 +250,41 @@
 {
     if (self.submitHandler)
     {
-        NSMutableArray* selectedPlatform =[[_contentView.toolbar selectedPlatforms] mutableCopy];
+        [_contentView.contentView resignFirstResponder];
         
-        NSString* contentText = _contentView.contentView.text;
-        if (![contentText isEqualToString:@""]) {
+        NSMutableArray *selectedPlatform =[[_contentView.toolbar selectedPlatforms] mutableCopy];
+        
+        NSString *contentText = _contentView.contentView.text;
+        if (![contentText isEqualToString:@""])
+        {
             BOOL needAuthorize = YES;
-            NSArray* unNeedAuthorizedPlatforms = @[@(SSDKPlatformTypeWechat),
-                                                   @(SSDKPlatformTypeQQ),
-                                                   @(SSDKPlatformSubTypeQZone),
-                                                   @(SSDKPlatformSubTypeQQFriend),
-                                                   @(SSDKPlatformSubTypeWechatSession),
-                                                   @(SSDKPlatformSubTypeWechatTimeline),
-                                                   @(SSDKPlatformSubTypeWechatFav),
-                                                   @(SSDKPlatformTypeSMS),
-                                                   @(SSDKPlatformTypeMail),
-                                                   @(SSDKPlatformTypeCopy),
-                                                   @(SSDKPlatformTypeGooglePlus),
-                                                   @(SSDKPlatformTypeInstagram),
-                                                   @(SSDKPlatformTypeWhatsApp),
-                                                   @(SSDKPlatformTypeLine),
-                                                   @(SSDKPlatformTypeKakao),
-                                                   @(SSDKPlatformSubTypeKakaoTalk),
-                                                   @(SSDKPlatformTypeAliPaySocial),
-                                                   @(SSDKPlatformTypePrint),
-                                                   @(SSDKPlatformTypeFacebookMessenger)
-                                                   ];
+            NSMutableArray *unNeedAuthorizedPlatforms = [NSMutableArray arrayWithArray:@[@(SSDKPlatformTypeWechat),
+                                                                                         @(SSDKPlatformTypeQQ),
+                                                                                         @(SSDKPlatformSubTypeQZone),
+                                                                                         @(SSDKPlatformSubTypeQQFriend),
+                                                                                         @(SSDKPlatformSubTypeWechatSession),
+                                                                                         @(SSDKPlatformSubTypeWechatTimeline),
+                                                                                         @(SSDKPlatformSubTypeWechatFav),
+                                                                                         @(SSDKPlatformTypeSMS),
+                                                                                         @(SSDKPlatformTypeMail),
+                                                                                         @(SSDKPlatformTypeCopy),
+                                                                                         @(SSDKPlatformTypeGooglePlus),
+                                                                                         @(SSDKPlatformTypeInstagram),
+                                                                                         @(SSDKPlatformTypeWhatsApp),
+                                                                                         @(SSDKPlatformTypeLine),
+                                                                                         @(SSDKPlatformTypeKakao),
+                                                                                         @(SSDKPlatformSubTypeKakaoTalk),
+                                                                                         @(SSDKPlatformTypeAliPaySocial),
+                                                                                         @(SSDKPlatformTypePrint),
+                                                                                         @(SSDKPlatformTypeFacebookMessenger)
+                                                                                         ]];
+            
+            if ([SSUIEditorViewStyle sharedInstance].unNeedAuthPlatforms.count > 0)
+            {
+                //如果检测到包含不需要授权的平台
+                [unNeedAuthorizedPlatforms addObjectsFromArray:[SSUIEditorViewStyle sharedInstance].unNeedAuthPlatforms];
+                [[SSUIEditorViewStyle sharedInstance].unNeedAuthPlatforms removeAllObjects];
+            }
 
             if ([unNeedAuthorizedPlatforms containsObject:[_platformTypes objectAtIndex:0]])
             {
@@ -281,7 +318,7 @@
                      {
                          
                          UIAlertView* alert = [[UIAlertView alloc]initWithTitle: NSLocalizedStringWithDefaultValue(@"Alert", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Alert", nil)
-                                                                        message:[NSString stringWithFormat:@"%@ - error code:%ld , error message:%@",NSLocalizedStringWithDefaultValue(@"AuthorizeFailed", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"AuthorizeFailed", nil),(long)[error code],[error userInfo]]
+                                                                        message:[NSString stringWithFormat:@"%@, error message:%@",NSLocalizedStringWithDefaultValue(@"AuthorizeFailed", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"AuthorizeFailed", nil), [error userInfo]]
                                                                        delegate:self
                                                               cancelButtonTitle:NSLocalizedStringWithDefaultValue(@"OK", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"OK", nil)
                                                               otherButtonTitles:nil];
@@ -289,9 +326,10 @@
                      }
                  }];
             }
-        }else
+        }
+        else
         {
-            UIAlertView* alert =[[UIAlertView alloc]initWithTitle:
+            UIAlertView *alert =[[UIAlertView alloc]initWithTitle:
                                  NSLocalizedStringWithDefaultValue(@"Alert", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Alert", nil)
                                                           message:NSLocalizedStringWithDefaultValue(@"InputTheShareContent", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"InputTheShareContent", nil)
                                                          delegate:self

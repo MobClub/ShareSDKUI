@@ -43,6 +43,7 @@
     [_viewCtr showInView:view];
     
     _window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    _window.windowLevel = [UIApplication sharedApplication].keyWindow.windowLevel + 1;
     _window.userInteractionEnabled = YES;
     _window.rootViewController = _viewCtr;
     [_window makeKeyAndVisible];
@@ -72,6 +73,11 @@
         _window.hidden = YES;
         _window = nil;
     }
+}
+
+-(void)dealloc
+{
+    NSLog(@"%@被销毁了", self);
 }
 
 @end

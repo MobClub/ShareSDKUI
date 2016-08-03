@@ -40,7 +40,7 @@
 
 @implementation SSUIiPhoneEditorViewController
 
--(id)init
+- (id)init
 {
     if (self = [super init])
     {
@@ -129,7 +129,10 @@
     }
 }
 
--(void)updateWithContent:(NSString *)content image:(SSDKImage *)image platformTypes:(NSArray *)platformTypes{
+- (void)updateWithContent:(NSString *)content
+                    image:(SSDKImage *)image
+            platformTypes:(NSArray *)platformTypes
+{
     _content = content;
     _platformTypes = platformTypes;
     _image = image;
@@ -146,12 +149,16 @@
 
 }
 
--(void)initView
+- (void)initView
 {
-    [_contentView updateWithContent:_content image:_image platformTypes:_platformTypes interfaceOrientation:self.interfaceOrientation];
+    [_contentView updateWithContent:_content
+                              image:_image
+                      platformTypes:_platformTypes
+               interfaceOrientation:self.interfaceOrientation];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                         duration:(NSTimeInterval)duration
 {
     
     CGFloat viewH ;
@@ -180,54 +187,69 @@
 
 
 #pragma mark - Private
+
 /**
  *	@brief	取消按钮点击
  *
  *	@param 	sender 	事件对象
  */
-- (void)cancelButtonClickHandler:(id)sender {
+- (void)cancelButtonClickHandler:(id)sender
+{
     
     [_contentView.contentView resignFirstResponder];
     
-    if (self.cancelHandler) {
+    if (self.cancelHandler)
+    {
          self.cancelHandler();
     }
 }
+
 /**
  *	@brief	发送按钮点击
  *
  *	@param 	sender 	事件对象
  */
-- (void)sendButtonClickHandler:(id)sender{
+- (void)sendButtonClickHandler:(id)sender
+{
     
     if (self.submitHandler)
     {
-        NSString* contentText = _contentView.contentView.text;
-        NSMutableArray* selectedPlatform =[[_contentView.toolbar selectedPlatforms] mutableCopy];
+        [_contentView.contentView resignFirstResponder];
+        
+        NSString *contentText = _contentView.contentView.text;
+        NSMutableArray *selectedPlatform =[[_contentView.toolbar selectedPlatforms] mutableCopy];
+        
         if (![contentText isEqualToString:@""])
         {
             BOOL needAuthorize = YES;
-            NSArray* unNeedAuthorizedPlatforms = @[@(SSDKPlatformTypeWechat),
-                                                   @(SSDKPlatformTypeQQ),
-                                                   @(SSDKPlatformSubTypeQZone),
-                                                   @(SSDKPlatformSubTypeQQFriend),
-                                                   @(SSDKPlatformSubTypeWechatSession),
-                                                   @(SSDKPlatformSubTypeWechatTimeline),
-                                                   @(SSDKPlatformSubTypeWechatFav),
-                                                   @(SSDKPlatformTypeSMS),
-                                                   @(SSDKPlatformTypeMail),
-                                                   @(SSDKPlatformTypeCopy),
-                                                   @(SSDKPlatformTypeGooglePlus),
-                                                   @(SSDKPlatformTypeInstagram),
-                                                   @(SSDKPlatformTypeWhatsApp),
-                                                   @(SSDKPlatformTypeLine),
-                                                   @(SSDKPlatformTypeKakao),
-                                                   @(SSDKPlatformSubTypeKakaoTalk),
-                                                   @(SSDKPlatformTypePinterest),
-                                                   @(SSDKPlatformTypeAliPaySocial),
-                                                   @(SSDKPlatformTypePrint),
-                                                   @(SSDKPlatformTypeFacebookMessenger)
-                                                   ];
+            NSMutableArray *unNeedAuthorizedPlatforms = [NSMutableArray arrayWithArray:@[@(SSDKPlatformTypeWechat),
+                                                                                         @(SSDKPlatformTypeQQ),
+                                                                                         @(SSDKPlatformSubTypeQZone),
+                                                                                         @(SSDKPlatformSubTypeQQFriend),
+                                                                                         @(SSDKPlatformSubTypeWechatSession),
+                                                                                         @(SSDKPlatformSubTypeWechatTimeline),
+                                                                                         @(SSDKPlatformSubTypeWechatFav),
+                                                                                         @(SSDKPlatformTypeSMS),
+                                                                                         @(SSDKPlatformTypeMail),
+                                                                                         @(SSDKPlatformTypeCopy),
+                                                                                         @(SSDKPlatformTypeGooglePlus),
+                                                                                         @(SSDKPlatformTypeInstagram),
+                                                                                         @(SSDKPlatformTypeWhatsApp),
+                                                                                         @(SSDKPlatformTypeLine),
+                                                                                         @(SSDKPlatformTypeKakao),
+                                                                                         @(SSDKPlatformSubTypeKakaoTalk),
+                                                                                         @(SSDKPlatformTypePinterest),
+                                                                                         @(SSDKPlatformTypeAliPaySocial),
+                                                                                         @(SSDKPlatformTypePrint),
+                                                                                         @(SSDKPlatformTypeFacebookMessenger)
+                                                                                         ]];
+            
+            if ([SSUIEditorViewStyle sharedInstance].unNeedAuthPlatforms.count > 0)
+            {
+                //如果检测到包含不需要授权的平台
+                [unNeedAuthorizedPlatforms addObjectsFromArray:[SSUIEditorViewStyle sharedInstance].unNeedAuthPlatforms];
+                [[SSUIEditorViewStyle sharedInstance].unNeedAuthPlatforms removeAllObjects];
+            }
             
             if ([unNeedAuthorizedPlatforms containsObject:[_platformTypes objectAtIndex:0]])
             {
@@ -259,8 +281,8 @@
                      if (state == SSDKResponseStateFail)
                      {
                          
-                         UIAlertView* alert = [[UIAlertView alloc]initWithTitle: NSLocalizedStringWithDefaultValue(@"Alert", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Alert", nil)
-                                                                        message:[NSString stringWithFormat:@"%@ - error code:%ld , error message:%@",NSLocalizedStringWithDefaultValue(@"AuthorizeFailed", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"AuthorizeFailed", nil),(long)[error code],[error userInfo]]
+                         UIAlertView *alert = [[UIAlertView alloc]initWithTitle: NSLocalizedStringWithDefaultValue(@"Alert", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Alert", nil)
+                                                                        message:[NSString stringWithFormat:@"%@, error message:%@",NSLocalizedStringWithDefaultValue(@"AuthorizeFailed", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"AuthorizeFailed", nil), [error userInfo]]
                                                                        delegate:self
                                                               cancelButtonTitle:NSLocalizedStringWithDefaultValue(@"OK", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"OK", nil)
                                                               otherButtonTitles:nil];
@@ -272,7 +294,7 @@
         }
         else
         {
-            UIAlertView* alert =[[UIAlertView alloc]initWithTitle:
+            UIAlertView *alert =[[UIAlertView alloc]initWithTitle:
                                  NSLocalizedStringWithDefaultValue(@"Alert", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Alert", nil)
                                                           message:NSLocalizedStringWithDefaultValue(@"InputTheShareContent", @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"InputTheShareContent", nil)
                                                          delegate:self
@@ -283,44 +305,65 @@
     }
 }
 
--(void)setNavigationItemStyle
+- (void)setNavigationItemStyle
 {
     
-    if ([SSUIEditorViewStyle sharedInstance].cancelButtonLabel) {
+    if ([SSUIEditorViewStyle sharedInstance].cancelButtonLabel)
+    {
         self.navigationItem.leftBarButtonItem.title = [SSUIEditorViewStyle sharedInstance].cancelButtonLabel;
     }
-    if ([SSUIEditorViewStyle sharedInstance].cancelButtonImage) {
-        [self.navigationItem.leftBarButtonItem setBackgroundImage:[SSUIEditorViewStyle sharedInstance].cancelButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    if ([SSUIEditorViewStyle sharedInstance].cancelButtonImage)
+    {
+        [self.navigationItem.leftBarButtonItem setBackgroundImage:[SSUIEditorViewStyle sharedInstance].cancelButtonImage
+                                                         forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     }
-    if ([SSUIEditorViewStyle sharedInstance].cancelButtonLabelColor) {
+    
+    if ([SSUIEditorViewStyle sharedInstance].cancelButtonLabelColor)
+    {
         self.navigationItem.leftBarButtonItem.tintColor = [SSUIEditorViewStyle sharedInstance].cancelButtonLabelColor;
     }
-    if ([SSUIEditorViewStyle sharedInstance].shareButtonImage) {
-       [self.navigationItem.rightBarButtonItem setBackgroundImage:[SSUIEditorViewStyle sharedInstance].shareButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
+    if ([SSUIEditorViewStyle sharedInstance].shareButtonImage)
+    {
+       [self.navigationItem.rightBarButtonItem setBackgroundImage:[SSUIEditorViewStyle sharedInstance].shareButtonImage
+                                                         forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     }
-    if ([SSUIEditorViewStyle sharedInstance].shareButtonLabel) {
+    
+    if ([SSUIEditorViewStyle sharedInstance].shareButtonLabel)
+    {
         self.navigationItem.rightBarButtonItem.title = [SSUIEditorViewStyle sharedInstance].shareButtonLabel;
     }
-    if ([SSUIEditorViewStyle sharedInstance].shareButtonLabelColor) {
+    
+    if ([SSUIEditorViewStyle sharedInstance].shareButtonLabelColor)
+    {
         self.navigationItem.rightBarButtonItem.tintColor = [SSUIEditorViewStyle sharedInstance].shareButtonLabelColor;
         
     }
 }
 
--(void)setNavigationBarStyle{
-    if ([SSUIEditorViewStyle sharedInstance].title) {
+- (void)setNavigationBarStyle
+{
+    if ([SSUIEditorViewStyle sharedInstance].title)
+    {
         self.title = [SSUIEditorViewStyle sharedInstance].title;
     }
-    if ([SSUIEditorViewStyle sharedInstance].titleColor) {
+    
+    if ([SSUIEditorViewStyle sharedInstance].titleColor)
+    {
         [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20],
                                                                           NSForegroundColorAttributeName:[SSUIEditorViewStyle sharedInstance].titleColor}];
     }
-    if ([SSUIEditorViewStyle sharedInstance].iPhoneNavigationbarBackgroundImage) {
+    
+    if ([SSUIEditorViewStyle sharedInstance].iPhoneNavigationbarBackgroundImage)
+    {
         [self.navigationController.navigationBar setBackgroundImage:[SSUIEditorViewStyle sharedInstance].iPhoneNavigationbarBackgroundImage forBarMetrics:UIBarMetricsDefault];
     }
+    
     if ([MOBFDevice versionCompare:@"7.0"] >= 0)
     {
-        if ([SSUIEditorViewStyle sharedInstance].iPhoneNavigationbarBackgroundColor) {
+        if ([SSUIEditorViewStyle sharedInstance].iPhoneNavigationbarBackgroundColor)
+        {
         self.navigationController.navigationBar.barTintColor = [SSUIEditorViewStyle sharedInstance].iPhoneNavigationbarBackgroundColor;
         }
     }

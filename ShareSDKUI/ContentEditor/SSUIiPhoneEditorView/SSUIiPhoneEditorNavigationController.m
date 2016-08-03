@@ -14,7 +14,7 @@
 
 -(id)initShareViewController
 {
-    SSUIiPhoneEditorViewController* iPhoneEditViewController = [[SSUIiPhoneEditorViewController alloc]init];
+    SSUIiPhoneEditorViewController *iPhoneEditViewController = [[SSUIiPhoneEditorViewController alloc]init];
     self = [self initWithRootViewController:iPhoneEditViewController];
     if (self)
     {
@@ -85,9 +85,14 @@
 }
 
 
--(void)updateWithContent:(NSString *)content image:(SSDKImage *)image platformTypes:(NSArray *)platformTypes{
+- (void)updateWithContent:(NSString *)content
+                    image:(SSDKImage *)image
+            platformTypes:(NSArray *)platformTypes
+{
     
-    [_iPhoneEditViewController updateWithContent:content image:image platformTypes:platformTypes];
+    [_iPhoneEditViewController updateWithContent:content
+                                           image:image
+                                   platformTypes:platformTypes];
     _iPhoneEditViewController.submitHandler = self.submitHandler;
     _iPhoneEditViewController.cancelHandler = self.cancelHandler;
     

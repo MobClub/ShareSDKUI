@@ -79,6 +79,11 @@
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
 
 /**
+ *  用于保存特定情况不需要授权的平台列表(如Sina客户端分享,Facebook Webpage分享)
+ */
+@property (nonatomic, strong) NSMutableArray *unNeedAuthPlatforms;
+
+/**
  *  获取授权视图风格共享实例
  *
  *  @return 风格实例

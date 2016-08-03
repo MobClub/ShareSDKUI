@@ -250,11 +250,6 @@
     [self.shareActionSheet dismiss];
 }
 
--(void)dealloc
-{
-    
-}
-
 - (void)onItemClick:(SSUIShareActionSheetItemClickHandler)itemClickHandler
 {
     __weak SSUIShareActionSheetController *theController = self;

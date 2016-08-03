@@ -16,7 +16,6 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <RennSDK/RennSDK.h>
-#import <GooglePlus/GooglePlus.h>
 
 #import <KakaoOpenSDK/KakaoOpenSDK.h>
 
@@ -46,38 +45,38 @@
                                  @(SSDKPlatformTypeQQ),
                                  @(SSDKPlatformTypeFacebook),
                                  @(SSDKPlatformTypeTencentWeibo),
-                                 @(SSDKPlatformTypeUnknown),
-                                 @(SSDKPlatformSubTypeQZone),
-                                 @(SSDKPlatformSubTypeWechatSession),
-                                 @(SSDKPlatformSubTypeWechatTimeline),
-                                 @(SSDKPlatformSubTypeQQFriend),
-                                 @(SSDKPlatformSubTypeWechatFav),
-                                 @(SSDKPlatformTypeAny),
+//                                 @(SSDKPlatformTypeUnknown),
+//                                 @(SSDKPlatformSubTypeQZone),
+//                                 @(SSDKPlatformSubTypeWechatSession),
+//                                 @(SSDKPlatformSubTypeWechatTimeline),
+//                                 @(SSDKPlatformSubTypeQQFriend),
+//                                 @(SSDKPlatformSubTypeWechatFav),
+//                                 @(SSDKPlatformTypeAny),
                                  @(SSDKPlatformTypeRenren),
                                  @(SSDKPlatformTypeDouBan),
                                  @(SSDKPlatformTypeKaixin),
                                  @(SSDKPlatformTypeGooglePlus),
-                                 @(SSDKPlatformTypePocket),
-                                 @(SSDKPlatformTypeLinkedIn),
-                                 @(SSDKPlatformTypeTumblr),
-                                 @(SSDKPlatformTypeFlickr),
-                                 @(SSDKPlatformTypeWhatsApp),
-                                 @(SSDKPlatformTypeYouDaoNote),
-                                 @(SSDKPlatformTypeLine),
-                                 @(SSDKPlatformTypeEvernote),
-                                 @(SSDKPlatformTypeYinXiang),
-                                 @(SSDKPlatformTypeAliPaySocial),
-                                 @(SSDKPlatformTypePinterest),
-                                 @(SSDKPlatformTypeKakao),
-                                 @(SSDKPlatformSubTypeKakaoTalk),
-                                 @(SSDKPlatformSubTypeKakaoStory),
-                                 @(SSDKPlatformTypeDropbox),
+//                                 @(SSDKPlatformTypePocket),
+//                                 @(SSDKPlatformTypeLinkedIn),
+//                                 @(SSDKPlatformTypeTumblr),
+//                                 @(SSDKPlatformTypeFlickr),
+//                                 @(SSDKPlatformTypeWhatsApp),
+//                                 @(SSDKPlatformTypeYouDaoNote),
+//                                 @(SSDKPlatformTypeLine),
+//                                 @(SSDKPlatformTypeEvernote),
+//                                 @(SSDKPlatformTypeYinXiang),
+//                                 @(SSDKPlatformTypeAliPaySocial),
+//                                 @(SSDKPlatformTypePinterest),
+//                                 @(SSDKPlatformTypeKakao),
+//                                 @(SSDKPlatformSubTypeKakaoTalk),
+//                                 @(SSDKPlatformSubTypeKakaoStory),
+//                                 @(SSDKPlatformTypeDropbox),
 //                                 @(SSDKPlatformTypeVKontakte),
-                                 @(SSDKPlatformTypeMingDao),
-                                 @(SSDKPlatformTypePrint),
-                                 @(SSDKPlatformTypeYiXin),
-                                 @(SSDKPlatformTypeInstapaper),
-                                 @(SSDKPlatformTypeFacebookMessenger)
+//                                 @(SSDKPlatformTypeMingDao),
+//                                 @(SSDKPlatformTypePrint),
+//                                 @(SSDKPlatformTypeYiXin),
+//                                 @(SSDKPlatformTypeInstapaper),
+//                                 @(SSDKPlatformTypeFacebookMessenger)
                                  ];
     
     //ShareSDK和平台初始化
@@ -97,19 +96,15 @@
                              [ShareSDKConnector connectWeibo:[WeiboSDK class]];
                              
                              break;
-                         case SSDKPlatformTypeQQ:
-                             
-                             [ShareSDKConnector connectQQ:[QQApiInterface class]
-                                        tencentOAuthClass:[TencentOAuth class]];
-                             
-                             break;
+//                         case SSDKPlatformTypeQQ:
+//                             
+//                             [ShareSDKConnector connectQQ:[QQApiInterface class]
+//                                        tencentOAuthClass:[TencentOAuth class]];
+//                             
+//                             break;
                          case SSDKPlatformTypeRenren:
                              [ShareSDKConnector connectRenren:[RennClient class]];
                              break;
-//                         case SSDKPlatformTypeGooglePlus:
-//                             [ShareSDKConnector connectGooglePlus:[GPPSignIn class]
-//                                                       shareClass:[GPPShare class]];
-//                             break;
                          case SSDKPlatformTypeKakao:
                          case SSDKPlatformSubTypeKakaoStory:
                          case SSDKPlatformSubTypeKakaoTalk:

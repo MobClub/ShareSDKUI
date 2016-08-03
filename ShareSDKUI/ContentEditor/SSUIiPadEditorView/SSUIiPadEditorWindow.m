@@ -34,7 +34,7 @@
     return self;
 }
 
--(void)setSubmitHandler:(SSUIShareContentEditorViewSubmitHandler)submitHandler
+- (void)setSubmitHandler:(SSUIShareContentEditorViewSubmitHandler)submitHandler
 {
     ((SSUIiPadEditorViewController *)self.rootViewController).submitHandler = submitHandler;
 }
@@ -57,12 +57,16 @@
 }
 
 
--(void)showWithContent:(NSString *)content image:(SSDKImage *)image platformTypes:(NSArray *)platformTypes
+- (void)showWithContent:(NSString *)content
+                  image:(SSDKImage *)image
+          platformTypes:(NSArray *)platformTypes
 {
     [self makeKeyAndVisible];
     [self becomeKeyWindow];
     
-    [(SSUIiPadEditorViewController*)self.rootViewController updateWithContent:content image:image platformTypes:platformTypes];
+    [(SSUIiPadEditorViewController*)self.rootViewController updateWithContent:content
+                                                                        image:image
+                                                                platformTypes:platformTypes];
 }
 
 - (void)dismiss

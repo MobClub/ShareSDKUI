@@ -21,7 +21,8 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:[UIScreen mainScreen].bounds];
-    if (self) {
+    if (self)
+    {
         self.backgroundColor = [MOBFColor colorWithARGB:0x4c000000];
         self.windowLevel = [UIApplication sharedApplication].keyWindow.windowLevel + 1;
         SSUIiPhoneEditorNavigationController* naviVc = [[SSUIiPhoneEditorNavigationController alloc] initShareViewController];
@@ -52,12 +53,17 @@
     return ((SSUIiPhoneEditorNavigationController *)self.rootViewController).cancelHandler;
 }
 
--(void)showWithContent:(NSString *)content image:(SSDKImage *)image platformTypes:(NSArray *)platformTypes{
+- (void)showWithContent:(NSString *)content
+                  image:(SSDKImage *)image
+          platformTypes:(NSArray *)platformTypes
+{
     
     [self makeKeyAndVisible];
     [self becomeKeyWindow];
    
-    [(SSUIiPhoneEditorNavigationController*)self.rootViewController updateWithContent:content image:image platformTypes:platformTypes];
+    [(SSUIiPhoneEditorNavigationController*)self.rootViewController updateWithContent:content
+                                                                                image:image
+                                                                        platformTypes:platformTypes];
         
 }
 

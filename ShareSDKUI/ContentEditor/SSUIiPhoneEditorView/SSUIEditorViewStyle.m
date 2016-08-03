@@ -27,42 +27,52 @@ static SSUIEditorViewStyle *style = nil;
 {
     [SSUIEditorViewStyle sharedInstance].iPhoneNavigationbarBackgroundImage = image;
 }
+
 + (void)setiPhoneNavigationBarBackgroundColor:(UIColor *)color
 {
     [SSUIEditorViewStyle sharedInstance].iPhoneNavigationbarBackgroundColor = color;
 }
+
 + (void)setiPadNavigationBarBackgroundColor:(UIColor *)color
 {
     [SSUIEditorViewStyle sharedInstance].iPadNavigationbarBackgroundColor = color;
 }
+
 + (void)setContentViewBackgroundColor:(UIColor *)color
 {
     [SSUIEditorViewStyle sharedInstance].contentViewBackgroundColor = color;
 }
+
 + (void)setCancelButtonLabel:(NSString *)label
 {
     [SSUIEditorViewStyle sharedInstance].cancelButtonLabel = label;
 }
+
 + (void)setCancelButtonLabelColor:(UIColor *)color
 {
     [SSUIEditorViewStyle sharedInstance].cancelButtonLabelColor = color;
 }
+
 + (void)setCancelButtonImage:(UIImage *)image
 {
     [SSUIEditorViewStyle sharedInstance].cancelButtonImage = image;
 }
+
 + (void)setShareButtonLabel:(NSString *)label
 {
     [SSUIEditorViewStyle sharedInstance].shareButtonLabel = label;
 }
+
 + (void)setShareButtonLabelColor:(UIColor *)color
 {
     [SSUIEditorViewStyle sharedInstance].shareButtonLabelColor = color;
 }
+
 + (void)setShareButtonImage:(UIImage *)image
 {
     [SSUIEditorViewStyle sharedInstance].shareButtonImage = image;
 }
+
 + (instancetype)sharedInstance
 {
     static dispatch_once_t sharedInstancePredicate;
@@ -70,6 +80,7 @@ static SSUIEditorViewStyle *style = nil;
         if (style == nil)
         {
             style = [[SSUIEditorViewStyle alloc] init];
+            style.unNeedAuthPlatforms = [NSMutableArray array];
         }
     });
     return style;

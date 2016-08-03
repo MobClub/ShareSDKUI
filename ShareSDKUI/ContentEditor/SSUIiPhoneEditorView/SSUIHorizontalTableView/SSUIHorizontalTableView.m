@@ -38,7 +38,10 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        _contentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, frame.size.height)];
+        _contentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0,
+                                                                      0.0,
+                                                                      frame.size.width,
+                                                                      frame.size.height)];
         _contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _contentView.delegate = self;
         _contentView.showsVerticalScrollIndicator = NO;
@@ -323,7 +326,10 @@
             item.indexPath = indexPath;
             
             NSArray *measure = [_itemsMeasureArray objectAtIndex:i];
-            item.frame = CGRectMake([[measure objectAtIndex:0] floatValue], 0.0, [[measure objectAtIndex:1] floatValue], self.frame.size.height);
+            item.frame = CGRectMake([[measure objectAtIndex:0] floatValue],
+                                    0.0,
+                                    [[measure objectAtIndex:1] floatValue],
+                                    self.frame.size.height);
             
             if ([_delegate conformsToProtocol:@protocol(SSUIHorizontalTableViewDelegate)] &&
                 [_delegate respondsToSelector:@selector(tableView:willDisplayItem:indexPath:)])

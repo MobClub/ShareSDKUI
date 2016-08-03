@@ -19,7 +19,7 @@
 
 @implementation SSUIiPadShareContentEditor
 
--(void)show
+- (void)show
 {
     self.selRef = self;
     __weak SSUIiPadShareContentEditor *theEditor = self;
@@ -43,11 +43,14 @@
         }
     }];
     
-    [self.shareContentWindow showWithContent:self.content image:self.image platformTypes:self.platformTypes];
+    [self.shareContentWindow showWithContent:self.content
+                                       image:self.image
+                               platformTypes:self.platformTypes];
 }
 
 
--(void)dismiss{
+- (void)dismiss
+{
     self.selRef = nil;
     [self.shareContentWindow dismiss];
     self.shareContentWindow = nil;

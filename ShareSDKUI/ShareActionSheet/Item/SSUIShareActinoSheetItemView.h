@@ -10,15 +10,17 @@
 #import "SSUITypeDef.h"
 #import "SSUIShareActionSheetItem.h"
 
-@interface SSUIShareActinoSheetItemView : UIView
+@interface SSUIShareActinoSheetItemView : UIButton
 
 @property (nonatomic) NSInteger index;
 @property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) UIButton *platformIcon;
+@property (nonatomic, strong) UIImageView *platformIcon;
 @property (nonatomic, strong) SSUIShareActionSheetItem *item;
 @property (nonatomic, copy) SSUIShareActionSheetItemClickHandler clickHandle;
 @property (nonatomic, copy) SSUIShareActionSheetCancelHandler cancelHandle;
 
--(instancetype)initWithIndex:(NSInteger)index;
+@property (nonatomic, assign) CGFloat itemW;
+
+-(instancetype)initWithIndex:(NSInteger)index itemW:(CGFloat)itemWidth itemH:(CGFloat)itemHeight;
 
 @end

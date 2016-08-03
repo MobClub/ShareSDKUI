@@ -34,9 +34,9 @@
 - (void)rotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 
 
--(void)updateWithContent:(NSString *)content
-                   image:(SSDKImage *)image
-           platformTypes:(NSArray *)platformTypes
-    interfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
+- (void)updateWithContent:(NSString *)content
+                    image:(SSDKImage *)image
+            platformTypes:(NSArray *)platformTypes
+     interfaceOrientation:(UIInterfaceOrientation)interfaceOrientation;
 
 @end

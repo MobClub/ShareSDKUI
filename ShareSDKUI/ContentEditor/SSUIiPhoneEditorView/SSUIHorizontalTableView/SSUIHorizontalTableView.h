@@ -123,7 +123,9 @@
  *	@param 	indexPath 	Index path.
  */
 ///#end
-- (void)tableView:(SSUIHorizontalTableView *)tableView willDisplayItem:(UIView<ISSUIHorizontalTableViewItem> *)item indexPath:(NSIndexPath *)indexPath;
+- (void)tableView:(SSUIHorizontalTableView *)tableView
+  willDisplayItem:(UIView<ISSUIHorizontalTableViewItem> *)item
+        indexPath:(NSIndexPath *)indexPath;
 
 
 @end

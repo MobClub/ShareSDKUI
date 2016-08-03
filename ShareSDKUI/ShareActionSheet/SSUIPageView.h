@@ -37,6 +37,14 @@
 @property (nonatomic, strong) NSMutableArray *platformArr;
 
 /**
+ *  顶部的间距
+ */
+@property (nonatomic, assign) CGFloat topIntervalH;
+
+@property (nonatomic, assign) CGFloat platformItemW;
+@property (nonatomic, assign) CGFloat pageControlH;
+
+/**
  *  点击选项处理事件
  */
 @property (nonatomic, copy) SSUIShareActionSheetItemClickHandler clickHandle;
@@ -55,5 +63,6 @@
  */
 - (instancetype)initWithItems:(NSArray *)items;
 - (instancetype)initWithItems:(NSArray *)items totalColumn:(NSInteger)columnCount totalRow:(NSInteger)rowCount;
+- (instancetype)initWithItems:(NSArray *)items totalColumn:(NSInteger)columnCount totalRow:(NSInteger)rowCount platformItemH:(CGFloat)itemH;
 
 @end

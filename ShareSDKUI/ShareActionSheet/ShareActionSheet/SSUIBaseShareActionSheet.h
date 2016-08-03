@@ -13,7 +13,7 @@
 /**
  *  分享菜单基类
  */
-@interface SSUIBaseShareActionSheet : NSObject
+@interface SSUIBaseShareActionSheet : UIControl
 
 /**
  *  初始化分享菜单

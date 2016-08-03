@@ -16,6 +16,9 @@
 
 @property (nonatomic, copy) SSUIShareActionSheetItemClickHandler clickHandle;
 @property (nonatomic, copy) SSUIShareActionSheetCancelHandler cancelHandle;
+@property (nonatomic, assign) CGFloat spacing;
+@property (nonatomic, assign) CGFloat cancelButtonH;
+@property (nonatomic, assign) CGFloat platformItemH;
 
 /**
  *  初始化分享菜单

@@ -15,7 +15,10 @@
 @property (nonatomic, assign) NSInteger totalColums;
 @property (nonatomic, assign) NSInteger totalRow;
 @property (nonatomic, assign) NSInteger platformIndex;
+@property (nonatomic, assign) CGFloat itemW;
 
+@property (nonatomic, assign) CGFloat itemH;
+@property (nonatomic, assign) CGFloat platformItemW;
 @property (nonatomic, copy) SSUIShareActionSheetItemClickHandler clickHandle;
 @property (nonatomic, copy) SSUIShareActionSheetCancelHandler cancelHandle;
 

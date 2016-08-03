@@ -24,6 +24,21 @@
     return style;
 }
 
++ (void)setShareActionSheetStyle:(ShareActionSheetStyle)style
+{
+    [SSUIShareActionSheetStyle sharedInstance].style = style;
+    
+    //默认隐藏取消按钮
+    if ([SSUIShareActionSheetStyle sharedInstance].style == ShareActionSheetStyleSimple)
+    {
+        [self isCancelButtomHidden:YES];
+    }
+    else
+    {
+        [self isCancelButtomHidden:NO];
+    }
+}
+
 + (void)setActionSheetColor:(UIColor *)color
 {
     [SSUIShareActionSheetStyle sharedInstance].actionSheetColor = color;

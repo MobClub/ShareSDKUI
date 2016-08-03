@@ -53,14 +53,30 @@
 
 -(void)TestButton:(id)sender
 {
-    [ShareSDK authorize:SSDKPlatformTypeWechat
-               settings:nil
-         onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
-             if (error)
-             {
-                 NSLog(@"error : %@",error);
-             }
-         }];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params SSDKSetupShareParamsByText:@"ShareSDK is the most comprehensive Social SDK in the world , which share easily with 40+ platforms , from around the world.For more information,please visit http://www.mob.com website."
+                                images:@"http://f.hiphotos.bdimg.com/album/w%3D2048/sign=df8f1fe50dd79123e0e09374990c5882/cf1b9d16fdfaaf51e6d1ce528d5494eef01f7a28.jpg"
+                                   url:[NSURL URLWithString:@"http://www.mob.com"]
+                                 title:@"分享标题"
+                                  type:SSDKContentTypeWebPage];
+    
+    [params SSDKSetupFacebookParamsByText:nil
+                                    image:@"http://f.hiphotos.bdimg.com/album/w%3D2048/sign=df8f1fe50dd79123e0e09374990c5882/cf1b9d16fdfaaf51e6d1ce528d5494eef01f7a28.jpg"
+                                      url:[NSURL URLWithString:@"http://163.com"]
+                                 urlTitle:@"The Link Title"
+                                  urlName:@"The Link Name"
+                           attachementUrl:[NSURL URLWithString:@""]
+                                     type:SSDKContentTypeWebPage];
+    
+    [ShareSDK share:SSDKPlatformTypeFacebook
+         parameters:params
+     onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+        
+         NSLog(@"state:%lu",state);
+         
+         
+     }];
+    
 }
 
 #pragma mark -
@@ -74,7 +90,7 @@
                                 images:@[imgUrl]
                                    url:[NSURL URLWithString:@"http://www.mob.com"]
                                  title:@"分享标题"
-                                  type:SSDKContentTypeAuto];
+                                  type:SSDKContentTypeImage];
     [params SSDKEnableUseClientShare];
     
     //1.2、自定义分享平台（非必要）
@@ -89,28 +105,28 @@
 //    [activePlatforms addObject:item];
     
     //1.3、自定义分享菜单栏（非必要）
-    [SSUIShareActionSheetStyle setStatusBarStyle:UIStatusBarStyleLightContent];
-    [SSUIEditorViewStyle setStatusBarStyle:UIStatusBarStyleLightContent];
-    [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:137/255.0 green:142/255.0 blue:150/255.0 alpha:0.8]];
-    [SSUIShareActionSheetStyle setActionSheetColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
-    [SSUIShareActionSheetStyle setCancelButtonBackgroundColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
+//    [SSUIShareActionSheetStyle setStatusBarStyle:UIStatusBarStyleLightContent];
+//    [SSUIEditorViewStyle setStatusBarStyle:UIStatusBarStyleLightContent];
+//    [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:137/255.0 green:142/255.0 blue:150/255.0 alpha:0.8]];
+//    [SSUIShareActionSheetStyle setActionSheetColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
+//    [SSUIShareActionSheetStyle setCancelButtonBackgroundColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
 
-    [SSUIShareActionSheetStyle setCancelButtonLabelColor:[UIColor whiteColor]];
-    [SSUIShareActionSheetStyle setItemNameColor:[UIColor whiteColor]];
-    [SSUIShareActionSheetStyle setItemNameFont:[UIFont systemFontOfSize:10]];
-    [SSUIShareActionSheetStyle setCurrentPageIndicatorTintColor:[UIColor colorWithRed:156/255.0 green:156/255.0 blue:156/255.0 alpha:1.0]];
-    [SSUIShareActionSheetStyle setPageIndicatorTintColor:[UIColor colorWithRed:62/255.0 green:62/255.0 blue:62/255.0 alpha:1.0]];
-    [SSUIShareActionSheetStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskPortrait];
+//    [SSUIShareActionSheetStyle setCancelButtonLabelColor:[UIColor whiteColor]];
+//    [SSUIShareActionSheetStyle setItemNameColor:[UIColor whiteColor]];
+//    [SSUIShareActionSheetStyle setItemNameFont:[UIFont systemFontOfSize:10]];
+//    [SSUIShareActionSheetStyle setCurrentPageIndicatorTintColor:[UIColor colorWithRed:156/255.0 green:156/255.0 blue:156/255.0 alpha:1.0]];
+//    [SSUIShareActionSheetStyle setPageIndicatorTintColor:[UIColor colorWithRed:62/255.0 green:62/255.0 blue:62/255.0 alpha:1.0]];
+//    [SSUIShareActionSheetStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskPortrait];
     
-    NSMutableArray *active = [ShareSDK activePlatforms];
+//    NSMutableArray *active = [ShareSDK activePlatforms];
     
-    [SSUIShareActionSheetStyle isCancelButtomHidden:YES];
+    [SSUIShareActionSheetStyle setShareActionSheetStyle:ShareActionSheetStyleSimple];
+//    [SSUIShareActionSheetStyle isCancelButtomHidden:NO];
     
-    BOOL isClient =  [ShareSDK isClientInstalled:SSDKPlatformTypeFacebookMessenger];
+//    BOOL isClient =  [ShareSDK isClientInstalled:SSDKPlatformTypeFacebookMessenger];
     
     //1.4、自定义支持的屏幕方向
-//    [ShareSDK setSupportedInterfaceOrientation:UIInterfaceOrientationMaskAllButUpsideDown];
-    
+//    [ShareSDK setSupportedInterfaceOrientation:UIInterfaceOrientationMaskPortrait];
     
     //2、弹出分享菜单栏
     SSUIShareActionSheetController *actionSheet = [ShareSDK showShareActionSheet:sender
@@ -179,7 +195,7 @@
                    }
                }];
     
-    [actionSheet.directSharePlatforms removeObject:@(SSDKPlatformTypeWechat)];
+//    [actionSheet.directSharePlatforms removeObject:@(SSDKPlatformTypeWechat)];
 }
 
 -(void)ShowShareContentEditorView:(id*)sender
@@ -189,18 +205,29 @@
     NSMutableDictionary* params = [NSMutableDictionary dictionary];
     [params SSDKSetupShareParamsByText:@"ShareSDK is the most comprehensive Social SDK in the world , which share easily with 40+ platforms , from around the world.For more information,please visit http://www.mob.com website."
                                 images:imgArr
-                                   url:nil
-                                 title:nil
+                                   url:[NSURL URLWithString:@"http://163.com"]
+                                 title:@"Share Title"
                                   type:SSDKContentTypeImage];
-    [params SSDKSetupSinaWeiboShareParamsByText:@"sina text-test"
-                                          title:@"微博测试标题"
-                                          image:urlImage
-                                            url:nil
-                                       latitude:40.413467
-                                      longitude:116.646439
-                                       objectID:nil
-                                           type:SSDKContentTypeImage];
-    [params SSDKSetupFacebookParamsByText:@"Facebook text-test" image:urlImage type:SSDKContentTypeImage];
+//    [params SSDKSetupSinaWeiboShareParamsByText:@"sina text-test"
+//                                          title:@"微博测试标题"
+//                                          image:urlImage
+//                                            url:nil
+//                                       latitude:40.413467
+//                                      longitude:116.646439
+//                                       objectID:nil
+//                                           type:SSDKContentTypeImage];
+//    [params SSDKSetupFacebookParamsByText:@"Facebook text-test" image:urlImage type:SSDKContentTypeImage];
+    
+    [params SSDKSetupFacebookParamsByText:nil
+                                    image:@"http://f.hiphotos.bdimg.com/album/w%3D2048/sign=df8f1fe50dd79123e0e09374990c5882/cf1b9d16fdfaaf51e6d1ce528d5494eef01f7a28.jpg"
+                                      url:[NSURL URLWithString:@"http://163.com"]
+                                 urlTitle:@"The Link Title"
+                                  urlName:@"The Link Name"
+                           attachementUrl:[NSURL URLWithString:@""]
+                                     type:SSDKContentTypeWebPage];
+    
+    
+    [params SSDKEnableUseClientShare];
     [params SSDKSetupTencentWeiboShareParamsByText:@"TencentWeibo xt-test" images:imgArr latitude:34.12 longitude:54.05 type:SSDKContentTypeImage];
     
     NSArray* othetplarForms = [NSArray arrayWithObjects:@(SSDKPlatformTypeTencentWeibo),@(SSDKPlatformTypeFacebook),@(SSDKPlatformTypeTwitter) ,nil];
@@ -221,8 +248,8 @@
     [SSUIEditorViewStyle setContentViewBackgroundColor:[UIColor brownColor]];
 //    [SSUIEditorViewStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskLandscape];
     
-    [ShareSDK showShareEditor:SSDKPlatformTypeSinaWeibo
-           otherPlatformTypes:othetplarForms
+    [ShareSDK showShareEditor:SSDKPlatformSubTypeWechatSession
+           otherPlatformTypes:nil
                   shareParams:params
           onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
               

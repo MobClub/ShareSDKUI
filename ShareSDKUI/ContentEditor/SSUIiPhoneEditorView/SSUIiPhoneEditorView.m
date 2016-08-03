@@ -30,13 +30,14 @@
 @interface SSUIiPhoneEditorView ()
 {
 @private
-    NSString* _content;
-    SSDKImage* _image;
-    NSArray* _platformTypes;
+    NSString *_content;
+    SSDKImage *_image;
+    NSArray *_platformTypes;
     
     SSUIiPhoneEditorToolBar *_toolbar; //工具栏
     SSDKPlatformType _platType;
     BOOL _needLayout;
+    BOOL _firstTimeSet;
     UIInterfaceOrientation _interfaceOrientation;
 }
 
@@ -77,10 +78,10 @@
     return self;
 }
 
--(void)updateWithContent:(NSString *)content
-                   image:(SSDKImage *)image
-           platformTypes:(NSArray *)platformTypes
-    interfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (void)updateWithContent:(NSString *)content
+                    image:(SSDKImage *)image
+            platformTypes:(NSArray *)platformTypes
+     interfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     _interfaceOrientation = interfaceOrientation;
     _platformTypes = platformTypes;
@@ -89,11 +90,12 @@
     //设置键盘焦点
     [_contentView becomeFirstResponder];
     _needLayout = YES;
+    _firstTimeSet = YES;
     [self setNeedsLayout];
 }
 
-- (void)rotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-    
+- (void)rotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     _interfaceOrientation = interfaceOrientation;
     [self updateLayout];
 }
@@ -113,7 +115,13 @@
     {
         _needLayout = NO;
         
-        _contentView.text = _content;
+
+        if ([_contentView.text isEqualToString:@""] && _firstTimeSet)
+        {
+            _contentView.text = _content;
+            _firstTimeSet = NO;
+        }
+
         
         NSMutableArray* shareList = [NSMutableArray array];
         
@@ -121,7 +129,8 @@
         for (NSNumber *shareTypeNum in _platformTypes)
         {
             BOOL selected = NO;
-            if ([shareTypeNum integerValue] == _platType) {
+            if ([shareTypeNum integerValue] == _platType)
+            {
                 selected = YES;
             }
             [shareList addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:
@@ -200,11 +209,13 @@
         imgW = self.frame.size.width * 0.2;
         
         //要对6,6+适量增大比例
-        if ([UIScreen mainScreen].bounds.size.width > 666) {
+        if ([UIScreen mainScreen].bounds.size.width > 666)
+        {
             imgH = self.frame.size.height * 0.675;
         }
         
-        if ([MOBFDevice isPad]) {
+        if ([MOBFDevice isPad])
+        {
             imgH = self.frame.size.height * 0.8;
         }
         
@@ -304,12 +315,16 @@
         imgW = self.frame.size.width * 0.3;
         
         //要对6,6+适量增大比例
-        if ([UIScreen mainScreen].bounds.size.height > 666) {
+        if ([UIScreen mainScreen].bounds.size.height > 666)
+        {
             imgH = self.frame.size.height * 0.85;
         }
-        if ([MOBFDevice isPad]) {
+        
+        if ([MOBFDevice isPad])
+        {
             imgH = self.frame.size.height * 0.8;
         }
+        
         if (!_picView)
         {
             _picView = [[UIImageView alloc] initWithFrame:CGRectMake(SSUI_WIDTH(self) - pRight - imgW,
