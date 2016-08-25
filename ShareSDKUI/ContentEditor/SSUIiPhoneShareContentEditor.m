@@ -55,10 +55,9 @@
     self.shareContentWindow = nil;
 }
 
--(void)dealloc
-{
-    NSLog(@"%@被销毁了", self);
-}
-
+//-(void)dealloc
+//{
+//    NSLog(@"%@被销毁了", self);
+//}
 
 @end

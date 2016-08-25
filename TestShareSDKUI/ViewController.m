@@ -107,20 +107,20 @@
     //1.3、自定义分享菜单栏（非必要）
 //    [SSUIShareActionSheetStyle setStatusBarStyle:UIStatusBarStyleLightContent];
 //    [SSUIEditorViewStyle setStatusBarStyle:UIStatusBarStyleLightContent];
-//    [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:137/255.0 green:142/255.0 blue:150/255.0 alpha:0.8]];
-//    [SSUIShareActionSheetStyle setActionSheetColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
+    [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:137/255.0 green:142/255.0 blue:150/255.0 alpha:0.8]];
+    [SSUIShareActionSheetStyle setActionSheetColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
 //    [SSUIShareActionSheetStyle setCancelButtonBackgroundColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
 
 //    [SSUIShareActionSheetStyle setCancelButtonLabelColor:[UIColor whiteColor]];
-//    [SSUIShareActionSheetStyle setItemNameColor:[UIColor whiteColor]];
-//    [SSUIShareActionSheetStyle setItemNameFont:[UIFont systemFontOfSize:10]];
+    [SSUIShareActionSheetStyle setItemNameColor:[UIColor whiteColor]];
+    [SSUIShareActionSheetStyle setItemNameFont:[UIFont systemFontOfSize:10]];
 //    [SSUIShareActionSheetStyle setCurrentPageIndicatorTintColor:[UIColor colorWithRed:156/255.0 green:156/255.0 blue:156/255.0 alpha:1.0]];
 //    [SSUIShareActionSheetStyle setPageIndicatorTintColor:[UIColor colorWithRed:62/255.0 green:62/255.0 blue:62/255.0 alpha:1.0]];
 //    [SSUIShareActionSheetStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskPortrait];
     
 //    NSMutableArray *active = [ShareSDK activePlatforms];
     
-    [SSUIShareActionSheetStyle setShareActionSheetStyle:ShareActionSheetStyleSimple];
+//    [SSUIShareActionSheetStyle setShareActionSheetStyle:ShareActionSheetStyleSimple];
 //    [SSUIShareActionSheetStyle isCancelButtomHidden:NO];
     
 //    BOOL isClient =  [ShareSDK isClientInstalled:SSDKPlatformTypeFacebookMessenger];

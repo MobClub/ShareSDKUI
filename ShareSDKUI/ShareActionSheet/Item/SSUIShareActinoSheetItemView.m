@@ -52,6 +52,11 @@ static const CGFloat iconPercentage = 0.35;
             name.font = [SSUIShareActionSheetStyle sharedInstance].itemNameFont;
         }
         
+        if ([SSUIShareActionSheetStyle sharedInstance].actionSheetColor)
+        {
+            self.backgroundColor = [SSUIShareActionSheetStyle sharedInstance].actionSheetColor;
+        }
+        
         [self addSubview:name];
         self.nameLabel = name;
 

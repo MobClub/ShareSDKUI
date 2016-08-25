@@ -10,7 +10,6 @@
 #import "SSUIShareActionSheetPlatformItem.h"
 #import "SSUIShareActionSheetCustomItem.h"
 
-
 @implementation SSUIShareActionSheetItem
 
 + (instancetype)itemWithPlatformType:(SSDKPlatformType)platformType

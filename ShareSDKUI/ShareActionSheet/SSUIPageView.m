@@ -122,6 +122,11 @@
         _pageCtr.pageIndicatorTintColor = [UIColor colorWithRed:160/255.0 green:199/255.0 blue:250/255.0 alpha:1.0];
         _pageCtr.backgroundColor = [UIColor whiteColor];
         
+        if ([SSUIShareActionSheetStyle sharedInstance].actionSheetColor)
+        {
+            _pageCtr.backgroundColor = [SSUIShareActionSheetStyle sharedInstance].actionSheetColor;
+        }
+        
         if ([SSUIShareActionSheetStyle sharedInstance].currentPageIndicatorTintColor)
         {
             _pageCtr.currentPageIndicatorTintColor = [SSUIShareActionSheetStyle sharedInstance].currentPageIndicatorTintColor;
