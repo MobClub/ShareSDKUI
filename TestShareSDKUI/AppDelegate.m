@@ -46,10 +46,10 @@
                                  @(SSDKPlatformTypeFacebook),
                                  @(SSDKPlatformTypeTencentWeibo),
 //                                 @(SSDKPlatformTypeUnknown),
-//                                 @(SSDKPlatformSubTypeQZone),
+                                 @(SSDKPlatformSubTypeQZone),
 //                                 @(SSDKPlatformSubTypeWechatSession),
 //                                 @(SSDKPlatformSubTypeWechatTimeline),
-//                                 @(SSDKPlatformSubTypeQQFriend),
+                                 @(SSDKPlatformSubTypeQQFriend),
 //                                 @(SSDKPlatformSubTypeWechatFav),
 //                                 @(SSDKPlatformTypeAny),
                                  @(SSDKPlatformTypeRenren),
@@ -96,12 +96,12 @@
                              [ShareSDKConnector connectWeibo:[WeiboSDK class]];
                              
                              break;
-//                         case SSDKPlatformTypeQQ:
-//                             
-//                             [ShareSDKConnector connectQQ:[QQApiInterface class]
-//                                        tencentOAuthClass:[TencentOAuth class]];
-//                             
-//                             break;
+                         case SSDKPlatformTypeQQ:
+
+                             [ShareSDKConnector connectQQ:[QQApiInterface class]
+                                        tencentOAuthClass:[TencentOAuth class]];
+
+                             break;
                          case SSDKPlatformTypeRenren:
                              [ShareSDKConnector connectRenren:[RennClient class]];
                              break;

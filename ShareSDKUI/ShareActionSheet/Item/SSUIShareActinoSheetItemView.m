@@ -39,7 +39,11 @@ static const CGFloat iconPercentage = 0.35;
         name.textColor = [UIColor blackColor];
         name.backgroundColor = [UIColor clearColor];
         name.font = [UIFont systemFontOfSize:12];
-        
+        //iOS10以上中文大小比iOS以下大,因此字体略缩小
+        if ([MOBFDevice versionCompare:@"10.0"] >= 0)
+        {
+            name.font = [UIFont systemFontOfSize:11.5];
+        }
         _itemW = 60;
 
         if ([SSUIShareActionSheetStyle sharedInstance].itemNameColor)

@@ -275,8 +275,10 @@
                                                                                          @(SSDKPlatformTypeKakao),
                                                                                          @(SSDKPlatformSubTypeKakaoTalk),
                                                                                          @(SSDKPlatformTypeAliPaySocial),
+                                                                                         @(SSDKPlatformTypeAliPaySocialTimeline),
                                                                                          @(SSDKPlatformTypePrint),
                                                                                          @(SSDKPlatformTypeFacebookMessenger)
+//                                                                                         ,@(SSDKPlatformTypeDingTalk)
                                                                                          ]];
             
             if ([SSUIEditorViewStyle sharedInstance].unNeedAuthPlatforms.count > 0)

@@ -90,9 +90,7 @@ const CGFloat SSUIPageViewH = 400;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.view.backgroundColor = [UIColor purpleColor];
-    
+
     NSInteger row = ceil(_itemsCount * 1.0 /3.0);
     
     if (row >2)

@@ -28,22 +28,30 @@
     [btn setTitle:@"Show Action Sheet" forState:UIControlStateNormal];
     [btn sizeToFit];
     [btn setFrame:CGRectMake(self.view.frame.size.width/2 - 100, 100, 200, 25)];
-    [btn addTarget:self action:@selector(btnClickHandler:) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(ShowActionSheet:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
     UIButton *btn2 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [btn2 setTitle:@"Show ContentEditor View" forState:UIControlStateNormal];
+    [btn2 setTitle:@"Show Content Editor View" forState:UIControlStateNormal];
     [btn2 sizeToFit];
     btn2.frame = CGRectMake((self.view.frame.size.width - 200)/2, 200, 200, 50);
     [btn2 addTarget:self action:@selector(ShowShareContentEditorView:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn2];
     
     UIButton *btn3 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [btn3 setTitle:@"Test button" forState:UIControlStateNormal];
+    [btn3 setTitle:@"Show Action Sheet With Content Name" forState:UIControlStateNormal];
     [btn3 sizeToFit];
-    btn3.frame = CGRectMake((self.view.frame.size.width - 200)/2, 300, 200, 50);
-    [btn3 addTarget:self action:@selector(TestButton:) forControlEvents:UIControlEventTouchUpInside];
+    btn3.frame = CGRectMake((self.view.frame.size.width - 280)/2, 300, 280, 50);
+    [btn3 addTarget:self action:@selector(ShowActionSheetWithContentName:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn3];
+    
+    UIButton *btn4 = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [btn4 setTitle:@"ShowContent Editor With Content Name" forState:UIControlStateNormal];
+    [btn4 sizeToFit];
+    btn4.frame = CGRectMake((self.view.frame.size.width - 280)/2, 400, 280, 50);
+    [btn4 addTarget:self action:@selector(ShowShareContentEditorWithContentName:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn4];
+
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -51,43 +59,16 @@
     return UIStatusBarStyleLightContent;
 }
 
--(void)TestButton:(id)sender
-{
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params SSDKSetupShareParamsByText:@"ShareSDK is the most comprehensive Social SDK in the world , which share easily with 40+ platforms , from around the world.For more information,please visit http://www.mob.com website."
-                                images:@"http://f.hiphotos.bdimg.com/album/w%3D2048/sign=df8f1fe50dd79123e0e09374990c5882/cf1b9d16fdfaaf51e6d1ce528d5494eef01f7a28.jpg"
-                                   url:[NSURL URLWithString:@"http://www.mob.com"]
-                                 title:@"分享标题"
-                                  type:SSDKContentTypeWebPage];
-    
-    [params SSDKSetupFacebookParamsByText:nil
-                                    image:@"http://f.hiphotos.bdimg.com/album/w%3D2048/sign=df8f1fe50dd79123e0e09374990c5882/cf1b9d16fdfaaf51e6d1ce528d5494eef01f7a28.jpg"
-                                      url:[NSURL URLWithString:@"http://163.com"]
-                                 urlTitle:@"The Link Title"
-                                  urlName:@"The Link Name"
-                           attachementUrl:[NSURL URLWithString:@""]
-                                     type:SSDKContentTypeWebPage];
-    
-    [ShareSDK share:SSDKPlatformTypeFacebook
-         parameters:params
-     onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
-        
-         NSLog(@"state:%lu",state);
-         
-         
-     }];
-    
-}
+#pragma mark - 界面
 
-#pragma mark -
-
-- (void)btnClickHandler:(id)sender
+- (void)ShowActionSheet:(id)sender
 {
     NSURL *imgUrl = [NSURL URLWithString:@"http://f.hiphotos.bdimg.com/album/w%3D2048/sign=df8f1fe50dd79123e0e09374990c5882/cf1b9d16fdfaaf51e6d1ce528d5494eef01f7a28.jpg"];
+    NSString *imgPath = [[NSBundle mainBundle] pathForResource:@"sharesdk1" ofType:@"png"];
     //1、构造分享内容
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params SSDKSetupShareParamsByText:@"ShareSDK is the most comprehensive Social SDK in the world , which share easily with 40+ platforms , from around the world.For more information,please visit http://www.mob.com website."
-                                images:@[imgUrl]
+                                images:imgPath
                                    url:[NSURL URLWithString:@"http://www.mob.com"]
                                  title:@"分享标题"
                                   type:SSDKContentTypeImage];
@@ -107,22 +88,20 @@
     //1.3、自定义分享菜单栏（非必要）
 //    [SSUIShareActionSheetStyle setStatusBarStyle:UIStatusBarStyleLightContent];
 //    [SSUIEditorViewStyle setStatusBarStyle:UIStatusBarStyleLightContent];
-    [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:137/255.0 green:142/255.0 blue:150/255.0 alpha:0.8]];
-    [SSUIShareActionSheetStyle setActionSheetColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
+//    [SSUIShareActionSheetStyle setActionSheetBackgroundColor:[UIColor colorWithRed:137/255.0 green:142/255.0 blue:150/255.0 alpha:0.8]];
+//    [SSUIShareActionSheetStyle setActionSheetColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
 //    [SSUIShareActionSheetStyle setCancelButtonBackgroundColor:[UIColor colorWithRed:21.0/255.0 green:21.0/255.0 blue:21.0/255.0 alpha:1.0]];
 
 //    [SSUIShareActionSheetStyle setCancelButtonLabelColor:[UIColor whiteColor]];
-    [SSUIShareActionSheetStyle setItemNameColor:[UIColor whiteColor]];
-    [SSUIShareActionSheetStyle setItemNameFont:[UIFont systemFontOfSize:10]];
+//    [SSUIShareActionSheetStyle setItemNameColor:[UIColor whiteColor]];
+//    [SSUIShareActionSheetStyle setItemNameFont:[UIFont systemFontOfSize:10]];
 //    [SSUIShareActionSheetStyle setCurrentPageIndicatorTintColor:[UIColor colorWithRed:156/255.0 green:156/255.0 blue:156/255.0 alpha:1.0]];
 //    [SSUIShareActionSheetStyle setPageIndicatorTintColor:[UIColor colorWithRed:62/255.0 green:62/255.0 blue:62/255.0 alpha:1.0]];
 //    [SSUIShareActionSheetStyle setSupportedInterfaceOrientation:UIInterfaceOrientationMaskPortrait];
     
 //    NSMutableArray *active = [ShareSDK activePlatforms];
-    
 //    [SSUIShareActionSheetStyle setShareActionSheetStyle:ShareActionSheetStyleSimple];
 //    [SSUIShareActionSheetStyle isCancelButtomHidden:NO];
-    
 //    BOOL isClient =  [ShareSDK isClientInstalled:SSDKPlatformTypeFacebookMessenger];
     
     //1.4、自定义支持的屏幕方向
@@ -198,7 +177,7 @@
 //    [actionSheet.directSharePlatforms removeObject:@(SSDKPlatformTypeWechat)];
 }
 
--(void)ShowShareContentEditorView:(id*)sender
+- (void)ShowShareContentEditorView:(id*)sender
 {
     SSDKImage* urlImage = [[SSDKImage alloc] initWithURL:[NSURL URLWithString:@"http://img4.duitang.com/uploads/item/201303/14/20130314114434_M3fej.thumb.600_0.jpeg"]];
     NSArray* imgArr = @[urlImage];
@@ -269,6 +248,125 @@
                   NSLog(@"平台:%lu 取消分享",(unsigned long)platformType);
               }
     }];
+}
+
+
+- (void)ShowActionSheetWithContentName:(id)sender
+{
+    
+    NSString *imgPath = [[NSBundle mainBundle] pathForResource:@"sharesdk1" ofType:@"png"];
+
+    NSDictionary *customFiled = @{@"text":@"Custom Text",
+                                  @"Title":@"Custom Title",
+                                  @"imgUrl":@"http://ww4.sinaimg.cn/mw690/9b829026jw1f7bw4y4fklj20c806wjrx.jpg",
+                                  @"url":@"http://mob.com",
+                                  @"SinaText":@"Sina Text"};
+
+    [ShareSDK showShareActionSheet:sender
+                             items:nil
+                       contentName:@"ShareSDK"
+                      customFields:customFiled
+               onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+                  
+                   switch (state)
+                   {
+                       case SSDKResponseStateSuccess:
+                       {
+                           NSLog(@"分享成功");
+                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                           message:nil
+                                                                          delegate:nil
+                                                                 cancelButtonTitle:@"OK"
+                                                                 otherButtonTitles:nil, nil];
+                           [alert show];
+                       }
+                           break;
+                       case SSDKResponseStateFail:
+                       {
+                           NSLog(@"分享失败");
+                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                           message:[NSString stringWithFormat:@"%@",error]
+                                                                          delegate:nil
+                                                                 cancelButtonTitle:@"OK"
+                                                                 otherButtonTitles:nil, nil];
+                           [alert show];
+
+                       }
+                       case SSDKResponseStateCancel:
+                       {
+                           NSLog(@"取消");
+                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"取消分享"
+                                                                           message:nil
+                                                                          delegate:nil
+                                                                 cancelButtonTitle:@"OK"
+                                                                 otherButtonTitles:nil, nil];
+                           [alert show];
+                       }
+                           
+                       default:
+                           break;
+                   }
+               }];
+}
+
+
+- (void)ShowShareContentEditorWithContentName:(id)sender
+{
+    
+    NSString *imgPath = [[NSBundle mainBundle] pathForResource:@"sharesdk1" ofType:@"png"];
+    
+    NSDictionary *customFiled = @{@"text":@"Editor - Custom Text",
+                                  @"Title":@"Editor - Custom Title",
+                                  @"imgUrl":imgPath,
+                                  @"url":@"http://mob.com"};
+    
+   [ShareSDK showShareEditor:SSDKPlatformTypeSinaWeibo
+          otherPlatformTypes:nil
+                 contentName:@"ShareSDK"
+                customFields:customFiled
+         onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+            
+             
+             switch (state)
+             {
+                 case SSDKResponseStateSuccess:
+                 {
+                     NSLog(@"分享成功");
+                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                     message:nil
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil, nil];
+                     [alert show];
+                 }
+                     break;
+                 case SSDKResponseStateFail:
+                 {
+                     NSLog(@"分享失败");
+                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                     message:[NSString stringWithFormat:@"%@",error]
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil, nil];
+                     [alert show];
+                     
+                 }
+                 case SSDKResponseStateCancel:
+                 {
+                     NSLog(@"取消");
+                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"取消分享"
+                                                                     message:nil
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"OK"
+                                                           otherButtonTitles:nil, nil];
+                     [alert show];
+                 }
+                     
+                 default:
+                     break;
+             }
+
+         }];
 }
 
 //- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

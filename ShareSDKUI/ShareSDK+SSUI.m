@@ -10,12 +10,12 @@
 #import "ShareSDKUI.h"
 #import "SSUIShareActionSheetPlatformItem.h"
 #import "SSUIShareActionSheetCustomItem.h"
-#import <ShareSDK/ShareSDK+Base.h>
 #import "SSUIShareActionSheetStyle.h"
 #import "SSUIEditorViewStyle.h"
 #import "SSUIEditorViewStyle_Private.h"
 #import <ShareSDKExtension/ShareSDK+Extension.h>
-
+#import <ShareSDKConfigFile/ShareSDK+XML.h>
+#import <ShareSDK/ShareSDK+Base.h>
 /**
  *  错误域
  */
@@ -54,7 +54,9 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                                      @(SSDKPlatformSubTypeKakaoTalk),
                                      @(SSDKPlatformTypePinterest),
                                      @(SSDKPlatformTypeAliPaySocial),
+                                     @(SSDKPlatformTypeAliPaySocialTimeline),
                                      @(SSDKPlatformTypeFacebookMessenger)
+//                                     ,@(SSDKPlatformTypeDingTalk)
                                      ];
     
     NSMutableArray *temPlatform = [NSMutableArray arrayWithArray:activePlatforms];
@@ -291,8 +293,10 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                                                                                      @(SSDKPlatformSubTypeKakaoTalk),
                                                                                      @(SSDKPlatformTypePinterest),
                                                                                      @(SSDKPlatformTypeAliPaySocial),
+                                                                                     @(SSDKPlatformTypeAliPaySocialTimeline),
                                                                                      @(SSDKPlatformTypePrint),
                                                                                      @(SSDKPlatformTypeFacebookMessenger)
+//                                                                                     ,@(SSDKPlatformTypeDingTalk)
                                                                                      ]];
     
     
@@ -309,6 +313,13 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
             {
                 unSupport = YES;
             }
+            else if ([[facebookParams objectForKey:@"type"] integerValue] == SSDKContentTypeAuto)
+            {
+                if ([facebookParams objectForKey:@"title"] && [facebookParams objectForKey:@"url"])
+                {
+                    unSupport = YES;
+                }
+            }
         }
         else
         {
@@ -322,7 +333,6 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
                 {
                     unSupport = YES;
                 }
-                
             }
         }
         
@@ -338,32 +348,10 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
     {
         if ([[shareParams objectForKey:@"@client_share"] boolValue])
         {
-            static BOOL unSupport = NO;
-            NSString *sinaKey = [NSString stringWithFormat:@"@platform(%lu)",(unsigned long)SSDKPlatformTypeSinaWeibo];
-            NSDictionary *sinaParams = [shareParams objectForKey:sinaKey];
-            if (sinaParams)
-            {
-                if ([[sinaParams objectForKey:@"type"] integerValue] == SSDKContentTypeWebPage)
-                {
-                    unSupport = YES;
-                }
-            }
-            else
-            {
-                if ([[shareParams objectForKey:@"type"] integerValue] == SSDKContentTypeWebPage)
-                {
-                    unSupport = YES;
-                }
-            }
-            
-            if (unSupport)
-            {
-                [unSupportOneKeySharePlatforms addObject:@(SSDKPlatformTypeFacebook)];
-                [[SSUIEditorViewStyle sharedInstance].unNeedAuthPlatforms addObject:@(SSDKPlatformTypeSinaWeibo)];
-            }
+            [unSupportOneKeySharePlatforms addObject:@(SSDKPlatformTypeSinaWeibo)];
+            [[SSUIEditorViewStyle sharedInstance].unNeedAuthPlatforms addObject:@(SSDKPlatformTypeSinaWeibo)];
         }
     }
-    
     
     if ([unSupportOneKeySharePlatforms containsObject:@(platformType)])
     {
@@ -499,6 +487,66 @@ extern const NSInteger SSDKErrorCodePlatformNotFound;
         }];
     }];
     return vc;
+}
+
++ (SSUIShareActionSheetController *)showShareActionSheet:(UIView *)view
+                                                   items:(NSArray *)items
+                                             contentName:(NSString *)contentName
+                                            customFields:(NSDictionary *)customFields
+                                     onShareStateChanged:(SSUIShareStateChangedHandler)shareStateChangedHandler
+{
+    NSMutableDictionary *shareParams = [ShareSDK getShareParamsWithContentName:contentName customFields:customFields];
+    
+    if (shareParams && [[shareParams allKeys] count] > 0)
+    {
+        return [self showShareActionSheet:view
+                                    items:items
+                              shareParams:shareParams
+                      onShareStateChanged:shareStateChangedHandler];
+    }
+    else
+    {
+        if (shareStateChangedHandler)
+        {
+            NSError *error = [NSError errorWithDomain:@"ShareWithXMLContent"
+                                                 code:204
+                                             userInfo:@{@"error_msg" : @"无效的分享内容"}];
+            
+            shareStateChangedHandler(SSDKResponseStateFail, SSDKPlatformTypeAny, nil, nil, error, YES);
+        }
+        
+        return nil;
+    }
+}
+
++ (SSUIShareContentEditorViewController *)showShareEditor:(SSDKPlatformType)platformType
+                                       otherPlatformTypes:(NSArray *)otherPlatformTypes
+                                              contentName:(NSString *)contentName
+                                             customFields:(NSDictionary *)customFields
+                                      onShareStateChanged:(SSUIShareStateChangedHandler)shareStateChangedHandler
+{
+    NSMutableDictionary *shareParams = [ShareSDK getShareParamsWithContentName:contentName customFields:customFields];
+    
+    if (shareParams && [[shareParams allKeys] count] > 0)
+    {
+        return [self showShareEditor:platformType
+                  otherPlatformTypes:otherPlatformTypes
+                         shareParams:shareParams
+                 onShareStateChanged:shareStateChangedHandler];
+    }
+    else
+    {
+        if (shareStateChangedHandler)
+        {
+            NSError *error = [NSError errorWithDomain:@"ShareWithXMLContent"
+                                                 code:204
+                                             userInfo:@{@"error_msg" : @"无效的分享内容"}];
+            
+            shareStateChangedHandler(SSDKResponseStateFail, platformType, nil, nil, error, YES);
+        }
+
+        return nil;
+    }
 }
 
 + (void)setSupportedInterfaceOrientation:(UIInterfaceOrientationMask)toInterfaceOrientation

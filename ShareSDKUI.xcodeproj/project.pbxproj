@@ -137,6 +137,7 @@
 		DEA563821BE76048002E9552 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = DEA563801BE76048002E9552 /* README.md */; };
 		DEA563851BE7604F002E9552 /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA563841BE7604F002E9552 /* KakaoOpenSDK.framework */; };
 		DECF63AC1B54B53100B6197E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DECF63AB1B54B53100B6197E /* LaunchScreen.xib */; };
+		E2C646041DAB42D4003FEA12 /* ShareSDKConfigFile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C646021DAB42D4003FEA12 /* ShareSDKConfigFile.framework */; };
 		E2FF0FF01B56922F008EA663 /* SSUIEditorViewStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = E2FF0FEE1B56922F008EA663 /* SSUIEditorViewStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E2FF0FF11B56922F008EA663 /* SSUIEditorViewStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = E2FF0FEF1B56922F008EA663 /* SSUIEditorViewStyle.m */; };
 		E2FF0FF61B569789008EA663 /* SSUIEditorViewStyle_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = E2FF0FF51B569789008EA663 /* SSUIEditorViewStyle_Private.h */; };
@@ -302,6 +303,7 @@
 		DEA563801BE76048002E9552 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DEA563841BE7604F002E9552 /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		DECF63AB1B54B53100B6197E /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		E2C646021DAB42D4003FEA12 /* ShareSDKConfigFile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKConfigFile.framework; sourceTree = "<group>"; };
 		E2FF0FEE1B56922F008EA663 /* SSUIEditorViewStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSUIEditorViewStyle.h; path = SSUIiPhoneEditorView/SSUIEditorViewStyle.h; sourceTree = "<group>"; };
 		E2FF0FEF1B56922F008EA663 /* SSUIEditorViewStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SSUIEditorViewStyle.m; path = SSUIiPhoneEditorView/SSUIEditorViewStyle.m; sourceTree = "<group>"; };
 		E2FF0FF51B569789008EA663 /* SSUIEditorViewStyle_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SSUIEditorViewStyle_Private.h; path = SSUIiPhoneEditorView/SSUIEditorViewStyle_Private.h; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 				DE148B681C50842800B50AAD /* FBSDKMessengerShareKit.framework in Frameworks */,
 				DE6333F91BB91836007FB9A2 /* AdSupport.framework in Frameworks */,
 				DE0F13031B84691800B6E543 /* AddressBook.framework in Frameworks */,
+				E2C646041DAB42D4003FEA12 /* ShareSDKConfigFile.framework in Frameworks */,
 				DE0F13011B84691100B6E543 /* AssetsLibrary.framework in Frameworks */,
 				DE0F12FF1B84690A00B6E543 /* MediaPlayer.framework in Frameworks */,
 				DE148B6C1C50852A00B50AAD /* TencentOpenAPI.framework in Frameworks */,
@@ -565,6 +568,7 @@
 		DE93B08A1B4E4C6900459A2A /* bin */ = {
 			isa = PBXGroup;
 			children = (
+				E2C646021DAB42D4003FEA12 /* ShareSDKConfigFile.framework */,
 				DE93B0BD1B4E4E1300459A2A /* ShareSDKUI.framework */,
 				DE93B08B1B4E4C6900459A2A /* MOBFoundation.framework */,
 				DE93B08C1B4E4C6900459A2A /* ShareSDK.bundle */,

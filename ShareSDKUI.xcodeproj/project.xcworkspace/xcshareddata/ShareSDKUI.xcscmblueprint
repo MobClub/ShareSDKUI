@@ -2,7 +2,9 @@
   "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "ddbbef2e-7d24-4ea3-accf-f5ea24af4a8b++6617",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
     "ddbbef2e-7d24-4ea3-accf-f5ea24af4a8b++6617" : {
-
+      "DVTSourceControlWorkingCopyRepositoryBranchesLocationKey" : "ios\/project\/ShareSDK\/branches",
+      "DVTSourceControlWorkingCopyRepositoryTagsLocationKey" : "ios\/project\/ShareSDK\/tags",
+      "DVTSourceControlWorkingCopyRepositoryPrimaryBranchLocationKey" : "ios\/project\/ShareSDK\/trunk"
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
@@ -10,7 +12,7 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D46FF6B9-AF24-4159-9335-0249BCACDA52",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "ddbbef2e-7d24-4ea3-accf-f5ea24af4a8b++6617" : "ShareSDKv3.0.2"
+    "ddbbef2e-7d24-4ea3-accf-f5ea24af4a8b++6617" : "ShareSDKv3.x\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ShareSDKUI",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
