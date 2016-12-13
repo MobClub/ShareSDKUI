@@ -211,7 +211,6 @@ static const CGFloat maxPlatformsItemW = 105;
 {
     if ([SSUIShareActionSheetStyle sharedInstance].supportedInterfaceOrientation)
     {
-        
         switch ([SSUIShareActionSheetStyle sharedInstance].supportedInterfaceOrientation)
         {
             case UIInterfaceOrientationMaskPortrait:
@@ -400,13 +399,13 @@ static const CGFloat maxPlatformsItemW = 105;
                              
                              if([SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
                              {
-                                 theSheet.pageView.frame = CGRectMake(_spacing, _screenH - _spacing - theSheet.pageViewH, _screenW -  2 * _spacing, theSheet.pageViewH);
+                                 theSheet.pageView.frame = CGRectMake(theSheet.spacing, theSheet.screenH - theSheet.spacing - theSheet.pageViewH, theSheet.screenW -  2 * theSheet.spacing, theSheet.pageViewH);
                              }
                              else
                              {
-                                 theSheet.cancelButton.frame = CGRectMake(_spacing, SSUI_HEIGHT(self.view) - _cancelButtonH + _spacing, SSUI_WIDTH(self.view) - 2 * _spacing, _cancelButtonH - 2 * _spacing);
+                                 theSheet.cancelButton.frame = CGRectMake(theSheet.spacing, SSUI_HEIGHT(self.view) - theSheet.cancelButtonH + theSheet.spacing, SSUI_WIDTH(self.view) - 2 * theSheet.spacing, theSheet.cancelButtonH - 2 * theSheet.spacing);
                                  
-                                 theSheet.pageView.frame = CGRectMake(_spacing, theSheet.cancelButton.frame.origin.y - _spacing - theSheet.pageViewH, _screenW -  2 * _spacing, theSheet.pageViewH);
+                                 theSheet.pageView.frame = CGRectMake(theSheet.spacing, theSheet.cancelButton.frame.origin.y - theSheet.spacing - theSheet.pageViewH, theSheet.screenW -  2 * theSheet.spacing, theSheet.pageViewH);
                              }
                              
                              
@@ -421,13 +420,13 @@ static const CGFloat maxPlatformsItemW = 105;
                              
                              if ([SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
                              {
-                                 theSheet.pageView.frame = CGRectMake(_spacing, _screenW - _spacing - theSheet.pageViewH, _screenH -  2 * _spacing, theSheet.pageViewH);
+                                 theSheet.pageView.frame = CGRectMake(theSheet.spacing, theSheet.screenW - theSheet.spacing - theSheet.pageViewH, theSheet.screenH -  2 * theSheet.spacing, theSheet.pageViewH);
                              }
                              else
                              {
-                                 theSheet.cancelButton.frame = CGRectMake(_spacing, SSUI_HEIGHT(self.view) - _cancelButtonH + _spacing, SSUI_WIDTH(self.view) -   2 * _spacing, _cancelButtonH - 2 * _spacing);
+                                 theSheet.cancelButton.frame = CGRectMake(_spacing, SSUI_HEIGHT(self.view) - theSheet.cancelButtonH + theSheet.spacing, SSUI_WIDTH(self.view) -   2 * theSheet.spacing, theSheet.cancelButtonH - 2 * theSheet.spacing);
                                  
-                                 theSheet.pageView.frame = CGRectMake(_spacing, theSheet.cancelButton.frame.origin.y - _spacing - theSheet.pageViewH, _screenH -  2 * _spacing, theSheet.pageViewH);
+                                 theSheet.pageView.frame = CGRectMake(_spacing, theSheet.cancelButton.frame.origin.y - theSheet.spacing - theSheet.pageViewH, theSheet.screenH -  2 * theSheet.spacing, theSheet.pageViewH);
                              }
                          } completion:^(BOOL finished) {}];
     }
@@ -472,11 +471,11 @@ static const CGFloat maxPlatformsItemW = 105;
                         options:0
                      animations:^{
                          
-                         actionSheet.pageView.frame = CGRectMake(_spacing, SSUI_HEIGHT(actionSheet.view), SSUI_WIDTH(actionSheet.view) -  2 * _spacing, actionSheet.pageViewH);
+                         actionSheet.pageView.frame = CGRectMake(actionSheet.spacing, SSUI_HEIGHT(actionSheet.view), SSUI_WIDTH(actionSheet.view) -  2 * actionSheet.spacing, actionSheet.pageViewH);
                          
                          if(![SSUIShareActionSheetStyle sharedInstance].isCancelButtomHidden)
                          {
-                             actionSheet.cancelButton.frame = CGRectMake(_spacing, SSUI_HEIGHT(actionSheet.view) + actionSheet.pageViewH - _spacing, SSUI_WIDTH(actionSheet.view) -  2 * _spacing, _cancelButtonH - 2 * _spacing);
+                             actionSheet.cancelButton.frame = CGRectMake(actionSheet.spacing, SSUI_HEIGHT(actionSheet.view) + actionSheet.pageViewH - actionSheet.spacing, SSUI_WIDTH(actionSheet.view) -  2 * actionSheet.spacing, actionSheet.cancelButtonH - 2 * actionSheet.spacing);
                          }
                      }
                      completion:^(BOOL finished) {
