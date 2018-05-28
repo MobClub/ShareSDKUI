@@ -1,0 +1,569 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		DE93B0B61B4E4DC800459A2A /* CreatePackage_UI */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = DE93B0B71B4E4DC800459A2A /* Build configuration list for PBXAggregateTarget "CreatePackage_UI" */;
+			buildPhases = (
+				DE93B0BC1B4E4DD600459A2A /* Run Script */,
+			);
+			dependencies = (
+				DE93B0BB1B4E4DD300459A2A /* PBXTargetDependency */,
+			);
+			name = CreatePackage_UI;
+			productName = CreatePackage;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		5045D5872092C25A008E93C3 /* ShareSDK+SSUIDeprecated.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045D5812092C25A008E93C3 /* ShareSDK+SSUIDeprecated.m */; };
+		5045D5882092C25A008E93C3 /* SSUIShareActionSheetStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 5045D5822092C25A008E93C3 /* SSUIShareActionSheetStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5045D5892092C25A008E93C3 /* SSUIEditorViewStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 5045D5832092C25A008E93C3 /* SSUIEditorViewStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5045D58A2092C25A008E93C3 /* ShareSDK+SSUIDeprecated.h in Headers */ = {isa = PBXBuildFile; fileRef = 5045D5842092C25A008E93C3 /* ShareSDK+SSUIDeprecated.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5045D58B2092C25A008E93C3 /* SSUIEditorViewStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045D5852092C25A008E93C3 /* SSUIEditorViewStyle.m */; };
+		5045D58C2092C25A008E93C3 /* SSUIShareActionSheetStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 5045D5862092C25A008E93C3 /* SSUIShareActionSheetStyle.m */; };
+		50ADFD59208847CF00E580D4 /* ShareSDK+SSUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD37208847CE00E580D4 /* ShareSDK+SSUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50ADFD5A208847CF00E580D4 /* ShareSDK+SSUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD38208847CE00E580D4 /* ShareSDK+SSUI.m */; };
+		50ADFD5B208847CF00E580D4 /* SSUIEditorConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD3A208847CE00E580D4 /* SSUIEditorConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50ADFD5C208847CF00E580D4 /* SSUIEditerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD3B208847CE00E580D4 /* SSUIEditerViewController.h */; };
+		50ADFD5D208847CF00E580D4 /* SSUIEditorNavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD3C208847CE00E580D4 /* SSUIEditorNavigationController.h */; };
+		50ADFD5E208847CF00E580D4 /* SSUIiPadEditorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD3D208847CE00E580D4 /* SSUIiPadEditorViewController.h */; };
+		50ADFD5F208847CF00E580D4 /* SSUIEditerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD3E208847CE00E580D4 /* SSUIEditerViewController.m */; };
+		50ADFD60208847CF00E580D4 /* SSUIEditorConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD3F208847CE00E580D4 /* SSUIEditorConfiguration.m */; };
+		50ADFD61208847CF00E580D4 /* SSUIEditorNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD40208847CE00E580D4 /* SSUIEditorNavigationController.m */; };
+		50ADFD62208847CF00E580D4 /* SSUIiPadEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD41208847CE00E580D4 /* SSUIiPadEditorViewController.m */; };
+		50ADFD63208847CF00E580D4 /* ShareSDKUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD42208847CE00E580D4 /* ShareSDKUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50ADFD64208847CF00E580D4 /* SSUIShareSheetConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD44208847CE00E580D4 /* SSUIShareSheetConfiguration.m */; };
+		50ADFD65208847CF00E580D4 /* SSUICollectionViewSimpleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD45208847CE00E580D4 /* SSUICollectionViewSimpleCell.m */; };
+		50ADFD66208847CF00E580D4 /* SSUICollectionViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD46208847CE00E580D4 /* SSUICollectionViewLayout.h */; };
+		50ADFD67208847CF00E580D4 /* SSUIShareSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD47208847CE00E580D4 /* SSUIShareSheetViewController.m */; };
+		50ADFD68208847CF00E580D4 /* SSUIPlatformItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD48208847CE00E580D4 /* SSUIPlatformItem.m */; };
+		50ADFD69208847CF00E580D4 /* SSUICollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD49208847CE00E580D4 /* SSUICollectionViewCell.m */; };
+		50ADFD6A208847CF00E580D4 /* SSUICollectionViewSimpleCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD4A208847CE00E580D4 /* SSUICollectionViewSimpleCell.h */; };
+		50ADFD6B208847CF00E580D4 /* SSUIShareSheetConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD4B208847CE00E580D4 /* SSUIShareSheetConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50ADFD6C208847CF00E580D4 /* SSUIShareSheetViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD4C208847CE00E580D4 /* SSUIShareSheetViewController.h */; };
+		50ADFD6D208847CF00E580D4 /* SSUICollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD4D208847CE00E580D4 /* SSUICollectionViewLayout.m */; };
+		50ADFD6E208847CF00E580D4 /* SSUICollectionViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD4E208847CE00E580D4 /* SSUICollectionViewCell.h */; };
+		50ADFD6F208847CF00E580D4 /* SSUIPlatformItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD4F208847CE00E580D4 /* SSUIPlatformItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50ADFD70208847CF00E580D4 /* SSUIContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD50208847CE00E580D4 /* SSUIContext.h */; };
+		50ADFD71208847CF00E580D4 /* SSUIHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD52208847CE00E580D4 /* SSUIHelper.h */; };
+		50ADFD72208847CF00E580D4 /* SSUIConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD53208847CE00E580D4 /* SSUIConst.m */; };
+		50ADFD73208847CF00E580D4 /* SSUITypeDef.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD54208847CE00E580D4 /* SSUITypeDef.h */; };
+		50ADFD74208847CF00E580D4 /* SSUIPrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD55208847CE00E580D4 /* SSUIPrefixHeader.pch */; };
+		50ADFD75208847CF00E580D4 /* SSUIHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD56208847CE00E580D4 /* SSUIHelper.m */; };
+		50ADFD76208847CF00E580D4 /* SSUIConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 50ADFD57208847CE00E580D4 /* SSUIConst.h */; };
+		50ADFD77208847CF00E580D4 /* SSUIContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADFD58208847CF00E580D4 /* SSUIContext.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DE93B0BA1B4E4DD300459A2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0DD5A681B329802001D6161 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D0DD5A6F1B329802001D6161;
+			remoteInfo = ShareSDKUI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5045D5812092C25A008E93C3 /* ShareSDK+SSUIDeprecated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShareSDK+SSUIDeprecated.m"; sourceTree = "<group>"; };
+		5045D5822092C25A008E93C3 /* SSUIShareActionSheetStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIShareActionSheetStyle.h; sourceTree = "<group>"; };
+		5045D5832092C25A008E93C3 /* SSUIEditorViewStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIEditorViewStyle.h; sourceTree = "<group>"; };
+		5045D5842092C25A008E93C3 /* ShareSDK+SSUIDeprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShareSDK+SSUIDeprecated.h"; sourceTree = "<group>"; };
+		5045D5852092C25A008E93C3 /* SSUIEditorViewStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIEditorViewStyle.m; sourceTree = "<group>"; };
+		5045D5862092C25A008E93C3 /* SSUIShareActionSheetStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIShareActionSheetStyle.m; sourceTree = "<group>"; };
+		50ADFD37208847CE00E580D4 /* ShareSDK+SSUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShareSDK+SSUI.h"; sourceTree = "<group>"; };
+		50ADFD38208847CE00E580D4 /* ShareSDK+SSUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ShareSDK+SSUI.m"; sourceTree = "<group>"; };
+		50ADFD3A208847CE00E580D4 /* SSUIEditorConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIEditorConfiguration.h; sourceTree = "<group>"; };
+		50ADFD3B208847CE00E580D4 /* SSUIEditerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIEditerViewController.h; sourceTree = "<group>"; };
+		50ADFD3C208847CE00E580D4 /* SSUIEditorNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIEditorNavigationController.h; sourceTree = "<group>"; };
+		50ADFD3D208847CE00E580D4 /* SSUIiPadEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIiPadEditorViewController.h; sourceTree = "<group>"; };
+		50ADFD3E208847CE00E580D4 /* SSUIEditerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIEditerViewController.m; sourceTree = "<group>"; };
+		50ADFD3F208847CE00E580D4 /* SSUIEditorConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIEditorConfiguration.m; sourceTree = "<group>"; };
+		50ADFD40208847CE00E580D4 /* SSUIEditorNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIEditorNavigationController.m; sourceTree = "<group>"; };
+		50ADFD41208847CE00E580D4 /* SSUIiPadEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIiPadEditorViewController.m; sourceTree = "<group>"; };
+		50ADFD42208847CE00E580D4 /* ShareSDKUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareSDKUI.h; sourceTree = "<group>"; };
+		50ADFD44208847CE00E580D4 /* SSUIShareSheetConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIShareSheetConfiguration.m; sourceTree = "<group>"; };
+		50ADFD45208847CE00E580D4 /* SSUICollectionViewSimpleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUICollectionViewSimpleCell.m; sourceTree = "<group>"; };
+		50ADFD46208847CE00E580D4 /* SSUICollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUICollectionViewLayout.h; sourceTree = "<group>"; };
+		50ADFD47208847CE00E580D4 /* SSUIShareSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIShareSheetViewController.m; sourceTree = "<group>"; };
+		50ADFD48208847CE00E580D4 /* SSUIPlatformItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIPlatformItem.m; sourceTree = "<group>"; };
+		50ADFD49208847CE00E580D4 /* SSUICollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUICollectionViewCell.m; sourceTree = "<group>"; };
+		50ADFD4A208847CE00E580D4 /* SSUICollectionViewSimpleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUICollectionViewSimpleCell.h; sourceTree = "<group>"; };
+		50ADFD4B208847CE00E580D4 /* SSUIShareSheetConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIShareSheetConfiguration.h; sourceTree = "<group>"; };
+		50ADFD4C208847CE00E580D4 /* SSUIShareSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIShareSheetViewController.h; sourceTree = "<group>"; };
+		50ADFD4D208847CE00E580D4 /* SSUICollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUICollectionViewLayout.m; sourceTree = "<group>"; };
+		50ADFD4E208847CE00E580D4 /* SSUICollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUICollectionViewCell.h; sourceTree = "<group>"; };
+		50ADFD4F208847CE00E580D4 /* SSUIPlatformItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIPlatformItem.h; sourceTree = "<group>"; };
+		50ADFD50208847CE00E580D4 /* SSUIContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIContext.h; sourceTree = "<group>"; };
+		50ADFD52208847CE00E580D4 /* SSUIHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIHelper.h; sourceTree = "<group>"; };
+		50ADFD53208847CE00E580D4 /* SSUIConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIConst.m; sourceTree = "<group>"; };
+		50ADFD54208847CE00E580D4 /* SSUITypeDef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUITypeDef.h; sourceTree = "<group>"; };
+		50ADFD55208847CE00E580D4 /* SSUIPrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIPrefixHeader.pch; sourceTree = "<group>"; };
+		50ADFD56208847CE00E580D4 /* SSUIHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIHelper.m; sourceTree = "<group>"; };
+		50ADFD57208847CE00E580D4 /* SSUIConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSUIConst.h; sourceTree = "<group>"; };
+		50ADFD58208847CF00E580D4 /* SSUIContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSUIContext.m; sourceTree = "<group>"; };
+		D0DD5A701B329802001D6161 /* ShareSDKUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShareSDKUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0DD5A741B329802001D6161 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D0DD5A6D1B329802001D6161 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5045D5802092C25A008E93C3 /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				5045D5842092C25A008E93C3 /* ShareSDK+SSUIDeprecated.h */,
+				5045D5812092C25A008E93C3 /* ShareSDK+SSUIDeprecated.m */,
+				5045D5822092C25A008E93C3 /* SSUIShareActionSheetStyle.h */,
+				5045D5862092C25A008E93C3 /* SSUIShareActionSheetStyle.m */,
+				5045D5832092C25A008E93C3 /* SSUIEditorViewStyle.h */,
+				5045D5852092C25A008E93C3 /* SSUIEditorViewStyle.m */,
+			);
+			path = Deprecated;
+			sourceTree = "<group>";
+		};
+		50ADFD39208847CE00E580D4 /* ShareEditor */ = {
+			isa = PBXGroup;
+			children = (
+				50ADFD3C208847CE00E580D4 /* SSUIEditorNavigationController.h */,
+				50ADFD40208847CE00E580D4 /* SSUIEditorNavigationController.m */,
+				50ADFD3B208847CE00E580D4 /* SSUIEditerViewController.h */,
+				50ADFD3E208847CE00E580D4 /* SSUIEditerViewController.m */,
+				50ADFD3D208847CE00E580D4 /* SSUIiPadEditorViewController.h */,
+				50ADFD41208847CE00E580D4 /* SSUIiPadEditorViewController.m */,
+				50ADFD3A208847CE00E580D4 /* SSUIEditorConfiguration.h */,
+				50ADFD3F208847CE00E580D4 /* SSUIEditorConfiguration.m */,
+			);
+			path = ShareEditor;
+			sourceTree = "<group>";
+		};
+		50ADFD43208847CE00E580D4 /* ShareSheet */ = {
+			isa = PBXGroup;
+			children = (
+				50ADFD4C208847CE00E580D4 /* SSUIShareSheetViewController.h */,
+				50ADFD47208847CE00E580D4 /* SSUIShareSheetViewController.m */,
+				50ADFD4B208847CE00E580D4 /* SSUIShareSheetConfiguration.h */,
+				50ADFD44208847CE00E580D4 /* SSUIShareSheetConfiguration.m */,
+				50ADFD4E208847CE00E580D4 /* SSUICollectionViewCell.h */,
+				50ADFD49208847CE00E580D4 /* SSUICollectionViewCell.m */,
+				50ADFD4A208847CE00E580D4 /* SSUICollectionViewSimpleCell.h */,
+				50ADFD45208847CE00E580D4 /* SSUICollectionViewSimpleCell.m */,
+				50ADFD46208847CE00E580D4 /* SSUICollectionViewLayout.h */,
+				50ADFD4D208847CE00E580D4 /* SSUICollectionViewLayout.m */,
+				50ADFD4F208847CE00E580D4 /* SSUIPlatformItem.h */,
+				50ADFD48208847CE00E580D4 /* SSUIPlatformItem.m */,
+			);
+			path = ShareSheet;
+			sourceTree = "<group>";
+		};
+		50ADFD51208847CE00E580D4 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				50ADFD52208847CE00E580D4 /* SSUIHelper.h */,
+				50ADFD56208847CE00E580D4 /* SSUIHelper.m */,
+				50ADFD57208847CE00E580D4 /* SSUIConst.h */,
+				50ADFD53208847CE00E580D4 /* SSUIConst.m */,
+				50ADFD54208847CE00E580D4 /* SSUITypeDef.h */,
+				50ADFD55208847CE00E580D4 /* SSUIPrefixHeader.pch */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		D0DD5A671B329802001D6161 = {
+			isa = PBXGroup;
+			children = (
+				D0DD5A721B329802001D6161 /* ShareSDKUI */,
+				D0DD5A711B329802001D6161 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D0DD5A711B329802001D6161 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0DD5A701B329802001D6161 /* ShareSDKUI.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D0DD5A721B329802001D6161 /* ShareSDKUI */ = {
+			isa = PBXGroup;
+			children = (
+				50ADFD42208847CE00E580D4 /* ShareSDKUI.h */,
+				50ADFD37208847CE00E580D4 /* ShareSDK+SSUI.h */,
+				50ADFD38208847CE00E580D4 /* ShareSDK+SSUI.m */,
+				50ADFD50208847CE00E580D4 /* SSUIContext.h */,
+				50ADFD58208847CF00E580D4 /* SSUIContext.m */,
+				5045D5802092C25A008E93C3 /* Deprecated */,
+				50ADFD43208847CE00E580D4 /* ShareSheet */,
+				50ADFD39208847CE00E580D4 /* ShareEditor */,
+				50ADFD51208847CE00E580D4 /* Others */,
+				D0DD5A731B329802001D6161 /* Supporting Files */,
+			);
+			path = ShareSDKUI;
+			sourceTree = "<group>";
+		};
+		D0DD5A731B329802001D6161 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D0DD5A741B329802001D6161 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DE93B0BF1B4E4E3C00459A2A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50ADFD6F208847CF00E580D4 /* SSUIPlatformItem.h in Headers */,
+				50ADFD5B208847CF00E580D4 /* SSUIEditorConfiguration.h in Headers */,
+				50ADFD6B208847CF00E580D4 /* SSUIShareSheetConfiguration.h in Headers */,
+				50ADFD59208847CF00E580D4 /* ShareSDK+SSUI.h in Headers */,
+				50ADFD63208847CF00E580D4 /* ShareSDKUI.h in Headers */,
+				5045D5882092C25A008E93C3 /* SSUIShareActionSheetStyle.h in Headers */,
+				5045D58A2092C25A008E93C3 /* ShareSDK+SSUIDeprecated.h in Headers */,
+				5045D5892092C25A008E93C3 /* SSUIEditorViewStyle.h in Headers */,
+				50ADFD6A208847CF00E580D4 /* SSUICollectionViewSimpleCell.h in Headers */,
+				50ADFD66208847CF00E580D4 /* SSUICollectionViewLayout.h in Headers */,
+				50ADFD5E208847CF00E580D4 /* SSUIiPadEditorViewController.h in Headers */,
+				50ADFD5C208847CF00E580D4 /* SSUIEditerViewController.h in Headers */,
+				50ADFD6E208847CF00E580D4 /* SSUICollectionViewCell.h in Headers */,
+				50ADFD74208847CF00E580D4 /* SSUIPrefixHeader.pch in Headers */,
+				50ADFD5D208847CF00E580D4 /* SSUIEditorNavigationController.h in Headers */,
+				50ADFD73208847CF00E580D4 /* SSUITypeDef.h in Headers */,
+				50ADFD70208847CF00E580D4 /* SSUIContext.h in Headers */,
+				50ADFD6C208847CF00E580D4 /* SSUIShareSheetViewController.h in Headers */,
+				50ADFD76208847CF00E580D4 /* SSUIConst.h in Headers */,
+				50ADFD71208847CF00E580D4 /* SSUIHelper.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D0DD5A6F1B329802001D6161 /* ShareSDKUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0DD5A771B329802001D6161 /* Build configuration list for PBXNativeTarget "ShareSDKUI" */;
+			buildPhases = (
+				D0DD5A6C1B329802001D6161 /* Sources */,
+				D0DD5A6D1B329802001D6161 /* Frameworks */,
+				D0DD5A6E1B329802001D6161 /* Resources */,
+				DE93B0BF1B4E4E3C00459A2A /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShareSDKUI;
+			productName = ShareSDKUI;
+			productReference = D0DD5A701B329802001D6161 /* ShareSDKUI.framework */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D0DD5A681B329802001D6161 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = mob;
+				TargetAttributes = {
+					D0DD5A6F1B329802001D6161 = {
+						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = LW5266U92D;
+					};
+				};
+			};
+			buildConfigurationList = D0DD5A6B1B329802001D6161 /* Build configuration list for PBXProject "ShareSDKUI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+				zh,
+			);
+			mainGroup = D0DD5A671B329802001D6161;
+			productRefGroup = D0DD5A711B329802001D6161 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D0DD5A6F1B329802001D6161 /* ShareSDKUI */,
+				DE93B0B61B4E4DC800459A2A /* CreatePackage_UI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D0DD5A6E1B329802001D6161 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DE93B0BC1B4E4DD600459A2A /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Sets the target folders and the final framework product.\nFMK_NAME=${PROJECT_NAME}\n\n# Install dir will be the final output to the framework.\n# The following line create it in the root folder of the current project.\nINSTALL_BASE_DIR=${SRCROOT}/../SDK/ShareSDK/Support/Optional\nINSTALL_DIR=${INSTALL_BASE_DIR}/${FMK_NAME}.framework\n\n# Working dir will be deleted after the framework creation.\nWRK_DIR=build\nDEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.framework\nSIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/${FMK_NAME}.framework\n\n# -configuration ${CONFIGURATION}\n# Clean and Building both architectures.\nxcodebuild BITCODE_GENERATION_MODE=bitcode OTHER_CFLAGS=\"-fembed-bitcode\" -arch \"armv7s\" -arch \"armv7\" -arch \"arm64\" -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphoneos clean build\nxcodebuild BITCODE_GENERATION_MODE=bitcode OTHER_CFLAGS=\"-fembed-bitcode\" -arch \"i386\" -arch \"x86_64\" -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphonesimulator clean build\n\n# Cleaning the oldest.\nif [ -d \"${INSTALL_DIR}\" ]\nthen\nrm -rf \"${INSTALL_DIR}\"\nfi\n\nmkdir -p \"${INSTALL_DIR}\"\n\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/\"\n\n# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.\nlipo -create \"${DEVICE_DIR}/${FMK_NAME}\" \"${SIMULATOR_DIR}/${FMK_NAME}\" -output \"${INSTALL_DIR}/${FMK_NAME}\"\n\nrm -r \"${WRK_DIR}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D0DD5A6C1B329802001D6161 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50ADFD67208847CF00E580D4 /* SSUIShareSheetViewController.m in Sources */,
+				50ADFD72208847CF00E580D4 /* SSUIConst.m in Sources */,
+				50ADFD61208847CF00E580D4 /* SSUIEditorNavigationController.m in Sources */,
+				50ADFD69208847CF00E580D4 /* SSUICollectionViewCell.m in Sources */,
+				50ADFD62208847CF00E580D4 /* SSUIiPadEditorViewController.m in Sources */,
+				50ADFD77208847CF00E580D4 /* SSUIContext.m in Sources */,
+				50ADFD65208847CF00E580D4 /* SSUICollectionViewSimpleCell.m in Sources */,
+				5045D58B2092C25A008E93C3 /* SSUIEditorViewStyle.m in Sources */,
+				50ADFD68208847CF00E580D4 /* SSUIPlatformItem.m in Sources */,
+				50ADFD6D208847CF00E580D4 /* SSUICollectionViewLayout.m in Sources */,
+				50ADFD60208847CF00E580D4 /* SSUIEditorConfiguration.m in Sources */,
+				50ADFD5A208847CF00E580D4 /* ShareSDK+SSUI.m in Sources */,
+				5045D5872092C25A008E93C3 /* ShareSDK+SSUIDeprecated.m in Sources */,
+				50ADFD64208847CF00E580D4 /* SSUIShareSheetConfiguration.m in Sources */,
+				50ADFD5F208847CF00E580D4 /* SSUIEditerViewController.m in Sources */,
+				50ADFD75208847CF00E580D4 /* SSUIHelper.m in Sources */,
+				5045D58C2092C25A008E93C3 /* SSUIShareActionSheetStyle.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DE93B0BB1B4E4DD300459A2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D0DD5A6F1B329802001D6161 /* ShareSDKUI */;
+			targetProxy = DE93B0BA1B4E4DD300459A2A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D0DD5A751B329802001D6161 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jinghuang Liu (H4ZH7W6LU4)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D0DD5A761B329802001D6161 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jinghuang Liu (H4ZH7W6LU4)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D0DD5A781B329802001D6161 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = LW5266U92D;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../SDK\"/**";
+				GCC_PREFIX_HEADER = ShareSDKUI/Others/SSUIPrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = ShareSDKUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				OTHER_CFLAGS = "-fembed-bitcode";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		D0DD5A791B329802001D6161 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = LW5266U92D;
+				FRAMEWORK_SEARCH_PATHS = "\"$(SRCROOT)/../SDK\"/**";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PREFIX_HEADER = ShareSDKUI/Others/SSUIPrefixHeader.pch;
+				INFOPLIST_FILE = ShareSDKUI/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				OTHER_CFLAGS = "-fembed-bitcode";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		DE93B0B81B4E4DC800459A2A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_BITCODE = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DE93B0B91B4E4DC800459A2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ENABLE_BITCODE = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D0DD5A6B1B329802001D6161 /* Build configuration list for PBXProject "ShareSDKUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0DD5A751B329802001D6161 /* Debug */,
+				D0DD5A761B329802001D6161 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0DD5A771B329802001D6161 /* Build configuration list for PBXNativeTarget "ShareSDKUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D0DD5A781B329802001D6161 /* Debug */,
+				D0DD5A791B329802001D6161 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE93B0B71B4E4DC800459A2A /* Build configuration list for PBXAggregateTarget "CreatePackage_UI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE93B0B81B4E4DC800459A2A /* Debug */,
+				DE93B0B91B4E4DC800459A2A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D0DD5A681B329802001D6161 /* Project object */;
+}

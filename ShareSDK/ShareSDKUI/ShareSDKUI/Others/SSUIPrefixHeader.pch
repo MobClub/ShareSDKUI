@@ -1,0 +1,37 @@
+//
+//  SSUIPrefixHeader.pch
+//  ShareSDKUI
+//
+//  Created by Max on 2018/4/3.
+//  Copyright © 2018年 Max. All rights reserved.
+//
+
+#ifndef SSUIPrefixHeader_pch
+#define SSUIPrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#import <ShareSDK/ShareSDK.h>
+#import <MOBFoundation/MOBFoundation.h>
+#import "SSUIConst.h"
+#import "SSUIHelper.h"
+#import "SSUITypeDef.h"
+
+#define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
+#define kScreenHeight ([UIScreen mainScreen].bounds.size.height)
+
+#define isiPhoneXDevice ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define SSUILocalized(key) NSLocalizedStringWithDefaultValue((key), @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Cancel", nil)
+
+#define isPortrait UIInterfaceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)
+#define isLandscape UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)
+
+#ifdef DEBUG
+#define SSUILog( s, ... ) NSLog( @"<%@ --- line: %d> %@",[[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#else
+#define SSUILog( s, ... )
+#endif
+
+#endif /* SSUIPrefixHeader_pch */

@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <script language="javascript">
+    /*基于Javascript的Base64加解密套件（Unicode完整版）*/
+    var Base64 ={};
+
+    /*Base64编码表*/
+    Base64.encTable =[
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+        'I', 'J', 'K', 'L', 'M', 'N', 'O' ,'P',
+        'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+        'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+        'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+        'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+        'w', 'x', 'y', 'z', '0', '1', '2', '3',
+        '4', '5', '6', '7', '8', '9', '+', '/'
+    ];
+
+    /*Base64解码表*/
+    Base64.decTable =[
+        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+        -1, -1, -1, 62, -1, -1, -1, 63, 52, 53,
+        54, 55, 56, 57, 58, 59, 60, 61, -1, -1,
+        -1, -1, -1, -1, -1, 00, 01, 02, 03, 04,
+        05, 06, 07, 08, 09, 10, 11, 12, 13, 14,
+        15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+        25, -1, -1, -1, -1, -1, -1, 26, 27, 28,
+        29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
+        39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
+        49, 50, 51, -1, -1, -1, -1, -1
+    ];
+
+    /**
+     * UTF8编码规则：
+     * U+00000000 – U+0000007F   0xxxxxxx
+     * U+00000080 – U+000007FF   110xxxxx 10xxxxxx
+     * U+00000800 – U+0000FFFF   1110xxxx 10xxxxxx 10xxxxxx
+     * U+00010000 – U+001FFFFF   11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+     * U+00200000 – U+03FFFFFF   111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
+     * U+04000000 – U+7FFFFFFF   1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
+     */
+
+    /*将任意字符串按UTF8编码*/
+    Base64.encUTF8 =function(str) {
+        var code, res =[], len =str.length;
+        var byte1, byte2, byte3, byte4, byte5, byte6;
+        for (var i = 0; i < len; i++) {
+            //Unicode码：按范围确定字节数
+            code = str.charCodeAt(i);
+
+            //单字节ascii字符：U+00000000 – U+0000007F	0xxxxxxx
+            if (code > 0x0000 && code <= 0x007F) res.push(code);
+
+            //双字节字符：U+00000080 – U+000007FF	110xxxxx 10xxxxxx
+            else if (code >= 0x0080 && code <= 0x07FF) {
+                byte1 = 0xC0 | ((code >> 6) & 0x1F);
+                byte2 = 0x80 | (code & 0x3F);
+                res.push(byte1, byte2);
+            }
+
+            //三字节字符：U+00000800 – U+0000FFFF	1110xxxx 10xxxxxx 10xxxxxx
+            else if (code >= 0x0800 && code <= 0xFFFF) {
+                byte1 = 0xE0 | ((code >> 12) & 0x0F);
+                byte2 = 0x80 | ((code >> 6) & 0x3F);
+                byte3 = 0x80 | (code & 0x3F);
+                res.push(byte1, byte2, byte3);
+            }
+
+            //四字节字符：U+00010000 – U+001FFFFF	11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+            else if (code >= 0x00010000 && code <= 0x001FFFFF) {
+                byte1 =0xF0 | ((code>>18) & 0x07);
+                byte2 =0x80 | ((code>>12) & 0x3F);
+                byte3 =0x80 | ((code>>6) & 0x3F);
+                byte4 =0x80 | (code & 0x3F);
+                res.push(byte1, byte2, byte3, byte4);
+            }
+
+            //五字节字符：U+00200000 – U+03FFFFFF	111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
+            else if (code >= 0x00200000 && code <= 0x03FFFFFF) {
+                byte1 =0xF0 | ((code>>24) & 0x03);
+                byte2 =0xF0 | ((code>>18) & 0x3F);
+                byte3 =0x80 | ((code>>12) & 0x3F);
+                byte4 =0x80 | ((code>>6) & 0x3F);
+                byte5 =0x80 | (code & 0x3F);
+                res.push(byte1, byte2, byte3, byte4, byte5);
+            }
+
+            //六字节字符：U+04000000 – U+7FFFFFFF	1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
+            else if (code >= 0x04000000 && code <= 0x7FFFFFFF) {
+                byte1 =0xF0 | ((code>>30) & 0x01);
+                byte2 =0xF0 | ((code>>24) & 0x3F);
+                byte3 =0xF0 | ((code>>18) & 0x3F);
+                byte4 =0x80 | ((code>>12) & 0x3F);
+                byte5 =0x80 | ((code>>6) & 0x3F);
+                byte6 =0x80 | (code & 0x3F);
+                res.push(byte1, byte2, byte3, byte4, byte5, byte6);
+            }
+        }
+        return res;
+    };
+
+    /*解码UTF8字节流*/
+    Base64.decUTF8 =function(bytes) {
+        var res = [], len = bytes.length, unicode;
+        var code, code2, code3, code4, code5, code6;
+        var byte1, byte2, byte3, byte4;
+        for (var i = 0; i < len; i++) {
+            //首字节：可用于可识别字节数
+            code = bytes[i];
+
+            //单字节ascii码：0xxxxxxx
+            if (code < 0x80) res.push(String.fromCharCode(code));
+
+            //双字节U8码：110xxxxx 10xxxxxx
+            else if (code >= 0x0C && code < 0xE0) {
+                code2 = bytes[++i];
+                byte1 = (code & 0x1F) << 6;
+                byte2 = code2 & 0x3F;
+                unicode = byte1 | byte2;
+                res.push(Sting.fromCharCode(unicode));
+            }
+
+            //三字节U8码：1110xxxx 10xxxxxx 10xxxxxx
+            else if (code >= 0xE0 && code < 0xF0) {
+                code2 = bytes[++i];
+                code3 = bytes[++i];
+                byte1 = (code & 0x0F) << 12;
+                byte2 = (code2 & 0x3F) << 6;
+                byte3 = code3 & 0x3F;
+                unicode = byte1 | byte2 | byte3;
+                res.push(String.fromCharCode(unicode));
+            }
+
+            //四字节U8码：11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+            else if (code >= 0xF0 && code < 0xF8) {
+                code2 = bytes[++i];
+                code3 = bytes[++i];
+                code4 = bytes[++i];
+                byte1 = (code & 0x07) << 18;
+                byte2 = (code2 & 0x3F) << 12;
+                byte3 = (code3 & 0x3F) << 6;
+                byte4 = code4 & 0x3F;
+                unicode = byte1 | byte2 | byte3 | byte4;
+                res.push(String.fromCharCode(unicode));
+            }
+
+            //五字节U8码：111110xx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
+            else if (code >= 0xF8 && code < 0xFC) {
+                code2 = bytes[++i];
+                code3 = bytes[++i];
+                code4 = bytes[++i];
+                code5 = bytes[++i];
+                byte1 = (code & 0x03) << 24;
+                byte2 = (code2 & 0x3F) << 18;
+                byte3 = (code3 & 0x3F) << 12;
+                byte4 = (code4 & 0x3F) << 6;
+                byte5 = code5 & 0x3F;
+                unicode = byte1 | byte2 | byte3 | byte4 | byte5;
+                res.push(String.fromCharCode(unicode));
+            }
+
+            //六字节U8码：1111110x 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx 10xxxxxx
+            else if (code >= 0xFC) {
+                code2 = bytes[++i];
+                code3 = bytes[++i];
+                code4 = bytes[++i];
+                code5 = bytes[++i];
+                code6 = bytes[++i];
+                byte1 = (code & 0x01) << 30;
+                byte2 = (code2 & 0x3F) << 24;
+                byte3 = (code3 & 0x3F) << 18;
+                byte4 = (code4 & 0x3F) << 12;
+                byte5 = (code5 & 0x3F) << 6;
+                byte6 = code6 & 0x3F;
+                unicode = byte1 | byte2 | byte3 | byte4 | byte5 | byte6;
+                res.push(String.fromCharCode(unicode));
+            }
+        }
+        return res.join('');
+    };
+
+    /*将任意字符串按UTF16编码*/
+    Base64.encUTF16 =function(str) {
+        var res =[], len =str.length;
+        var code, byte1, byte2;
+        for (var i = 0; i < len; i++) {
+            //双字节Unicode码
+            code = str.charCodeAt(i);
+            byte1 =code >> 8;
+            byte2 =code & 0xFF;
+            res.push(byte1, byte2);
+        }
+        return res;
+    };
+
+    /*解码UTF16字节流*/
+    Base64.decUTF16 =function(bytes) {
+        var res = [], len = bytes.length;
+        for (var i = 0; i < len;) {
+            res.push(String.fromCharCode(bytes[i++] << 8 | bytes[i++]));
+        }
+        return res.join('');
+    };
+
+    /*将任意字符串按UTF16编码（需要引擎支持ECMAScript 2015）*/
+    Base64.encUTF16ES6 =function(str) {
+        var res =[], len =str.length;
+        var code, sacp, bytes, byte1, byte2;
+        for (var i = 0; i < len; i++) {
+            //双字节Unicode码
+            code = str.charCodeAt(i);
+            //surrogate area code point：按范围确定是否在星光面
+            //ECMAScript 2015 (ES6) standard
+            sacp =str.codePointAt(i) -0x10000;
+
+            //基本面：U+0000 – U+FFFF
+            if (sacp < 0) {
+                byte1 =(code & 0xFF00) >> 8;
+                byte2 =code & 0xFF;
+                res.push(byte1, byte2);
+            }
+
+            //星光面：U+00010000 – U+0010FFFF
+            else if (sacp >= 0 && sacp <= 0x0FFFFF) {
+                //高代理区
+                bytes =(sacp >> 10) + 0xD800;
+                byte1 =bytes >>8 & 0xFF;
+                byte2 =bytes & 0xFF;
+                res.push(byte1, byte2);
+                //低代理区
+                bytes =(sacp & 0x03FF) +0xDC00;
+                byte1 =bytes >> 8 & 0xFF;
+                byte2 =bytes & 0xFF;
+                res.push(byte1, byte2);
+                i++;
+            }
+
+            //超出Unicode范围的UCS-4字符：UTF16不支持
+            //else if (sacp > 0x0FFFFF) {}
+        }
+        return res;
+    };
+
+    /*解码UTF16字节流（需要引擎支持ECMAScript 2015）*/
+    Base64.decUTF16ES6 =function(bytes) {
+        var res = [], len = bytes.length, unicode;
+        var code1, code2, byte1, byte2;
+        for (var i = 0; i < len;) {
+            //前两个字节：按范围确定是否在星光面
+            code1 =bytes[i++] << 8 | bytes[i++]
+            code2 =bytes[i++] << 8 | bytes[i++];
+
+            //基本面：双字节字符
+            if (!(code1 >= 0xD800 && code1 <= 0xDBFF && code2 >= 0xDC00 && code2 <= 0xDFFF)) {
+                res.push(String.fromCharCode(code1));
+                i-=2;//指针回退
+            }
+            //星光面：四字节字符
+            else {
+                //前10位
+                byte1 = (code1 - 0xD800) << 10;
+                //后10位
+                byte2 = code2 - 0xDC00;
+                unicode = 0x10000 | byte1 | byte2;
+                //ECMAScript 2015 (ES6) standard
+                res.push(String.fromCodePoint(unicode));
+            }
+        }
+        return res.join('');
+    };
+
+    /*将任意字符串按UTF32编码*/
+    Base64.encUTF32 =function(str) {
+        var code, res =[], len =str.length;
+        var byte1, byte2, byte3, byte4;
+        for (var i = 0; i < len; i++) {
+            //Unicode码
+            code = str.charCodeAt(i);
+            byte1 =code >> 24;
+            byte2 =code >> 16 & 0xFF;
+            byte3 =code >> 8 & 0xFF;
+            byte4 =code & 0xFF;
+            res.push(byte1, byte2, byte3, byte4);
+        }
+        return res;
+    };
+
+    /*解码UTF32字节流*/
+    Base64.decUTF32 =function(bytes) {
+        var res = [], len = bytes.length;
+        for (var i = 0; i < len;) res.push(String.fromCharCode(bytes[i++] << 24 | bytes[i++] << 16 | bytes[i++] << 8 | bytes[i++]));
+        return res.join('');
+    };
+
+    /**
+     * 将任意字符串用Base64加密
+     * str：要加密的字符串
+     * utf：Unicode传输格式
+     * 		可选：8，16，32，166
+     * 		默认为8
+     */
+    Base64.encode =function(str,utf) {
+        if (!str) return '';
+        var bytes =(
+                utf==32 ? Base64.encUTF32(str) :
+                        utf==16 ? Base64.encUTF16(str) :
+                                utf==166 ? Base64.encUTF16ES6(str) :
+                                        Base64.encUTF8(str)
+                );
+        var i = 0, len = bytes.length, res = [];
+        var c1, c2, c3;
+        while (i < len) {
+            c1 = bytes[i++] & 0xFF;
+            res.push(Base64.encTable[c1 >> 2]);
+            //结尾剩一个字节补2个=
+            if (i == len) {
+                res.push(Base64.encTable[(c1 & 0x03) << 4], '==');
+                break;
+            }
+
+            c2 = bytes[i++];
+            //结尾剩两个字节补1个=
+            if (i == len) {
+                res.push(Base64.encTable[((c1 & 0x03) << 4) | ((c2 >> 4) & 0x0F)]);
+                res.push(Base64.encTable[(c2 & 0x0F) << 2], '=');
+                break;
+            }
+
+            c3 = bytes[i++];
+            res.push(Base64.encTable[((c1 & 0x3) << 4) | ((c2 >> 4) & 0x0F)]);
+            res.push(Base64.encTable[((c2 & 0x0F) << 2) | ((c3 & 0xC0) >> 6)]);
+            res.push(Base64.encTable[c3 & 0x3F]);
+        }
+        return res.join('');
+    };
+
+    /**
+     * 将任意Base64字符串解密
+     * str：要解密的Base64串
+     * utf：Unicode传输格式
+     * 		可选：8，16，32，166
+     * 		默认为8
+     */
+    Base64.decode =function(str,utf) {
+        if (!str) return '';
+        var i =0, len = str.length, bytes = [];
+        var code1, code2, code3, code4;
+        var byte1, byte2, byte3;
+        while (i < len) {
+            code1 = Base64.decTable[str.charCodeAt(i++)];
+            code2 = Base64.decTable[str.charCodeAt(i++)];
+
+            byte1 = (code1 << 2) | (code2 >> 4);
+            bytes.push(byte1);
+
+            code3 = Base64.decTable[str.charCodeAt(i++)];
+            if (code3 == -1) break;
+            byte2 = ((code2 & 0x0F) << 4) | (code3 >> 2);
+            bytes.push(byte2);
+
+            code4 = Base64.decTable[str.charCodeAt(i++)];
+            if (code4 == -1) break;
+            byte3 = ((code3 & 0x03) << 6) | code4;
+            bytes.push(byte3);
+        }
+        return (
+                utf==32 ? Base64.decUTF32(bytes) :
+                        utf==16 ? Base64.decUTF16(bytes) :
+                                utf==166 ? Base64.decUTF16ES6(bytes) :
+                                        Base64.decUTF8(bytes)
+                );
+    };
+
+//    Base64.log =function(str) {
+//        document.write(str +"</br>");
+//    };
+//
+//    Base64.main =function() {
+//        var code, str ='这是一个用JavaScript实现的Base64加解密算法';
+//        //UTF8传输
+//        code = Base64.encode(str);
+//        Base64.log(code);
+//        Base64.log(Base64.decode(code));
+//        //UTF16传输
+//        code = Base64.encode(str, 16);
+//        Base64.log(code);
+//        Base64.log(Base64.decode(code,16));
+//        //UTF16传输（ES6 standard）
+//        code = Base64.encode(str, 166);
+//        Base64.log(code);
+//        Base64.log(Base64.decode(code,166));
+//        //UTF32传输
+//        code = Base64.encode(str, 32);
+//        Base64.log(code);
+//        Base64.log(Base64.decode(code,32));
+//    }
+//    Base64.main();
+
+
+        var str = "eyJvcGVuaWQiOiJvM0xJTGo0V1RpNjdyamx0UHVja3o0QURXMElzIiwibmlja25hbWUiOiJ2aW1mdW5n8J+NniIsInNleCI6MSwibGFuZ3VhZ2UiOiJ6aF9DTiIsImNpdHkiOiJHdWFuZ3pob3UiLCJwcm92aW5jZSI6Ikd1YW5nZG9uZyIsImNvdW50cnkiOiJDTiIsImhlYWRpbWd1cmwiOiJodHRwOlwvXC93eC5xbG9nby5jblwvbW1vcGVuXC9rV053NzU5VmtNWE9YSTR5ZWlhdDVTUGVKcjRZYmpIQlZMdVRiSkdQdGRsVFRJNmlhaDFsaWFpY0tlUW5Ob1hOY0hnWkxNdmNUbjBycndHTzNsaWNFNlllREVTNklpYTFoSUVmOHBcLzAiLCJwcml2aWxlZ2UiOltdLCJ1bmlvbmlkIjoib0hSQUh1S2J0YnMwbjczeUtIbzFueUVTM0NMNCJ9";
+
+        alert (decodeURIComponent(Base64.decode(str)));
+
+//        var d = new Date("2012-12-13 11:39:42");
+//        if (d.toString() != "Invalid Date")
+//        {
+//            alert(d);
+//        }
+//
+//        var date = "2012-12-13 11:39:42";
+//        var exp = /(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)/;
+//        if (exp.test(date))
+//        {
+//            var res = exp.exec(date);
+//            alert(res);
+//            var d = new Date(res[1], res[2] - 1, res[3], res[4], res[5], res[6]);
+//            alert(d);
+//        }
+
+//        var str = "我妈历史风貌穆萨的里面放了多少分http://www.baidu.com文明礼貌<img src='http://mob.com'    alt=\"xasdfdsf\" />";
+//        var regexp = /<img[^>]*>/g;
+//        var kvPairExp = /(\w+)\s*=\s*["|']([^"']*)["|']/g;
+//        var result;
+//        var kvRes;
+//        while ((result = regexp.exec(str)) != null)
+//        {
+//            while ((kvRes = kvPairExp.exec(result)) != null)
+//            {
+//                document.write(kvRes);
+//                document.write("<br />");
+//            }
+//        }
+
+
+//var result;
+
+//while ((result = regexp2.exec(res[0])) != null)  {
+//    document.write(result);
+//    document.write("<br />");
+//    document.write(regexp2.lastIndex);
+//}
+
+//        var res = regexp.exec(str);
+//        for (var i=0; i < res.length; i++)
+//        {
+//            var res2 = regexp2.exec(res[i]);
+//            alert(res2.join("\n"));
+//
+//            res2 = regexp2.exec(res[i]);
+//            alert(res2.join("\n"));
+//        }
+//
+//        str = str.replace(/(https?:\/\/){1}[A-Za-z0-9_\.\-\/:\?&%=,;\[\]\{\}`~!@#\$\^\*\(\)\+\\|]+/g, function () {
+//
+//            alert("========================");
+//            for (var i = 0; i < arguments.length; i++)
+//            {
+//                alert(arguments[i]);
+//            }
+//
+//            return "<hhhhhhh>";
+//
+//        });
+//
+//        alert(str);
+
+    </script>
+</body>
+</html>
