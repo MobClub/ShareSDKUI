@@ -169,8 +169,18 @@ static NSString *const kSSUICollectionViewCellReuseIdentifier = @"SSUICollection
     CGFloat iPhoneXSafeAreaOffSet = isiPhoneXDevice ? 15.0:0.0;
     CGFloat menuH = self.menuHeight;
     CGFloat menuSpace = self.menuSpace;
-    _pageControl.numberOfPages = self.pageCount;
-    _pageControl.currentPage = 0;
+    
+    NSInteger pageCount = self.pageCount;
+    if (pageCount <= 1)
+    {
+        _pageControl.hidden = YES;
+    }
+    else
+    {
+        _pageControl.numberOfPages = pageCount;
+        _pageControl.currentPage = 0;
+    }
+
     _containerViewHeightConstraint.constant = menuH + (isSystemStyle ? 0.0:iPhoneXSafeAreaOffSet);
     _collectionViewHeightConstraint.constant = menuH - 2*kPageControlSpace - (isSystemStyle ? kItemPortraitVerticalSpace:0);
     _containerViewTopConstraint.constant = - (menuH + spaceWithBottom + iPhoneXSafeAreaOffSet);

@@ -30,8 +30,13 @@
 {
     NSMutableArray *filtedPlatforms = items.count ? items.mutableCopy:ShareSDK.activePlatforms.mutableCopy;
 
-    for (NSNumber *obj in ShareSDK.activePlatforms)
+    for (NSNumber *obj in filtedPlatforms.copy)
     {
+        if (![obj isKindOfClass:NSNumber.class])
+        {
+            continue;
+        }
+        
         switch (obj.integerValue)
         {
             case SSDKPlatformTypeWechat:
@@ -92,7 +97,10 @@
             case SSDKPlatformTypeAliSocial:
             case SSDKPlatformTypeAliSocialTimeline:
             {
-                if (![MOBFApplication canOpenUrl:[NSURL URLWithString:@"alipay://"]])
+                NSString *encodeStr = @"YWxpcGF5Oi8v";
+                NSData *data = [MOBFString dataByBase64DecodeString:encodeStr];
+                NSString *decodeStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                if (![MOBFApplication canOpenUrl:[NSURL URLWithString:decodeStr]])
                 {
                     [filtedPlatforms removeObject:obj];
                 }
@@ -130,6 +138,9 @@
                 }
                 break;
             }
+            case SSDKPlatformTypeCMCC:
+                [filtedPlatforms removeObject:obj];
+                break;
                 
             default:
                 break;
