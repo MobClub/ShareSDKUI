@@ -167,38 +167,42 @@
 
 - (void)shareSheet:(SSUIShareSheetViewController *)shareSheet didSelectPlatform:(id)platform params:(NSMutableDictionary *)params
 {
+    void(^selectOperation)(void) = ^{
+        
+        SSUIShareStateChangedHandler handler = shareSheet.stateChangedHandler;
+        if ([platform isKindOfClass:NSNumber.class])
+        {
+            SSDKPlatformType type = [platform integerValue];
+            if ([[SSUIHelper shareHelper] shareDirectlyWithPlatform:type directSharePlatforms:shareSheet.configuration.directSharePlatforms.mutableCopy])
+            {
+                [ShareSDK share:type parameters:params onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+                    if (handler)
+                    {
+                        handler(state, type, userData, contentEntity, error, state != SSDKResponseStateBegin);
+                    }
+                }];
+            }
+            else
+            {
+                [self showShareEditor:type otherPlatforms:nil shareParams:params editorConfiguration:shareSheet.editorConfiguration onStateChanged:handler];
+            }
+        }
+        
+        if ([platform isKindOfClass:SSUIPlatformItem.class])
+        {
+            [platform triggerClick];
+        }
+    };
+    
     if ([MOBFDevice isPad])
     {
         [[UIApplication sharedApplication] setStatusBarStyle:shareSheet.originalStyle];
-        [shareSheet dismissViewControllerAnimated:YES completion:nil];
+        [shareSheet dismissViewControllerAnimated:YES completion:selectOperation];
     }
     else
     {
         [self _dismissWindowForController:shareSheet];
-    }
-
-    SSUIShareStateChangedHandler handler = shareSheet.stateChangedHandler;
-    if ([platform isKindOfClass:NSNumber.class])
-    {
-        SSDKPlatformType type = [platform integerValue];
-        if ([[SSUIHelper shareHelper] shareDirectlyWithPlatform:type directSharePlatforms:shareSheet.configuration.directSharePlatforms.mutableCopy])
-        {
-            [ShareSDK share:type parameters:params onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
-                if (handler)
-                {
-                    handler(state, type, userData, contentEntity, error, state != SSDKResponseStateBegin);
-                }
-            }];
-        }
-        else
-        {
-            [self showShareEditor:type otherPlatforms:nil shareParams:params editorConfiguration:shareSheet.editorConfiguration onStateChanged:handler];
-        }
-    }
-    
-    if ([platform isKindOfClass:SSUIPlatformItem.class])
-    {
-        [platform triggerClick];
+        selectOperation();
     }
 }
 
@@ -259,9 +263,9 @@
 
 - (void)_beginShareForEditor:(SSUIEditerViewController *)editor content:(NSString *)content
 {
-    NSMutableDictionary *params = [[SSUIHelper shareHelper] editedParamsWithContent:content orginalParams:editor.params];
     SSUIShareStateChangedHandler handler = editor.stateChangedHandler;
     NSMutableArray *authedPlatforms = [[SSUIHelper shareHelper] filteAuthedPlatforms:editor.platforms];
+        NSMutableDictionary *params = [[SSUIHelper shareHelper] editedParamsWithContent:content orginalParams:editor.params platforms:authedPlatforms];
     __block NSInteger count = authedPlatforms.count;
     for (NSNumber *obj in authedPlatforms)
     {

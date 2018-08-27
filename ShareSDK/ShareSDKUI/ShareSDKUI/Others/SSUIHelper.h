@@ -43,6 +43,6 @@
 - (NSMutableArray *)filteAuthedPlatforms:(NSArray *)selectedPlatforms;
 
 // 根据editor的编辑内容重新配置参数
-- (NSMutableDictionary *)editedParamsWithContent:(NSString *)content orginalParams:(NSMutableDictionary *)params;
+- (NSMutableDictionary *)editedParamsWithContent:(NSString *)content orginalParams:(NSMutableDictionary *)params platforms:(NSArray *)platformTypes;
 
 @end

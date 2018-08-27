@@ -114,6 +114,16 @@
                 }
             }
                 break;
+            
+            case SSDKPlatformTypeFacebook:
+            {
+                if (![MOBFApplication canOpenUrl:[NSURL URLWithString:@"fbauth2://"]])
+                {
+                    [filtedPlatforms removeObject:obj];
+                }
+            }
+                break;
+                
             case SSDKPlatformTypeDingTalk:
             {
                 if (![MOBFApplication canOpenUrl:[NSURL URLWithString:@"dingtalk://"]])
@@ -142,6 +152,15 @@
                 [filtedPlatforms removeObject:obj];
                 break;
                 
+            case SSDKPlatformTypeTelegram:
+            {
+                if (![MOBFApplication canOpenUrl:[NSURL URLWithString:@"tg://"]])
+                {
+                    [filtedPlatforms removeObject:obj];
+                }
+            }
+                break;
+            
             default:
                 break;
         }
@@ -419,10 +438,12 @@
                                  @(SSDKPlatformSubTypeKakaoTalk),
                                  @(SSDKPlatformTypeAliSocial),
                                  @(SSDKPlatformTypeAliSocialTimeline),
+                                 @(SSDKPlatformTypeFacebook),
                                  @(SSDKPlatformTypeFacebookMessenger),
                                  @(SSDKPlatformTypeYiXin),
                                  @(SSDKPlatformTypeDingTalk),
-                                 @(SSDKPlatformTypeMeiPai)].mutableCopy;
+                                 @(SSDKPlatformTypeMeiPai),
+                                 @(SSDKPlatformTypeTelegram)].mutableCopy;
     }
     
     //对微信和QQ、Kakao等包含多个平台的平台处理
@@ -531,7 +552,7 @@
         [unNeedAuthorizedPlatforms addObject:@(SSDKPlatformTypeFacebook)];
     }
     
-    return ![unNeedAuthorizedPlatforms containsObject:@(platformType)];
+    return !([unNeedAuthorizedPlatforms containsObject:@(platformType)] || [ShareSDK hasAuthorized:platformType]);
 }
 
 - (NSMutableArray *)filteAuthedPlatforms:(NSArray *)selectedPlatforms
@@ -551,28 +572,24 @@
     return filedPlatforms;
 }
 
-- (NSMutableDictionary *)editedParamsWithContent:(NSString *)content orginalParams:(NSMutableDictionary *)params
+- (NSMutableDictionary *)editedParamsWithContent:(NSString *)content orginalParams:(NSMutableDictionary *)params platforms:(NSArray *)platformTypes
 {
     NSMutableDictionary *editedParams = params.mutableCopy;
-    for (NSString *key in params.allKeys)
+    
+    for (NSNumber *obj in platformTypes)
     {
-        if ([key isEqualToString:@"text"])
+        NSString *platformKey = [NSString stringWithFormat:@"@platform(%@)",obj];
+        NSMutableDictionary *costomParams = [params[platformKey] mutableCopy];
+        if ([costomParams isKindOfClass:NSMutableDictionary.class])
         {
-            editedParams[key] = content;
+            costomParams[@"text"] = content;
+        }
+        else
+        {
+            costomParams = @{@"text":content?:@""}.mutableCopy;
         }
         
-        if ([key hasPrefix:@"@platform"])
-        {
-            NSMutableDictionary *costomParams = [params[key] mutableCopy];
-            if ([costomParams isKindOfClass:NSMutableDictionary.class])
-            {
-                if (costomParams[@"text"])
-                {
-                    costomParams[@"text"] = content;
-                }
-            }
-            editedParams[key] = costomParams;
-        }
+        editedParams[platformKey] = costomParams;
     }
     
     return editedParams;

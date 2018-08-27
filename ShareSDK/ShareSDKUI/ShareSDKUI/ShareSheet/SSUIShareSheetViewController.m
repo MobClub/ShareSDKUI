@@ -77,7 +77,7 @@ static NSString *const kSSUICollectionViewCellReuseIdentifier = @"SSUICollection
         platformsCollectionView.layer.borderWidth = 0.5;
         platformsCollectionView.layer.borderColor = [MOBFColor colorWithRGB:0xF5F5F5].CGColor;
     }
-    platformsCollectionView.backgroundColor = self.configuration.menuBackgroundColor;
+    platformsCollectionView.backgroundColor = [UIColor clearColor];
     platformsCollectionView.showsHorizontalScrollIndicator = NO;
     platformsCollectionView.pagingEnabled = YES;
     platformsCollectionView.delegate = self;
@@ -95,7 +95,7 @@ static NSString *const kSSUICollectionViewCellReuseIdentifier = @"SSUICollection
     
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
     cancelButton.layer.cornerRadius = kCornerRadius;
-    [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelButton setTitle:SSUILocalized(@"Cancel") forState:UIControlStateNormal];
     [cancelButton setTitleColor:self.configuration.cancelButtonTitleColor forState:UIControlStateNormal];
     cancelButton.backgroundColor = self.configuration.cancelButtonBackgroundColor;
     [cancelButton addTarget:self action:@selector(touchesBegan:withEvent:) forControlEvents:UIControlEventTouchUpInside];
