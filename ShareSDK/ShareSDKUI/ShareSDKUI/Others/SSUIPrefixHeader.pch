@@ -13,6 +13,7 @@
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
 #import <ShareSDK/ShareSDK.h>
+#import <ShareSDK/SSDKImage.h>
 #import <MOBFoundation/MOBFoundation.h>
 #import "SSUIConst.h"
 #import "SSUIHelper.h"
@@ -21,7 +22,7 @@
 #define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
 #define kScreenHeight ([UIScreen mainScreen].bounds.size.height)
 
-#define isiPhoneXDevice ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
+#define isiPhoneXDevice ([SSUIHelper shareHelper].needSafaAreaAdapt)
 
 #define SSUILocalized(key) NSLocalizedStringWithDefaultValue((key), @"ShareSDKUI_Localizable", [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"ShareSDKUI" ofType:@"bundle"]], @"Cancel", nil)
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SSDKImage;
 
 @interface SSUIHelper : NSObject
 
@@ -45,4 +46,5 @@
 // 根据editor的编辑内容重新配置参数
 - (NSMutableDictionary *)editedParamsWithContent:(NSString *)content orginalParams:(NSMutableDictionary *)params platforms:(NSArray *)platformTypes;
 
+- (BOOL)needSafaAreaAdapt;
 @end

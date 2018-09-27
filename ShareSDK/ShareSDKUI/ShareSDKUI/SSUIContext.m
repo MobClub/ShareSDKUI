@@ -14,6 +14,7 @@
 #import "SSUIHelper.h"
 #import "SSUIPlatformItem.h"
 #import <ShareSDK/ShareSDK+Base.h>
+#import <ShareSDK/SSDKError.h>
 
 @interface SSUIContext() <SSUIShareSheetViewControllerDelegate,SSUIEditerViewControllerDelegate,UIPopoverPresentationControllerDelegate>
 
@@ -44,10 +45,22 @@
         sheetConfiguration:(SSUIShareSheetConfiguration *)configuration
             onStateChanged:(SSUIShareStateChangedHandler)stateChangedHandler
 {
-    [ShareSDK enableAutomaticRecordingEvent:YES];
+    [ShareSDK enableAutomaticRecordingEvent:NO];
+    
+    NSArray *platforms = [[SSUIHelper shareHelper] activePlatformsWithCustomItems:items];
+    
+    if (!platforms.count)
+    {
+        if (stateChangedHandler)
+        {
+            NSError *error = [SSDKError paramsErrorWithDescription:@"Invlid platforms !"];
+            stateChangedHandler(SSDKResponseStateFail, 0, nil, nil, error, YES);
+        }
+        return nil;
+    }
     
     SSUIShareSheetViewController *rootVc = [[SSUIShareSheetViewController alloc] init];
-    rootVc.platforms = [[SSUIHelper shareHelper] activePlatformsWithCustomItems:items];
+    rootVc.platforms = platforms;
     rootVc.params = shareParams;
     rootVc.delegate = self;
     rootVc.configuration = configuration ?: [[SSUIShareSheetConfiguration alloc] init];
@@ -99,7 +112,7 @@
   editorConfiguration:(SSUIEditorConfiguration *)configuration
        onStateChanged:(SSUIShareStateChangedHandler)stateChangedHandler
 {
-    [ShareSDK enableAutomaticRecordingEvent:YES];
+    [ShareSDK enableAutomaticRecordingEvent:NO];
     
     SSUIEditerViewController *editor = [[SSUIEditerViewController alloc] init];
     editor.configuration = configuration ?: [[SSUIEditorConfiguration alloc] init];
@@ -216,19 +229,27 @@
     [self dismissShareController:shareSheet];
 }
 
-
 - (void)shareEditor:(SSUIEditerViewController *)editor didShareWithContent:(NSString *)content authCallback:(void (^)(BOOL))callback
 {
     SSDKPlatformType platform = [editor.platforms.firstObject integerValue];
     if ([[SSUIHelper shareHelper] checkIfNeedAuthWithPlatform:platform])
     {
+        //kakao平台授权不在window上，会导致editorView遮住授权页面的问题
+        BOOL editorNeedHidden = platform == SSDKPlatformTypeKakao || platform == SSDKPlatformSubTypeKakaoTalk || platform == SSDKPlatformSubTypeKakaoStory;
+        
+        if (editorNeedHidden)
+        {
+            editor.window.hidden = YES;
+        }
+        
         [ShareSDK authorize:platform settings:nil onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
             
             if (state != SSDKResponseStateBegin)
             {
                 callback(state==SSDKResponseStateSuccess);
+                editor.window.hidden = NO;
             }
-            
+
             if (state == SSDKResponseStateSuccess)
             {
                 [self _beginShareForEditor:editor content:content];
@@ -265,7 +286,7 @@
 {
     SSUIShareStateChangedHandler handler = editor.stateChangedHandler;
     NSMutableArray *authedPlatforms = [[SSUIHelper shareHelper] filteAuthedPlatforms:editor.platforms];
-        NSMutableDictionary *params = [[SSUIHelper shareHelper] editedParamsWithContent:content orginalParams:editor.params platforms:authedPlatforms];
+    NSMutableDictionary *params = [[SSUIHelper shareHelper] editedParamsWithContent:content orginalParams:editor.params platforms:authedPlatforms];
     __block NSInteger count = authedPlatforms.count;
     for (NSNumber *obj in authedPlatforms)
     {

@@ -7,12 +7,12 @@
 		<key>CreatePackage_UI.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>8</integer>
 		</dict>
 		<key>ShareSDKUI.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>34</integer>
+			<integer>40</integer>
 		</dict>
 	</dict>
 </dict>

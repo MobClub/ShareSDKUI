@@ -114,16 +114,6 @@
                 }
             }
                 break;
-            
-            case SSDKPlatformTypeFacebook:
-            {
-                if (![MOBFApplication canOpenUrl:[NSURL URLWithString:@"fbauth2://"]])
-                {
-                    [filtedPlatforms removeObject:obj];
-                }
-            }
-                break;
-                
             case SSDKPlatformTypeDingTalk:
             {
                 if (![MOBFApplication canOpenUrl:[NSURL URLWithString:@"dingtalk://"]])
@@ -160,7 +150,7 @@
                 }
             }
                 break;
-            
+                
             default:
                 break;
         }
@@ -438,8 +428,8 @@
                                  @(SSDKPlatformSubTypeKakaoTalk),
                                  @(SSDKPlatformTypeAliSocial),
                                  @(SSDKPlatformTypeAliSocialTimeline),
-                                 @(SSDKPlatformTypeFacebook),
                                  @(SSDKPlatformTypeFacebookMessenger),
+                                 @(SSDKPlatformTypeFacebook),
                                  @(SSDKPlatformTypeYiXin),
                                  @(SSDKPlatformTypeDingTalk),
                                  @(SSDKPlatformTypeMeiPai),
@@ -538,7 +528,7 @@
                                                   @(SSDKPlatformTypePrint),
                                                   @(SSDKPlatformTypeFacebookMessenger),
                                                   @(SSDKPlatformTypeDingTalk),
-                                                  @(SSDKPlatformTypeMeiPai)
+                                                  @(SSDKPlatformTypeMeiPai),
                                                   ].mutableCopy;
     
     if ([MOBFApplication canOpenUrl:[NSURL URLWithString:@"sinaweibo://"]]
@@ -552,7 +542,7 @@
         [unNeedAuthorizedPlatforms addObject:@(SSDKPlatformTypeFacebook)];
     }
     
-    return !([unNeedAuthorizedPlatforms containsObject:@(platformType)] || [ShareSDK hasAuthorized:platformType]);
+    return ![unNeedAuthorizedPlatforms containsObject:@(platformType)] && ![ShareSDK hasAuthorized:platformType];
 }
 
 - (NSMutableArray *)filteAuthedPlatforms:(NSArray *)selectedPlatforms
@@ -593,6 +583,13 @@
     }
     
     return editedParams;
+}
+
+- (BOOL)needSafaAreaAdapt
+{
+    CGSize size = [UIScreen mainScreen].currentMode.size;
+    CGFloat scale = size.height * 1.0 / size.width;
+    return scale > 2;
 }
 
 @end

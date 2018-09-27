@@ -25,10 +25,10 @@
                                                            ofType:@"bundle"];
     NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
     
-    info.iconNormal = [MOBFImage imageName:[NSString stringWithFormat:@"Icon/sns_icon_%zi.png",platformType] bundle:bundle];
-    info.iconSimple = [MOBFImage imageName:[NSString stringWithFormat:@"Icon_simple/sns_icon_%zi.png",platformType] bundle:bundle];
+    info.iconNormal = [MOBFImage imageName:[NSString stringWithFormat:@"Icon/sns_icon_%lu.png",(unsigned long)platformType] bundle:bundle];
+    info.iconSimple = [MOBFImage imageName:[NSString stringWithFormat:@"Icon_simple/sns_icon_%lu.png",(unsigned long)platformType] bundle:bundle];
     
-    NSString *temName = [NSString stringWithFormat:@"ShareType_%zi",platformType];
+    NSString *temName = [NSString stringWithFormat:@"ShareType_%lu",(unsigned long)platformType];
     info.platformName = NSLocalizedStringWithDefaultValue(temName, @"ShareSDKUI_Localizable", bundle, temName, nil);
     
     return info;
