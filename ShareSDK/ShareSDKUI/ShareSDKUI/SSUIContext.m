@@ -14,7 +14,6 @@
 #import "SSUIHelper.h"
 #import "SSUIPlatformItem.h"
 #import <ShareSDK/ShareSDK+Base.h>
-#import <ShareSDK/SSDKError.h>
 
 @interface SSUIContext() <SSUIShareSheetViewControllerDelegate,SSUIEditerViewControllerDelegate,UIPopoverPresentationControllerDelegate>
 
@@ -53,7 +52,7 @@
     {
         if (stateChangedHandler)
         {
-            NSError *error = [SSDKError paramsErrorWithDescription:@"Invlid platforms !"];
+            NSError *error = [NSError errorWithDomain:@"ShareSDKErrorDomain" code:200101 userInfo:@{@"description":SSUILocalized(@"NoValidPlatform")?:@""}];
             stateChangedHandler(SSDKResponseStateFail, 0, nil, nil, error, YES);
         }
         return nil;
@@ -235,7 +234,7 @@
     if ([[SSUIHelper shareHelper] checkIfNeedAuthWithPlatform:platform])
     {
         //kakao平台授权不在window上，会导致editorView遮住授权页面的问题
-        BOOL editorNeedHidden = platform == SSDKPlatformTypeKakao || platform == SSDKPlatformSubTypeKakaoTalk || platform == SSDKPlatformSubTypeKakaoStory;
+        BOOL editorNeedHidden = platform == SSDKPlatformTypeKakao || platform == SSDKPlatformSubTypeKakaoTalk || platform == SSDKPlatformSubTypeKakaoStory || platform == SSDKPlatformTypeSinaWeibo;
         
         if (editorNeedHidden)
         {

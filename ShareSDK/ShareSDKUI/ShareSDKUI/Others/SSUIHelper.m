@@ -106,6 +106,14 @@
                 }
             }
                 break;
+            case SSDKPlatformTypeFacebook:
+            {
+                if (![MOBFApplication canOpenUrl:[NSURL URLWithString:@"fbapi20130214://dialog/share"]])
+                {
+                    [filtedPlatforms removeObject:obj];
+                }
+            }
+                break;
             case SSDKPlatformTypeFacebookMessenger:
             {
                 if (![MOBFApplication canOpenUrl:[NSURL URLWithString:@"fb-messenger://"]])
@@ -139,6 +147,8 @@
                 break;
             }
             case SSDKPlatformTypeCMCC:
+            case SSDKPlatformTypeESurfing:
+            case SSDKPlatformTypeFacebookAccount:
                 [filtedPlatforms removeObject:obj];
                 break;
                 
